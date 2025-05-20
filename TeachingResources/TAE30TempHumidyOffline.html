@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAE30 Temp&RH Offline Mode</title>
     <link rel="icon" href="../DataFiles/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -19,8 +19,8 @@
             --light-bg: #f9f9f9;
             --white: #ffffff;
             --green-accent: #4CAF50;
-            --blue-accent: #2196F3;
-            --red-accent: #f44336;
+            --blue-accent: #3498db;
+            --red-accent: #e74c3c;
             --section-padding: 60px 0;
         }
         
@@ -253,246 +253,392 @@
             margin-bottom: 40px;
         }
         
-        /* Improved Thermometer */
-        .thermometer-container {
-            position: relative;
-            width: 200px;
+        /* NEW CREATIVE TEMPERATURE DISPLAY */
+        .temperature-card {
+            width: 280px;
             height: 350px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: var(--white);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
         
-        .thermometer-title {
-            font-family: 'Lora', serif;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            text-align: center;
+        .temperature-card:hover {
+            transform: translateY(-5px);
         }
         
-        .thermometer {
-            position: relative;
-            width: 40px;
-            height: 200px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), #f5f5f5;
-            border-radius: 20px 20px 0 0;
-            border: 2px solid #ddd;
-            overflow: hidden;
+        .temperature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+        }
+        
+        .temperature-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
         
-        .thermometer-bulb {
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 60px;
-            background: var(--red-accent);
+        .temperature-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+        
+        .temperature-icon-container {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 2px solid #ddd;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
-        
-        .thermometer-level {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0%;
-            background: linear-gradient(to top, #f44336, #ff7961);
-            transition: height 1s ease-in-out;
-            z-index: 1;
-        }
-        
-        .thermometer-scale {
-            position: absolute;
-            top: 0;
-            right: -35px;
-            height: 100%;
-            width: 30px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 10px 0;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
         }
         
-        .thermometer-mark {
+        .temperature-icon {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .temperature-display-container {
             position: relative;
-            font-size: 0.7rem;
-            color: #666;
+            width: 200px;
+            height: 200px;
+            margin: 10px 0 20px;
+        }
+        
+        .temperature-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             display: flex;
+            justify-content: center;
             align-items: center;
+            position: relative;
         }
         
-        .thermometer-mark::before {
+        .temperature-circle::before {
             content: '';
-            width: 8px;
-            height: 1px;
-            background-color: #888;
-            margin-right: 5px;
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
         }
         
-        .temperature-display {
+        .temperature-value-container {
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px;
         }
         
         .temperature-value {
-            font-size: 2.5rem;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 3.5rem;
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
         }
         
         .temperature-unit {
+            font-family: 'Quicksand', sans-serif;
             font-size: 1.2rem;
             color: #888;
             margin-top: 5px;
         }
         
-        .temperature-icon {
-            font-size: 1.5rem;
-            color: var(--red-accent);
-            margin-bottom: 5px;
+        .temperature-scale {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
         }
         
-        /* Improved Humidity Gauge */
-        .humidity-container {
-            position: relative;
-            width: 250px;
+        .temperature-marker {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            clip: rect(0px, 200px, 200px, 100px);
+        }
+        
+        .temperature-progress {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            clip: rect(0px, 100px, 200px, 0px);
+            transform: rotate(0deg);
+            transition: transform 1s ease-in-out;
+        }
+        
+        .temperature-progress-fill {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            clip: rect(0px, 100px, 200px, 0px);
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
+            transform: rotate(180deg);
+        }
+        
+        .temperature-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .temperature-range {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .temperature-range-min {
+            text-align: left;
+        }
+        
+        .temperature-range-max {
+            text-align: right;
+        }
+        
+        /* NEW CREATIVE HUMIDITY DISPLAY */
+        .humidity-card {
+            width: 280px;
             height: 350px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: var(--white);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
         
-        .humidity-title {
-            font-family: 'Lora', serif;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            text-align: center;
+        .humidity-card:hover {
+            transform: translateY(-5px);
         }
         
-        .humidity-gauge {
-            position: relative;
-            width: 180px;
-            height: 180px;
+        .humidity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+        }
+        
+        .humidity-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
         
-        .humidity-gauge-outer {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+        .humidity-title {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+        }
+        
+        .humidity-icon-container {
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background-color: #f5f5f5;
-            border: 2px solid #ddd;
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
+        }
+        
+        .humidity-icon {
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .humidity-display-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 10px 0 20px;
+        }
+        
+        .humidity-wave-container {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
         
-        .humidity-gauge-inner {
+        .humidity-wave {
             position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 80%;
-            height: 80%;
-            border-radius: 50%;
-            background-color: var(--white);
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            width: 200px;
+            height: 200px;
+            bottom: 0;
+            background: linear-gradient(0deg, #3498db 0%, #89f7fe 100%);
+            border-radius: 0;
+            transition: height 1s ease-in-out;
         }
         
-        .humidity-gauge-fill {
+        .humidity-wave::before,
+        .humidity-wave::after {
+            content: '';
             position: absolute;
-            bottom: 0;
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 45%;
+            transform: translate(-50%, -70%) rotate(0);
+            animation: wave 6s linear infinite;
+            z-index: 10;
+        }
+        
+        .humidity-wave::after {
+            border-radius: 47%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -70%) rotate(0);
+            animation: wave 10s linear -5s infinite;
+        }
+        
+        @keyframes wave {
+            0% {
+                transform: translate(-50%, -70%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -70%) rotate(360deg);
+            }
+        }
+        
+        .humidity-value-container {
+            position: absolute;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 0%;
-            background: linear-gradient(to top, #2196F3, #90caf9);
-            transition: height 1s ease-in-out;
-            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
         }
         
         .humidity-value {
-            font-size: 2.5rem;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 3.5rem;
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .humidity-unit {
+            font-family: 'Quicksand', sans-serif;
             font-size: 1.2rem;
             color: #888;
             margin-top: 5px;
         }
         
-        .humidity-icon {
-            font-size: 1.5rem;
-            color: var(--blue-accent);
-            margin-bottom: 5px;
+        .humidity-info {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-family: 'Quicksand', sans-serif;
         }
         
-        .humidity-scale {
+        .humidity-range {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .humidity-range-min {
+            text-align: left;
+        }
+        
+        .humidity-range-max {
+            text-align: right;
+        }
+        
+        .humidity-drops {
             position: absolute;
             width: 100%;
             height: 100%;
-            z-index: 3;
             pointer-events: none;
         }
         
-        .humidity-mark {
+        .humidity-drop {
             position: absolute;
-            font-size: 0.7rem;
-            color: #666;
+            background-color: rgba(52, 152, 219, 0.3);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            animation: drop-float 3s infinite ease-in-out;
         }
         
-        .humidity-mark:nth-child(1) {
-            top: 10%;
-            right: 25%;
+        .humidity-drop:nth-child(1) {
+            width: 12px;
+            height: 12px;
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
         }
         
-        .humidity-mark:nth-child(2) {
-            top: 25%;
-            right: 10%;
+        .humidity-drop:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            top: 30%;
+            right: 20%;
+            animation-delay: 0.5s;
         }
         
-        .humidity-mark:nth-child(3) {
-            top: 50%;
-            right: 5%;
+        .humidity-drop:nth-child(3) {
+            width: 10px;
+            height: 10px;
+            bottom: 30%;
+            left: 30%;
+            animation-delay: 1s;
         }
         
-        .humidity-mark:nth-child(4) {
-            bottom: 25%;
-            right: 10%;
-        }
-        
-        .humidity-mark:nth-child(5) {
-            bottom: 10%;
-            right: 25%;
-        }
-        
-        .humidity-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 10px;
+        @keyframes drop-float {
+            0%, 100% {
+                transform: rotate(-45deg) translateY(0);
+                opacity: 0.7;
+            }
+            50% {
+                transform: rotate(-45deg) translateY(-10px);
+                opacity: 0.3;
+            }
         }
         
         /* Charts section */
@@ -695,42 +841,6 @@
             animation-delay: 0.6s;
         }
         
-        /* Water drop animation */
-        @keyframes waterDrop {
-            0% { transform: scale(1); opacity: 0.7; }
-            50% { transform: scale(0.8); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 0.7; }
-        }
-        
-        .water-drop {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: var(--blue-accent);
-            border-radius: 50% 50% 50% 0;
-            transform: rotate(-45deg);
-            animation: waterDrop 2s infinite;
-            z-index: 4;
-        }
-        
-        .water-drop:nth-child(1) {
-            top: 30px;
-            right: 30px;
-            animation-delay: 0s;
-        }
-        
-        .water-drop:nth-child(2) {
-            top: 50px;
-            left: 30px;
-            animation-delay: 0.5s;
-        }
-        
-        .water-drop:nth-child(3) {
-            bottom: 60px;
-            right: 40px;
-            animation-delay: 1s;
-        }
-        
         /* No data message */
         .no-data-message {
             text-align: center;
@@ -809,54 +919,68 @@
                 <h2 class="dashboard-title fade-in">Current Readings</h2>
                 
                 <div class="gauges-container">
-                    <!-- Improved Thermometer -->
-                    <div class="thermometer-container fade-in">
-                        <h3 class="thermometer-title">Temperature</h3>
-                        <div class="temperature-icon">
-                            <i class="fas fa-temperature-high"></i>
-                        </div>
-                        <div class="thermometer">
-                            <div class="thermometer-level" id="thermometerLevel"></div>
-                            <div class="thermometer-bulb"></div>
-                            <div class="thermometer-scale">
-                                <div class="thermometer-mark">100°F</div>
-                                <div class="thermometer-mark">90°F</div>
-                                <div class="thermometer-mark">80°F</div>
-                                <div class="thermometer-mark">70°F</div>
-                                <div class="thermometer-mark">60°F</div>
-                                <div class="thermometer-mark">50°F</div>
+                    <!-- NEW CREATIVE TEMPERATURE DISPLAY -->
+                    <div class="temperature-card fade-in">
+                        <div class="temperature-header">
+                            <h3 class="temperature-title">Temperature</h3>
+                            <div class="temperature-icon-container">
+                                <svg class="temperature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
                             </div>
                         </div>
-                        <div class="temperature-display">
-                            <div class="temperature-value" id="temperatureValue">--</div>
-                            <div class="temperature-unit">°F</div>
+                        
+                        <div class="temperature-display-container">
+                            <div class="temperature-circle">
+                                <div class="temperature-scale">
+                                    <div class="temperature-marker">
+                                        <div class="temperature-progress" id="temperatureProgress">
+                                            <div class="temperature-progress-fill"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="temperature-value-container">
+                                    <div class="temperature-value" id="temperatureValue">--</div>
+                                    <div class="temperature-unit">°F</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="temperature-info">
+                            <div class="temperature-range temperature-range-min">50°F</div>
+                            <div class="temperature-range temperature-range-max">100°F</div>
                         </div>
                     </div>
                     
-                    <!-- Improved Humidity Gauge -->
-                    <div class="humidity-container fade-in delay-1">
-                        <h3 class="humidity-title">Humidity</h3>
-                        <div class="humidity-icon">
-                            <i class="fas fa-tint"></i>
-                        </div>
-                        <div class="humidity-gauge">
-                            <div class="humidity-gauge-outer">
-                                <div class="humidity-gauge-fill" id="humidityGaugeFill"></div>
+                    <!-- NEW CREATIVE HUMIDITY DISPLAY -->
+                    <div class="humidity-card fade-in delay-1">
+                        <div class="humidity-header">
+                            <h3 class="humidity-title">Humidity</h3>
+                            <div class="humidity-icon-container">
+                                <svg class="humidity-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                </svg>
                             </div>
-                            <div class="humidity-gauge-inner">
+                        </div>
+                        
+                        <div class="humidity-display-container">
+                            <div class="humidity-wave-container">
+                                <div class="humidity-wave" id="humidityWave"></div>
+                            </div>
+                            <div class="humidity-drops">
+                                <div class="humidity-drop"></div>
+                                <div class="humidity-drop"></div>
+                                <div class="humidity-drop"></div>
+                            </div>
+                            <div class="humidity-value-container">
                                 <div class="humidity-value" id="humidityValue">--</div>
                                 <div class="humidity-unit">%</div>
                             </div>
-                            <div class="humidity-scale">
-                                <div class="humidity-mark">100%</div>
-                                <div class="humidity-mark">75%</div>
-                                <div class="humidity-mark">50%</div>
-                                <div class="humidity-mark">25%</div>
-                                <div class="humidity-mark">0%</div>
-                            </div>
-                            <div class="water-drop"></div>
-                            <div class="water-drop"></div>
-                            <div class="water-drop"></div>
+                        </div>
+                        
+                        <div class="humidity-info">
+                            <div class="humidity-range humidity-range-min">0%</div>
+                            <div class="humidity-range humidity-range-max">100%</div>
                         </div>
                     </div>
                 </div>
@@ -1087,20 +1211,23 @@
         // Update temperature and humidity gauges
         function updateGauges(latestData) {
             const temperatureValue = document.getElementById('temperatureValue');
-            const thermometerLevel = document.getElementById('thermometerLevel');
+            const temperatureProgress = document.getElementById('temperatureProgress');
             const humidityValue = document.getElementById('humidityValue');
-            const humidityGaugeFill = document.getElementById('humidityGaugeFill');
+            const humidityWave = document.getElementById('humidityWave');
             
             // Update temperature
-            temperatureValue.textContent = latestData.temperature;
+            temperatureValue.textContent = latestData.temperature.toFixed(1);
             
-            // Calculate thermometer level (50°F to 100°F range)
-            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1) * 100;
-            thermometerLevel.style.height = `${tempPercentage}%`;
+            // Calculate temperature progress (50°F to 100°F range)
+            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1);
+            const tempRotation = tempPercentage * 180; // 0 to 180 degrees
+            temperatureProgress.style.transform = `rotate(${tempRotation}deg)`;
             
             // Update humidity
-            humidityValue.textContent = latestData.humidity;
-            humidityGaugeFill.style.height = `${latestData.humidity}%`;
+            humidityValue.textContent = latestData.humidity.toFixed(1);
+            
+            // Update humidity wave height (0% to 100%)
+            humidityWave.style.height = `${latestData.humidity}%`;
         }
         
         // Update charts
@@ -1118,8 +1245,8 @@
                     datasets: [{
                         label: 'Temperature (°F)',
                         data: temperatures,
-                        borderColor: '#f44336',
-                        backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                        borderColor: '#e74c3c',
+                        backgroundColor: 'rgba(231, 76, 60, 0.1)',
                         borderWidth: 2,
                         pointRadius: 0,
                         pointHoverRadius: 5,
@@ -1169,8 +1296,8 @@
                     datasets: [{
                         label: 'Humidity (%)',
                         data: humidities,
-                        borderColor: '#2196F3',
-                        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                        borderColor: '#3498db',
+                        backgroundColor: 'rgba(52, 152, 219, 0.1)',
                         borderWidth: 2,
                         pointRadius: 0,
                         pointHoverRadius: 5,
@@ -1270,11 +1397,11 @@
                 row.appendChild(timeCell);
                 
                 const tempCell = document.createElement('td');
-                tempCell.textContent = item.temperature;
+                tempCell.textContent = item.temperature.toFixed(1);
                 row.appendChild(tempCell);
                 
                 const humCell = document.createElement('td');
-                humCell.textContent = item.humidity;
+                humCell.textContent = item.humidity.toFixed(1);
                 row.appendChild(humCell);
                 
                 tableBody.appendChild(row);
@@ -1314,5 +1441,5 @@
         // Check on scroll
         window.addEventListener('scroll', fadeInOnScroll);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429cc15e6236a01',t:'MTc0NzcyMjc1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429d9fdb087d7cf',t:'MTc0NzcyMzMyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
