@@ -1,0 +1,1100 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel2 Vegetation Index Visualizer | Mohammadreza Narimani</title>
+    <link rel="icon" href="../DataFiles/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #022851; /* UC Davis blue */
+            --secondary-color: #FFBF00; /* UC Davis gold */
+            --accent-color: #8FA8C5; /* Lighter blue */
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --green-accent: #4CAF50;
+            --blue-accent: #2196F3;
+            --section-padding: 80px 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, rgba(2, 40, 81, 0.9), rgba(2, 40, 81, 0.8)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23022851"/><path d="M0 50 Q 25 30, 50 50 T 100 50" stroke="%238FA8C5" stroke-width="2" fill="none"/><path d="M0 60 Q 25 40, 50 60 T 100 60" stroke="%238FA8C5" stroke-width="2" fill="none"/><path d="M0 70 Q 25 50, 50 70 T 100 70" stroke="%238FA8C5" stroke-width="2" fill="none"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 25px 5px, white 100%, transparent 100%),
+                radial-gradient(1px 1px at 50px 25px, white 100%, transparent 100%),
+                radial-gradient(1px 1px at 125px 20px, white 100%, transparent 100%),
+                radial-gradient(1.5px 1.5px at 50px 75px, white 100%, transparent 100%),
+                radial-gradient(2px 2px at 175px 15px, white 100%, transparent 100%),
+                radial-gradient(2px 2px at 20px 125px, white 100%, transparent 100%),
+                radial-gradient(2.5px 2.5px at 100px 150px, white 100%, transparent 100%);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-title {
+            font-family: 'Lora', serif;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .primary-btn {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .primary-btn:hover {
+            background-color: #e6ac00;
+            transform: translateY(-3px);
+        }
+        
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .hero-btn i {
+            margin-left: 8px;
+        }
+        
+        /* About section */
+        .about-section {
+            padding: var(--section-padding);
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        /* Features section */
+        .features-section {
+            padding: var(--section-padding);
+            background-color: var(--light-bg);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-title {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-description {
+            color: #666;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-bg {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(143, 168, 197, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        /* Usage guide section */
+        .usage-section {
+            padding: var(--section-padding);
+            background-color: var(--white);
+        }
+        
+        .steps-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .step-item {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-content {
+            flex-grow: 1;
+            padding-bottom: 20px;
+        }
+        
+        .step-title {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .step-description {
+            color: #666;
+        }
+        
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50px;
+            left: 25px;
+            width: 2px;
+            height: calc(100% - 30px);
+            background-color: rgba(2, 40, 81, 0.2);
+            z-index: 1;
+        }
+        
+        /* App section */
+        .app-section {
+            padding: var(--section-padding);
+            background-color: var(--light-bg);
+        }
+        
+        .app-container {
+            margin-top: 50px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .app-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .app-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(2, 40, 81, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .app-container:hover .app-overlay {
+            opacity: 1;
+        }
+        
+        .app-overlay-title {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .app-overlay-text {
+            max-width: 500px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        /* Indices section */
+        .indices-section {
+            padding: var(--section-padding);
+            background-color: var(--white);
+        }
+        
+        .indices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .index-card {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .index-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .index-name {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .index-name::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .index-description {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Acknowledgments section */
+        .acknowledgments-section {
+            padding: var(--section-padding);
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+        
+        .acknowledgments-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .acknowledgments-logo {
+            max-width: 200px;
+            margin: 30px auto;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-frame {
+                height: 400px;
+            }
+            
+            .indices-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* UC Davis logo */
+        .ucdavis-logo {
+            width: 150px;
+            height: 50px;
+            margin: 0 auto 20px;
+        }
+        
+        .ucdavis-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../DataFiles/favicon.png" alt="Logo">
+                    <span>Mohammadreza Narimani</span>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About Me</a></li>
+                    <li><a href="../research.html">Research & Blog</a></li>
+                    <li><a href="../teaching.html">Teaching Resources</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Sentinel2 Vegetation Index Visualizer</h1>
+                <p class="hero-subtitle">
+                    A dynamic tool for visualizing and analyzing multiple vegetation indices using Sentinel-2 imagery
+                </p>
+                <div class="hero-buttons">
+                    <a href="#app" class="hero-btn primary-btn">
+                        Try the App <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="https://code.earthengine.google.com/?accept_repo=users/mnarimani/Sentinel2_VI_visualizer" target="_blank" class="hero-btn secondary-btn">
+                        Access GEE Script <i class="fas fa-code"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title fade-in">About the Project</h2>
+            <p class="section-subtitle fade-in delay-1">
+                Developed by the Digital Agriculture Laboratory at the University of California, Davis, this Google Earth Engine (GEE) script facilitates dynamic visualization and analysis of multiple vegetation indices using Sentinel-2 imagery for user-defined regions and time periods.
+            </p>
+            
+            <div class="ucdavis-logo fade-in delay-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70">
+                    <path fill="#022851" d="M0,35 C0,15.67 15.67,0 35,0 H165 C184.33,0 200,15.67 200,35 C200,54.33 184.33,70 165,70 H35 C15.67,70 0,54.33 0,35 Z"/>
+                    <path fill="#FFBF00" d="M40,20 H50 V50 H40 Z"/>
+                    <path fill="#FFBF00" d="M60,20 C65.52,20 70,24.48 70,30 V40 C70,45.52 65.52,50 60,50 H55 V20 H60 Z"/>
+                    <path fill="#FFBF00" d="M80,20 H90 V40 C90,45.52 94.48,50 100,50 C105.52,50 110,45.52 110,40 V20 H120 V40 C120,51.05 111.05,60 100,60 C88.95,60 80,51.05 80,40 V20 Z"/>
+                    <path fill="#FFBF00" d="M130,20 H160 V30 H140 V35 H155 V45 H140 V50 H160 V60 H130 V20 Z"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <p class="section-subtitle">
+                Our tool provides a comprehensive set of features for analyzing vegetation indices from satellite imagery
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-bg"></div>
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Interactive Mapping</h3>
+                    <p class="feature-description">
+                        Visualize multiple vegetation indices overlaid on Sentinel-2 RGB imagery with intuitive controls and dynamic rendering.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-bg"></div>
+                    <div class="feature-icon">
+                        <i class="fas fa-draw-polygon"></i>
+                    </div>
+                    <h3 class="feature-title">Polygon Drawing</h3>
+                    <p class="feature-description">
+                        Define your Area of Interest (AOI) by drawing polygons directly on the map interface for precise regional analysis.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-bg"></div>
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Date Selection</h3>
+                    <p class="feature-description">
+                        Input specific dates to filter the satellite imagery, allowing for temporal analysis of vegetation changes.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in">
+                    <div class="feature-bg"></div>
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3 class="feature-title">Cloud Masking</h3>
+                    <p class="feature-description">
+                        Automatically removes cloudy pixels from Sentinel-2 imagery to enhance the clarity and accuracy of data visualization.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in delay-1">
+                    <div class="feature-bg"></div>
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="feature-title">Dynamic Legend</h3>
+                    <p class="feature-description">
+                        Displays a dynamic legend for the selected vegetation index to assist in data interpretation and analysis.
+                    </p>
+                </div>
+                
+                <div class="feature-card fade-in delay-2">
+                    <div class="feature-bg"></div>
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="feature-title">Index Visualization</h3>
+                    <p class="feature-description">
+                        Supports visualization of multiple vegetation indices, each with a corresponding dynamic legend for comprehensive analysis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="usage-section">
+        <div class="container">
+            <h2 class="section-title">Usage Guide</h2>
+            <p class="section-subtitle">
+                Follow these simple steps to get started with the Vegetation Index Visualizer
+            </p>
+            
+            <div class="steps-container">
+                <div class="step-item fade-in">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Access the Script</h3>
+                        <p class="step-description">
+                            Navigate to the GEE code editor and access the <a href="https://code.earthengine.google.com/?accept_repo=users/mnarimani/Sentinel2_VI_visualizer" target="_blank">Sentinel2_VI_Visualizer</a> repository. You'll need a Google Earth Engine account.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in delay-1">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Draw a Polygon</h3>
+                        <p class="step-description">
+                            Utilize the polygon tool to define your Area of Interest (AOI) on the map. This will be the region analyzed for vegetation indices.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in delay-2">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Select a Date</h3>
+                        <p class="step-description">
+                            Enter a specific date to filter the imagery. This allows you to analyze vegetation conditions at particular points in time.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in delay-3">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Choose an Index</h3>
+                        <p class="step-description">
+                            Select a vegetation index from the dropdown menu to visualize. Each index provides different insights into vegetation health and conditions.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Calculate and Visualize</h3>
+                        <p class="step-description">
+                            Click the 'Calculate' button to generate the visualization of the selected index. The dynamic legend will adjust based on the index chosen.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="step-item fade-in delay-1">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3 class="step-title">Interpret the Data</h3>
+                        <p class="step-description">
+                            Use the generated legend to interpret the visualized data effectively. Different colors represent different values of the selected vegetation index.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="app" class="app-section">
+        <div class="container">
+            <h2 class="section-title">Interactive Visualizer</h2>
+            <p class="section-subtitle">
+                Try the Vegetation Index Visualizer App directly in your browser
+            </p>
+            
+            <div class="app-container fade-in">
+                <iframe src="https://ee-mnarimani.projects.earthengine.app/view/vegetationindexvisualizer" class="app-frame" title="Vegetation Index Visualizer"></iframe>
+                <div class="app-overlay">
+                    <h3 class="app-overlay-title">Interactive Earth Engine App</h3>
+                    <p class="app-overlay-text">
+                        This embedded application allows you to analyze vegetation indices using Sentinel-2 imagery. Draw polygons, select dates, and visualize different indices.
+                    </p>
+                    <a href="https://ee-mnarimani.projects.earthengine.app/view/vegetationindexvisualizer" target="_blank" class="hero-btn primary-btn">
+                        Open in Full Screen <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="indices-section">
+        <div class="container">
+            <h2 class="section-title">Vegetation Indices</h2>
+            <p class="section-subtitle">
+                This application visualizes the following indices, retrieved from Sentinel-2 imagery
+            </p>
+            
+            <div class="indices-grid">
+                <div class="index-card fade-in">
+                    <div class="index-name">NDVI</div>
+                    <div class="index-description">Normalized Difference Vegetation Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">ARI</div>
+                    <div class="index-description">Anthocyanin Reflectance Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">mARI</div>
+                    <div class="index-description">Modified Anthocyanin Reflectance Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">CHL_REDEDGE</div>
+                    <div class="index-description">Chlorophyll Red-Edge</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">EVI</div>
+                    <div class="index-description">Enhanced Vegetation Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">GNDVI</div>
+                    <div class="index-description">Green Normalized Difference Vegetation Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">MCARI</div>
+                    <div class="index-description">Modified Chlorophyll Absorption in Reflectance Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">MSI</div>
+                    <div class="index-description">Moisture Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">NDMI</div>
+                    <div class="index-description">Normalized Difference Moisture Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">NDWI</div>
+                    <div class="index-description">Normalized Difference Water Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">NDMI STRESS</div>
+                    <div class="index-description">Normalized Difference Moisture Index for Crop Moisture Stress</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">NDCI</div>
+                    <div class="index-description">Normalized Difference Chlorophyll Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">PSSRB1</div>
+                    <div class="index-description">Pigment Specific Simple Ratio for Chlorophyll B (800/650)</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">SAVI</div>
+                    <div class="index-description">Soil Adjusted Vegetation Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">SIPI1</div>
+                    <div class="index-description">Structure Insensitive Pigment Index</div>
+                </div>
+                
+                <div class="index-card fade-in">
+                    <div class="index-name">PSRI</div>
+                    <div class="index-description">Plant Senescence Reflectance Index</div>
+                </div>
+            </div>
+            
+            <p class="section-subtitle" style="margin-top: 40px;">
+                For more information on these indices, visit <a href="https://custom-scripts.sentinel-hub.com/custom-scripts/sentinel/sentinel-2/" target="_blank">Sentinel Hub Custom Scripts</a>.
+            </p>
+        </div>
+    </section>
+
+    <section class="acknowledgments-section">
+        <div class="container">
+            <h2 class="section-title">Acknowledgments</h2>
+            <div class="acknowledgments-content fade-in">
+                <p>
+                    This project is a collaborative effort by the Digital Agriculture Laboratory at UC Davis, dedicated to advancing the use of remote sensing technology in agriculture.
+                </p>
+                <div class="acknowledgments-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+                        <path fill="#022851" d="M0,50 C0,22.39 22.39,0 50,0 H150 C177.61,0 200,22.39 200,50 C200,77.61 177.61,100 150,100 H50 C22.39,100 0,77.61 0,50 Z"/>
+                        <text x="100" y="45" font-family="Arial" font-size="14" fill="#FFFFFF" text-anchor="middle">Digital Agriculture Laboratory</text>
+                        <text x="100" y="65" font-family="Arial" font-size="12" fill="#FFBF00" text-anchor="middle">University of California, Davis</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Initial check
+        fadeInOnScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'94297d7314d1d7cf',t:'MTc0NzcxOTUyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
