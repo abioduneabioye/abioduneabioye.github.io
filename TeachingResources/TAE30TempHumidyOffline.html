@@ -1,0 +1,1289 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAE30 Temp&RH Offline Mode</title>
+    <link rel="icon" href="../DataFiles/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #022851; /* UC Davis blue */
+            --secondary-color: #FFBF00; /* UC Davis gold */
+            --accent-color: #8FA8C5; /* Lighter blue */
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --green-accent: #4CAF50;
+            --blue-accent: #2196F3;
+            --red-accent: #f44336;
+            --section-padding: 60px 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Main content */
+        .main-content {
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+        
+        .page-title {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #666;
+        }
+        
+        /* File upload section */
+        .upload-section {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .upload-title {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .upload-container {
+            border: 2px dashed var(--accent-color);
+            border-radius: 10px;
+            padding: 40px 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .upload-container:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(143, 168, 197, 0.05);
+        }
+        
+        .upload-container.dragover {
+            border-color: var(--secondary-color);
+            background-color: rgba(255, 191, 0, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            transition: color 0.3s;
+        }
+        
+        .upload-container:hover .upload-icon {
+            color: var(--primary-color);
+        }
+        
+        .upload-text {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .upload-subtext {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .upload-status {
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--green-accent);
+            display: none;
+        }
+        
+        /* Dashboard section */
+        .dashboard-section {
+            display: none;
+            margin-top: 40px;
+        }
+        
+        .dashboard-title {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .gauges-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        /* Thermometer */
+        .thermometer-container {
+            position: relative;
+            width: 200px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .thermometer {
+            position: relative;
+            width: 60px;
+            height: 250px;
+            background-color: #f5f5f5;
+            border-radius: 30px 30px 0 0;
+            border: 3px solid #ddd;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .thermometer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: var(--red-accent);
+            border-radius: 50% 50% 0 0;
+        }
+        
+        .thermometer-bulb {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background-color: var(--red-accent);
+            border-radius: 50%;
+            border: 3px solid #ddd;
+        }
+        
+        .thermometer-level {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background-color: var(--red-accent);
+            transition: height 1s ease-in-out;
+        }
+        
+        .thermometer-marks {
+            position: absolute;
+            top: 0;
+            left: -30px;
+            height: 100%;
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        
+        .thermometer-mark {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        .thermometer-mark::before {
+            content: '';
+            width: 10px;
+            height: 1px;
+            background-color: #888;
+            margin-right: 5px;
+        }
+        
+        .temperature-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .temperature-unit {
+            font-size: 1.2rem;
+            color: #888;
+        }
+        
+        /* Humidity gauge */
+        .humidity-container {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .humidity-gauge {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+        }
+        
+        .humidity-gauge-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            border: 3px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .humidity-gauge-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, #2196F3, #8FA8C5);
+            transition: height 1s ease-in-out;
+        }
+        
+        .humidity-gauge-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .humidity-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .humidity-unit {
+            font-size: 1.2rem;
+            color: #888;
+        }
+        
+        .humidity-label {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+        
+        .humidity-marks {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .humidity-mark {
+            position: absolute;
+            font-size: 0.8rem;
+            color: #888;
+        }
+        
+        .humidity-mark:nth-child(1) {
+            top: 10%;
+            right: 10%;
+        }
+        
+        .humidity-mark:nth-child(2) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+        
+        .humidity-mark:nth-child(3) {
+            bottom: 10%;
+            right: 10%;
+        }
+        
+        .humidity-mark:nth-child(4) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .humidity-mark:nth-child(5) {
+            bottom: 10%;
+            left: 10%;
+        }
+        
+        .humidity-mark:nth-child(6) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        
+        .humidity-mark:nth-child(7) {
+            top: 10%;
+            left: 10%;
+        }
+        
+        .humidity-icon {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: var(--blue-accent);
+        }
+        
+        /* Charts section */
+        .charts-section {
+            margin-top: 60px;
+        }
+        
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .chart-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chart-title {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        
+        /* Summary section */
+        .summary-section {
+            margin-top: 60px;
+        }
+        
+        .summary-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .summary-title {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: var(--light-bg);
+            transition: transform 0.3s;
+        }
+        
+        .summary-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .summary-label {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+        
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .summary-table-container {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+        
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .summary-table th,
+        .summary-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .summary-table th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+        }
+        
+        .summary-table tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        .summary-table tr:hover {
+            background-color: rgba(143, 168, 197, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gauges-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Water drop animation */
+        @keyframes waterDrop {
+            0% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(10px) scale(0.8); opacity: 0.9; }
+            100% { transform: translateY(0) scale(1); opacity: 0.7; }
+        }
+        
+        .water-drop {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--blue-accent);
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            animation: waterDrop 2s infinite;
+        }
+        
+        .water-drop:nth-child(1) {
+            top: 20px;
+            left: 30px;
+            animation-delay: 0s;
+        }
+        
+        .water-drop:nth-child(2) {
+            top: 40px;
+            right: 30px;
+            animation-delay: 0.5s;
+        }
+        
+        .water-drop:nth-child(3) {
+            bottom: 60px;
+            left: 40px;
+            animation-delay: 1s;
+        }
+        
+        /* No data message */
+        .no-data-message {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .no-data-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .no-data-text {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .no-data-subtext {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <img src="../DataFiles/favicon.png" alt="Logo">
+                    <span>TAE30 Temp&RH Offline Mode</span>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About Me</a></li>
+                    <li><a href="../research.html">Research & Blog</a></li>
+                    <li><a href="../teaching.html">Teaching Resources</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">Temperature and Humidity Monitoring</h1>
+            <p class="intro-text">
+                This tool allows you to visualize temperature and humidity data collected with a DHT22 sensor. 
+                The data is collected every second using a Parallax Activity Board and Simple IDE software. 
+                Since this is an offline monitoring system, it records data from a starting point (0) and continues 
+                without a real-time clock reference.
+            </p>
+            
+            <div class="upload-section fade-in">
+                <h2 class="upload-title">Upload Your Data</h2>
+                <div class="upload-container" id="uploadContainer">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <p class="upload-text">Drag and drop your CSV file here</p>
+                    <p class="upload-subtext">or click to browse files</p>
+                    <input type="file" id="fileInput" class="file-input" accept=".csv">
+                </div>
+                <p class="upload-status" id="uploadStatus">File uploaded successfully!</p>
+            </div>
+            
+            <div class="no-data-message fade-in" id="noDataMessage">
+                <i class="fas fa-file-csv no-data-icon"></i>
+                <p class="no-data-text">No data to display yet</p>
+                <p class="no-data-subtext">Upload a CSV file to see temperature and humidity visualizations</p>
+            </div>
+            
+            <div class="dashboard-section" id="dashboardSection">
+                <h2 class="dashboard-title fade-in">Current Readings</h2>
+                
+                <div class="gauges-container">
+                    <div class="thermometer-container fade-in">
+                        <div class="thermometer">
+                            <div class="thermometer-level" id="thermometerLevel"></div>
+                            <div class="thermometer-bulb"></div>
+                            <div class="thermometer-marks">
+                                <div class="thermometer-mark">100°F</div>
+                                <div class="thermometer-mark">90°F</div>
+                                <div class="thermometer-mark">80°F</div>
+                                <div class="thermometer-mark">70°F</div>
+                                <div class="thermometer-mark">60°F</div>
+                                <div class="thermometer-mark">50°F</div>
+                            </div>
+                        </div>
+                        <div class="temperature-value" id="temperatureValue">--</div>
+                        <div class="temperature-unit">°F</div>
+                    </div>
+                    
+                    <div class="humidity-container fade-in delay-1">
+                        <div class="humidity-gauge">
+                            <div class="humidity-gauge-bg">
+                                <div class="humidity-gauge-fill" id="humidityGaugeFill"></div>
+                            </div>
+                            <div class="humidity-gauge-center">
+                                <div class="humidity-value" id="humidityValue">--</div>
+                                <div class="humidity-unit">%</div>
+                                <div class="humidity-label">Humidity</div>
+                            </div>
+                            <div class="humidity-marks">
+                                <div class="humidity-mark">75%</div>
+                                <div class="humidity-mark">50%</div>
+                                <div class="humidity-mark">25%</div>
+                                <div class="humidity-mark">0%</div>
+                                <div class="humidity-mark">25%</div>
+                                <div class="humidity-mark">50%</div>
+                                <div class="humidity-mark">75%</div>
+                            </div>
+                            <div class="humidity-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="water-drop"></div>
+                            <div class="water-drop"></div>
+                            <div class="water-drop"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="charts-section fade-in delay-2">
+                    <h2 class="dashboard-title">Data Over Time</h2>
+                    <div class="charts-container">
+                        <div class="chart-card">
+                            <h3 class="chart-title">Temperature (°F)</h3>
+                            <div class="chart-container">
+                                <canvas id="temperatureChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3 class="chart-title">Humidity (%)</h3>
+                            <div class="chart-container">
+                                <canvas id="humidityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-section fade-in delay-3">
+                    <div class="summary-card">
+                        <h2 class="summary-title">Data Summary</h2>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-label">Duration</div>
+                                <div class="summary-value" id="durationValue">--:--:--</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Max Temperature</div>
+                                <div class="summary-value" id="maxTempValue">-- °F</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Min Temperature</div>
+                                <div class="summary-value" id="minTempValue">-- °F</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Avg Temperature</div>
+                                <div class="summary-value" id="avgTempValue">-- °F</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Max Humidity</div>
+                                <div class="summary-value" id="maxHumValue">-- %</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Min Humidity</div>
+                                <div class="summary-value" id="minHumValue">-- %</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Avg Humidity</div>
+                                <div class="summary-value" id="avgHumValue">-- %</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Data Points</div>
+                                <div class="summary-value" id="dataPointsValue">--</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-table-container">
+                            <table class="summary-table" id="dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Temperature (°F)</th>
+                                        <th>Humidity (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <!-- Table data will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">TAE30 Teaching Resources 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // File upload handling
+        const uploadContainer = document.getElementById('uploadContainer');
+        const fileInput = document.getElementById('fileInput');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const noDataMessage = document.getElementById('noDataMessage');
+        
+        // Drag and drop functionality
+        uploadContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadContainer.classList.add('dragover');
+        });
+        
+        uploadContainer.addEventListener('dragleave', () => {
+            uploadContainer.classList.remove('dragover');
+        });
+        
+        uploadContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadContainer.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length) {
+                const file = e.dataTransfer.files[0];
+                if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                    processFile(file);
+                } else {
+                    alert('Please upload a CSV file.');
+                }
+            }
+        });
+        
+        // Click to upload functionality
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                const file = fileInput.files[0];
+                if (file.type === 'text/csv' || file.name.endsWith('.csv')) {
+                    processFile(file);
+                } else {
+                    alert('Please upload a CSV file.');
+                }
+            }
+        });
+        
+        // Process the uploaded CSV file
+        function processFile(file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                const csvData = e.target.result;
+                const data = parseCSV(csvData);
+                
+                if (data.length > 0) {
+                    // Show success message
+                    uploadStatus.style.display = 'block';
+                    
+                    // Hide no data message
+                    noDataMessage.style.display = 'none';
+                    
+                    // Show dashboard
+                    dashboardSection.style.display = 'block';
+                    
+                    // Process and display data
+                    processData(data);
+                } else {
+                    alert('No valid data found in the CSV file.');
+                }
+            };
+            
+            reader.onerror = function() {
+                alert('Error reading the file.');
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        // Parse CSV data
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const result = [];
+            
+            // Check for header
+            const header = lines[0].split(',');
+            const hasHeader = header.includes('Time') && header.includes('Temperature') && header.includes('Humidity');
+            
+            // Start from index 1 if header exists, otherwise from 0
+            const startIndex = hasHeader ? 1 : 0;
+            
+            for (let i = startIndex; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line) {
+                    const values = line.split(',');
+                    if (values.length >= 3) {
+                        result.push({
+                            time: values[0],
+                            temperature: parseFloat(values[1]),
+                            humidity: parseFloat(values[2])
+                        });
+                    }
+                }
+            }
+            
+            return result;
+        }
+        
+        // Process and display data
+        function processData(data) {
+            // Update gauges with latest values
+            updateGauges(data[data.length - 1]);
+            
+            // Update charts
+            updateCharts(data);
+            
+            // Update summary
+            updateSummary(data);
+            
+            // Update table
+            updateTable(data);
+        }
+        
+        // Update temperature and humidity gauges
+        function updateGauges(latestData) {
+            const temperatureValue = document.getElementById('temperatureValue');
+            const thermometerLevel = document.getElementById('thermometerLevel');
+            const humidityValue = document.getElementById('humidityValue');
+            const humidityGaugeFill = document.getElementById('humidityGaugeFill');
+            
+            // Update temperature
+            temperatureValue.textContent = latestData.temperature;
+            
+            // Calculate thermometer level (50°F to 100°F range)
+            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1) * 100;
+            thermometerLevel.style.height = `${tempPercentage}%`;
+            
+            // Update humidity
+            humidityValue.textContent = latestData.humidity;
+            humidityGaugeFill.style.height = `${latestData.humidity}%`;
+        }
+        
+        // Update charts
+        function updateCharts(data) {
+            const times = data.map(item => item.time);
+            const temperatures = data.map(item => item.temperature);
+            const humidities = data.map(item => item.humidity);
+            
+            // Temperature chart
+            const tempCtx = document.getElementById('temperatureChart').getContext('2d');
+            new Chart(tempCtx, {
+                type: 'line',
+                data: {
+                    labels: times,
+                    datasets: [{
+                        label: 'Temperature (°F)',
+                        data: temperatures,
+                        borderColor: '#f44336',
+                        backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxTicksLimit: 10,
+                                maxRotation: 0
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            min: Math.floor(Math.min(...temperatures) - 5),
+                            max: Math.ceil(Math.max(...temperatures) + 5),
+                            ticks: {
+                                stepSize: 5
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Humidity chart
+            const humCtx = document.getElementById('humidityChart').getContext('2d');
+            new Chart(humCtx, {
+                type: 'line',
+                data: {
+                    labels: times,
+                    datasets: [{
+                        label: 'Humidity (%)',
+                        data: humidities,
+                        borderColor: '#2196F3',
+                        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                maxTicksLimit: 10,
+                                maxRotation: 0
+                            },
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                stepSize: 10
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update summary statistics
+        function updateSummary(data) {
+            const durationValue = document.getElementById('durationValue');
+            const maxTempValue = document.getElementById('maxTempValue');
+            const minTempValue = document.getElementById('minTempValue');
+            const avgTempValue = document.getElementById('avgTempValue');
+            const maxHumValue = document.getElementById('maxHumValue');
+            const minHumValue = document.getElementById('minHumValue');
+            const avgHumValue = document.getElementById('avgHumValue');
+            const dataPointsValue = document.getElementById('dataPointsValue');
+            
+            // Calculate duration
+            const firstTime = data[0].time;
+            const lastTime = data[data.length - 1].time;
+            durationValue.textContent = lastTime;
+            
+            // Calculate temperature stats
+            const temperatures = data.map(item => item.temperature);
+            const maxTemp = Math.max(...temperatures);
+            const minTemp = Math.min(...temperatures);
+            const avgTemp = temperatures.reduce((sum, temp) => sum + temp, 0) / temperatures.length;
+            
+            maxTempValue.textContent = `${maxTemp.toFixed(1)} °F`;
+            minTempValue.textContent = `${minTemp.toFixed(1)} °F`;
+            avgTempValue.textContent = `${avgTemp.toFixed(1)} °F`;
+            
+            // Calculate humidity stats
+            const humidities = data.map(item => item.humidity);
+            const maxHum = Math.max(...humidities);
+            const minHum = Math.min(...humidities);
+            const avgHum = humidities.reduce((sum, hum) => sum + hum, 0) / humidities.length;
+            
+            maxHumValue.textContent = `${maxHum.toFixed(1)} %`;
+            minHumValue.textContent = `${minHum.toFixed(1)} %`;
+            avgHumValue.textContent = `${avgHum.toFixed(1)} %`;
+            
+            // Data points count
+            dataPointsValue.textContent = data.length;
+        }
+        
+        // Update data table
+        function updateTable(data) {
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+            
+            // Limit to 100 rows for performance
+            const displayData = data.length > 100 ? 
+                [...data.slice(0, 50), ...data.slice(data.length - 50)] : 
+                data;
+            
+            displayData.forEach(item => {
+                const row = document.createElement('tr');
+                
+                const timeCell = document.createElement('td');
+                timeCell.textContent = item.time;
+                row.appendChild(timeCell);
+                
+                const tempCell = document.createElement('td');
+                tempCell.textContent = item.temperature;
+                row.appendChild(tempCell);
+                
+                const humCell = document.createElement('td');
+                humCell.textContent = item.humidity;
+                row.appendChild(humCell);
+                
+                tableBody.appendChild(row);
+            });
+            
+            // Add note if data was truncated
+            if (data.length > 100) {
+                const noteRow = document.createElement('tr');
+                const noteCell = document.createElement('td');
+                noteCell.colSpan = 3;
+                noteCell.textContent = `Note: Showing first and last 50 rows of ${data.length} total records`;
+                noteCell.style.textAlign = 'center';
+                noteCell.style.fontStyle = 'italic';
+                noteRow.appendChild(noteCell);
+                tableBody.appendChild(noteRow);
+            }
+        }
+        
+        // Animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Initial check
+        fadeInOnScroll();
+        
+        // Check on scroll
+        window.addEventListener('scroll', fadeInOnScroll);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429bc18541f32bc',t:'MTc0NzcyMjA5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
