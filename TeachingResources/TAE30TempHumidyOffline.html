@@ -253,7 +253,7 @@
             margin-bottom: 40px;
         }
         
-        /* Thermometer */
+        /* Improved Thermometer */
         .thermometer-container {
             position: relative;
             width: 200px;
@@ -261,40 +261,42 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .thermometer-title {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
         }
         
         .thermometer {
             position: relative;
-            width: 60px;
-            height: 250px;
-            background-color: #f5f5f5;
-            border-radius: 30px 30px 0 0;
-            border: 3px solid #ddd;
+            width: 40px;
+            height: 200px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0.5)), #f5f5f5;
+            border-radius: 20px 20px 0 0;
+            border: 2px solid #ddd;
             overflow: hidden;
             margin-bottom: 20px;
         }
         
-        .thermometer::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background-color: var(--red-accent);
-            border-radius: 50% 50% 0 0;
-        }
-        
         .thermometer-bulb {
             position: absolute;
-            bottom: -30px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
-            background-color: var(--red-accent);
+            width: 60px;
+            height: 60px;
+            background: var(--red-accent);
             border-radius: 50%;
-            border: 3px solid #ddd;
+            border: 2px solid #ddd;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
         
         .thermometer-level {
@@ -303,14 +305,15 @@
             left: 0;
             width: 100%;
             height: 0%;
-            background-color: var(--red-accent);
+            background: linear-gradient(to top, #f44336, #ff7961);
             transition: height 1s ease-in-out;
+            z-index: 1;
         }
         
-        .thermometer-marks {
+        .thermometer-scale {
             position: absolute;
             top: 0;
-            left: -30px;
+            right: -35px;
             height: 100%;
             width: 30px;
             display: flex;
@@ -320,31 +323,48 @@
         }
         
         .thermometer-mark {
+            position: relative;
+            font-size: 0.7rem;
+            color: #666;
             display: flex;
             align-items: center;
-            font-size: 0.8rem;
         }
         
         .thermometer-mark::before {
             content: '';
-            width: 10px;
+            width: 8px;
             height: 1px;
             background-color: #888;
             margin-right: 5px;
         }
         
+        .temperature-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
         .temperature-value {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary-color);
+            line-height: 1;
         }
         
         .temperature-unit {
             font-size: 1.2rem;
             color: #888;
+            margin-top: 5px;
         }
         
-        /* Humidity gauge */
+        .temperature-icon {
+            font-size: 1.5rem;
+            color: var(--red-accent);
+            margin-bottom: 5px;
+        }
+        
+        /* Improved Humidity Gauge */
         .humidity-container {
             position: relative;
             width: 250px;
@@ -352,23 +372,51 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .humidity-title {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            text-align: center;
         }
         
         .humidity-gauge {
             position: relative;
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             margin-bottom: 20px;
         }
         
-        .humidity-gauge-bg {
+        .humidity-gauge-outer {
             position: absolute;
             width: 100%;
             height: 100%;
             border-radius: 50%;
             background-color: #f5f5f5;
-            border: 3px solid #ddd;
+            border: 2px solid #ddd;
             overflow: hidden;
+        }
+        
+        .humidity-gauge-inner {
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background-color: var(--white);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
         }
         
         .humidity-gauge-fill {
@@ -377,100 +425,74 @@
             left: 0;
             width: 100%;
             height: 0%;
-            background: linear-gradient(to top, #2196F3, #8FA8C5);
+            background: linear-gradient(to top, #2196F3, #90caf9);
             transition: height 1s ease-in-out;
-        }
-        
-        .humidity-gauge-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 80%;
-            background-color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1;
         }
         
         .humidity-value {
             font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary-color);
+            line-height: 1;
         }
         
         .humidity-unit {
             font-size: 1.2rem;
             color: #888;
-        }
-        
-        .humidity-label {
-            font-size: 1rem;
-            color: var(--primary-color);
             margin-top: 5px;
         }
         
-        .humidity-marks {
+        .humidity-icon {
+            font-size: 1.5rem;
+            color: var(--blue-accent);
+            margin-bottom: 5px;
+        }
+        
+        .humidity-scale {
             position: absolute;
             width: 100%;
             height: 100%;
+            z-index: 3;
+            pointer-events: none;
         }
         
         .humidity-mark {
             position: absolute;
-            font-size: 0.8rem;
-            color: #888;
+            font-size: 0.7rem;
+            color: #666;
         }
         
         .humidity-mark:nth-child(1) {
             top: 10%;
-            right: 10%;
+            right: 25%;
         }
         
         .humidity-mark:nth-child(2) {
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-        }
-        
-        .humidity-mark:nth-child(3) {
-            bottom: 10%;
+            top: 25%;
             right: 10%;
         }
         
+        .humidity-mark:nth-child(3) {
+            top: 50%;
+            right: 5%;
+        }
+        
         .humidity-mark:nth-child(4) {
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 25%;
+            right: 10%;
         }
         
         .humidity-mark:nth-child(5) {
             bottom: 10%;
-            left: 10%;
+            right: 25%;
         }
         
-        .humidity-mark:nth-child(6) {
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-        
-        .humidity-mark:nth-child(7) {
-            top: 10%;
-            left: 10%;
-        }
-        
-        .humidity-icon {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
-            color: var(--blue-accent);
+        .humidity-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
         }
         
         /* Charts section */
@@ -675,36 +697,37 @@
         
         /* Water drop animation */
         @keyframes waterDrop {
-            0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            50% { transform: translateY(10px) scale(0.8); opacity: 0.9; }
-            100% { transform: translateY(0) scale(1); opacity: 0.7; }
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(0.8); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 0.7; }
         }
         
         .water-drop {
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-color: var(--blue-accent);
             border-radius: 50% 50% 50% 0;
             transform: rotate(-45deg);
             animation: waterDrop 2s infinite;
+            z-index: 4;
         }
         
         .water-drop:nth-child(1) {
-            top: 20px;
-            left: 30px;
+            top: 30px;
+            right: 30px;
             animation-delay: 0s;
         }
         
         .water-drop:nth-child(2) {
-            top: 40px;
-            right: 30px;
+            top: 50px;
+            left: 30px;
             animation-delay: 0.5s;
         }
         
         .water-drop:nth-child(3) {
             bottom: 60px;
-            left: 40px;
+            right: 40px;
             animation-delay: 1s;
         }
         
@@ -786,11 +809,16 @@
                 <h2 class="dashboard-title fade-in">Current Readings</h2>
                 
                 <div class="gauges-container">
+                    <!-- Improved Thermometer -->
                     <div class="thermometer-container fade-in">
+                        <h3 class="thermometer-title">Temperature</h3>
+                        <div class="temperature-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
                         <div class="thermometer">
                             <div class="thermometer-level" id="thermometerLevel"></div>
                             <div class="thermometer-bulb"></div>
-                            <div class="thermometer-marks">
+                            <div class="thermometer-scale">
                                 <div class="thermometer-mark">100°F</div>
                                 <div class="thermometer-mark">90°F</div>
                                 <div class="thermometer-mark">80°F</div>
@@ -799,31 +827,32 @@
                                 <div class="thermometer-mark">50°F</div>
                             </div>
                         </div>
-                        <div class="temperature-value" id="temperatureValue">--</div>
-                        <div class="temperature-unit">°F</div>
+                        <div class="temperature-display">
+                            <div class="temperature-value" id="temperatureValue">--</div>
+                            <div class="temperature-unit">°F</div>
+                        </div>
                     </div>
                     
+                    <!-- Improved Humidity Gauge -->
                     <div class="humidity-container fade-in delay-1">
+                        <h3 class="humidity-title">Humidity</h3>
+                        <div class="humidity-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
                         <div class="humidity-gauge">
-                            <div class="humidity-gauge-bg">
+                            <div class="humidity-gauge-outer">
                                 <div class="humidity-gauge-fill" id="humidityGaugeFill"></div>
                             </div>
-                            <div class="humidity-gauge-center">
+                            <div class="humidity-gauge-inner">
                                 <div class="humidity-value" id="humidityValue">--</div>
                                 <div class="humidity-unit">%</div>
-                                <div class="humidity-label">Humidity</div>
                             </div>
-                            <div class="humidity-marks">
+                            <div class="humidity-scale">
+                                <div class="humidity-mark">100%</div>
                                 <div class="humidity-mark">75%</div>
                                 <div class="humidity-mark">50%</div>
                                 <div class="humidity-mark">25%</div>
                                 <div class="humidity-mark">0%</div>
-                                <div class="humidity-mark">25%</div>
-                                <div class="humidity-mark">50%</div>
-                                <div class="humidity-mark">75%</div>
-                            </div>
-                            <div class="humidity-icon">
-                                <i class="fas fa-tint"></i>
                             </div>
                             <div class="water-drop"></div>
                             <div class="water-drop"></div>
@@ -1011,28 +1040,28 @@
             reader.readAsText(file);
         }
         
-        // Parse CSV data
+        // Parse CSV data - Fixed to properly handle header row
         function parseCSV(csvText) {
             const lines = csvText.split('\n');
             const result = [];
             
-            // Check for header
-            const header = lines[0].split(',');
-            const hasHeader = header.includes('Time') && header.includes('Temperature') && header.includes('Humidity');
-            
-            // Start from index 1 if header exists, otherwise from 0
-            const startIndex = hasHeader ? 1 : 0;
-            
-            for (let i = startIndex; i < lines.length; i++) {
+            // Skip the header row (first row)
+            for (let i = 1; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (line) {
                     const values = line.split(',');
                     if (values.length >= 3) {
-                        result.push({
-                            time: values[0],
-                            temperature: parseFloat(values[1]),
-                            humidity: parseFloat(values[2])
-                        });
+                        const temp = parseFloat(values[1]);
+                        const humidity = parseFloat(values[2]);
+                        
+                        // Only add valid numeric data
+                        if (!isNaN(temp) && !isNaN(humidity)) {
+                            result.push({
+                                time: values[0],
+                                temperature: temp,
+                                humidity: humidity
+                            });
+                        }
                     }
                 }
             }
@@ -1285,5 +1314,5 @@
         // Check on scroll
         window.addEventListener('scroll', fadeInOnScroll);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429bc18541f32bc',t:'MTc0NzcyMjA5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429cc15e6236a01',t:'MTc0NzcyMjc1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
