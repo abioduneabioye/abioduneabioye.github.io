@@ -1058,7 +1058,7 @@
                         <h2 class="summary-title">Data Summary</h2>
                         <div class="summary-grid">
                             <div class="summary-item">
-                                <div class="summary-label">Duration</div>
+                                <div class="summary-label">Iterations</div>
                                 <div class="summary-value" id="durationValue">--:--:--</div>
                             </div>
                             <div class="summary-item">
@@ -1095,7 +1095,7 @@
                             <table class="summary-table" id="dataTable">
                                 <thead>
                                     <tr>
-                                        <th>Time</th>
+                                        <th>Iteration</th>
                                         <th>Temperature (°F)</th>
                                         <th>Humidity (%)</th>
                                     </tr>
@@ -1216,33 +1216,35 @@
         
         // Parse CSV data - Fixed to properly handle header row
         function parseCSV(csvText) {
-            const lines = csvText.split('\n');
-            const result = [];
-            
-            // Skip the header row (first row)
-            for (let i = 1; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (line) {
-                    const values = line.split(',');
-                    if (values.length >= 3) {
-                        const temp = parseFloat(values[1]);
-                        const humidity = parseFloat(values[2]);
-                        
-                        // Only add valid numeric data
-                        if (!isNaN(temp) && !isNaN(humidity)) {
-                            result.push({
-                                time: values[0],
-                                temperature: temp,
-                                humidity: humidity
-                            });
-                        }
-                    }
-                }
+        const lines   = csvText.split(/\r?\n/).filter(l => l.trim() !== '');
+        if (lines.length < 2) return [];
+
+        // Detect delimiter (first data row, not header, in case header has spaces)
+        const sample  = lines[1];
+        const delim   = sample.includes('\t') ? '\t' : ',';
+
+        // Map header names ➔ column indexes
+        const header  = lines[0].trim().split(delim).map(h => h.trim().toLowerCase());
+        const idxIter = header.findIndex(h => h.startsWith('iter'));
+        const idxTemp = header.findIndex(h => h.startsWith('temp'));
+        const idxHum  = header.findIndex(h => h.startsWith('hum'));
+
+        const out = [];
+        for (let i = 1; i < lines.length; i++) {
+            const vals = lines[i].trim().split(delim);
+            if (vals.length < 3) continue;
+
+            const iter = parseInt(vals[idxIter]);
+            const temp = parseFloat(vals[idxTemp]);
+            const hum  = parseFloat(vals[idxHum]);
+
+            if (!Number.isNaN(iter) && !Number.isNaN(temp) && !Number.isNaN(hum)) {
+            out.push({ iteration: iter, temperature: temp, humidity: hum });
             }
-            
-            return result;
         }
-        
+        return out;
+        }
+                
         // Process and display data
         function processData(data) {
             // Update gauges with latest values
@@ -1281,7 +1283,7 @@
         
         // Update charts
         function updateCharts(data) {
-            const times = data.map(item => item.time);
+            const times = data.map(item => item.iteration);
             const temperatures = data.map(item => item.temperature);
             const humidities = data.map(item => item.humidity);
             
@@ -1317,6 +1319,7 @@
                     },
                     scales: {
                         x: {
+                            title: { display: true, text: 'Iteration' },
                             ticks: {
                                 maxTicksLimit: 10,
                                 maxRotation: 0
@@ -1368,6 +1371,7 @@
                     },
                     scales: {
                         x: {
+                            title: { display: true, text: 'Iteration' },
                             ticks: {
                                 maxTicksLimit: 10,
                                 maxRotation: 0
@@ -1400,8 +1404,8 @@
             const dataPointsValue = document.getElementById('dataPointsValue');
             
             // Calculate duration
-            const firstTime = data[0].time;
-            const lastTime = data[data.length - 1].time;
+            const firstTime = data[0].iteration;
+            const lastTime = data[data.length - 1].iteration;
             durationValue.textContent = lastTime;
             
             // Calculate temperature stats
@@ -1442,7 +1446,7 @@
                 const row = document.createElement('tr');
                 
                 const timeCell = document.createElement('td');
-                timeCell.textContent = item.time;
+                timeCell.textContent = item.iteration;
                 row.appendChild(timeCell);
                 
                 const tempCell = document.createElement('td');
