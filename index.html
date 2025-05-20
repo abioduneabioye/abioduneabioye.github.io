@@ -1,115 +1,478 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Define title -->
-    <title>Mohammadreza Narimani</title>
-
-    <!-- Include favicon. Use, e.g., https://favicon.io/ -->
-    <link rel="icon" type="image/png" href="DataFiles/favicon.png" sizes="32x32" />
-
-    <!-- Include style sheets -->
-    <link rel="stylesheet" href="main.css" />
-
-    <!-- Fonts from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;600&display=swap" rel="stylesheet" />
-
-    <!-- Load FontAwesome (for icons) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-    />
-
-    <!-- Load Academicons (for more icons) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.2/css/academicons.min.css"
-      integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg=="
-      crossorigin="anonymous"
-    />
-  </head>
-
-  <body>
-    <!-- Navigation Bar -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammadreza Narimani | UC Davis</title>
+    <link rel="icon" href="DataFiles/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #022851; /* UC Davis blue */
+            --secondary-color: #FFBF00; /* UC Davis gold */
+            --accent-color: #8FA8C5; /* Lighter blue */
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-bg) 100%);
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .profile-image {
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .profile-circle {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--white);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .profile-circle:hover {
+            transform: scale(1.03);
+        }
+        
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-accent {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed var(--secondary-color);
+            top: -10px;
+            left: 10px;
+            z-index: -1;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .hero-text h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+        
+        .hero-text p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        /* Social links */
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: var(--white);
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-logo {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 900px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .profile-circle {
+                width: 220px;
+                height: 220px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .profile-circle {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .social-icon {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-text h1, .hero-text h2, .hero-text p, .social-links {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        .hero-text h1 { animation-delay: 0.2s; }
+        .hero-text h2 { animation-delay: 0.4s; }
+        .hero-text p { animation-delay: 0.6s; }
+        .social-links { animation-delay: 0.8s; }
+        
+        /* Academic styling touches */
+        .academic-highlight {
+            background-color: rgba(255, 191, 0, 0.1);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
     <header>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="https://mohammadrezanarimaniucdavis.github.io/">Home</a></li>
-          <li><a href="blog.html">Blog Posts</a></li>
-        </ul>
-      </nav>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <img src="DataFiles/favicon.png" alt="Logo">
+                    <span>Mohammadreza Narimani</span>
+                </a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="research.html">Research & Blog</a></li>
+                    <li><a href="teaching.html">Teaching Resources</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <section id="content">
-      <!-- Avatar image -->
-      <img src="DataFiles/image.jpg" alt="Mohammadreza Narimani" class="avatar" />
-
-      <!-- Text -->
-      <h1>Hi, I'm Mohammadreza Narimani!</h1>
-      <p>
-        I am a Ph.D. Candidate at the University of California, Davis.
-      </p>
-      <p>
-        ​I am also a research assistant at the Digital Agriculture Laboratory, focusing on remote sensing in agriculture.
-        My work spans from leaf-level analysis using handheld hyperspectral devices to large-scale agricultural monitoring employing drone-based RGB, multispectral, hyperspectral, and LiDAR sensors, as well as satellite imagery.
-        I utilize machine learning and deep learning models to extract insights from these diverse data sources.
-      </p>
-      <p>
-        Please feel free to get in touch!
-      </p>
-
-      <!-- Icons -->
-      <ul class="icons">
-        <!-- Institutional website -->
-        <li>
-          <a href="https://digitalag.ucdavis.edu/people/mohammadreza-narimani" title="Institutional website" target="_blank">
-            <i class="fas fa-university"></i>
-          </a>
-        </li>
-      
-        <!-- E-Mail -->
-        <li>
-          <a href="mailto:mnarimani@ucdavis.edu" title="E-Mail">
-            <i class="fas fa-envelope"></i>
-          </a>
-        </li>
-      
-        <!-- GitHub -->
-        <li>
-          <a href="https://github.com/MohammadrezaNarimaniUCDavis" title="GitHub" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        </li>
-      
-        <!-- LinkedIn -->
-        <li>
-          <a href="https://www.linkedin.com/in/mohammadreza-narimani/" title="LinkedIn" target="_blank">
-            <i class="fab fa-linkedin"></i>
-          </a>
-        </li>
-      
-        <!-- Google Scholar -->
-        <li>
-          <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" title="Google Scholar" target="_blank">
-            <i class="ai ai-google-scholar"></i>
-          </a>
-        </li>
-
-        <!-- CV -->
-        <li>
-          <a href="DataFiles/Mohammadreza_Narimani_CV_03-18-2025.pdf" title="Curriculum Vitae" download>
-            <i class="fas fa-file-pdf"></i>
-          </a>
-        </li>
-        
-      </ul>      
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-image">
+                    <div class="profile-circle">
+                        <img src="DataFiles/image.jpg" alt="Mohammadreza Narimani">
+                    </div>
+                    <div class="profile-accent"></div>
+                </div>
+                <div class="hero-text">
+                    <h1>Hi, I'm Mohammadreza Narimani!</h1>
+                    <h2>Ph.D. Candidate at the University of California, Davis</h2>
+                    <p>
+                        I am a research assistant at the <span class="academic-highlight">Digital Agriculture Laboratory</span>, 
+                        focusing on remote sensing in agriculture. My work spans from leaf-level analysis using handheld 
+                        hyperspectral devices to large-scale agricultural monitoring employing drone-based RGB, multispectral, 
+                        hyperspectral, and LiDAR sensors, as well as satellite imagery. I utilize 
+                        <span class="academic-highlight">machine learning</span> and 
+                        <span class="academic-highlight">deep learning</span> models to extract insights from these diverse data sources.
+                    </p>
+                    <a href="mailto:mnarimani@ucdavis.edu" class="contact-btn">
+                        <i class="fas fa-envelope"></i> Get in Touch
+                    </a>
+                    
+                    <div class="social-links">
+                        <h3>Connect with me</h3>
+                        <div class="social-icons">
+                            <a href="https://digitalag.ucdavis.edu/people/mohammadreza-narimani" class="social-icon" target="_blank">
+                                <i class="fas fa-university"></i> UC Davis
+                            </a>
+                            <a href="mailto:mnarimani@ucdavis.edu" class="social-icon">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://github.com/MohammadrezaNarimaniUCDavis" class="social-icon" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://www.linkedin.com/in/mohammadreza-narimani/" class="social-icon" target="_blank">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" class="social-icon" target="_blank">
+                                <i class="fas fa-graduation-cap"></i> Google Scholar
+                            </a>
+                            <a href="DataFiles/Mohammadreza_Narimani_CV_03-18-2025.pdf" class="social-icon" target="_blank">
+                                <i class="fas fa-file-alt"></i> CV
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-  </body>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9428337ef3b232b4',t:'MTc0NzcwNjAxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
