@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TAE30 Temp&RH Offline Mode</title>
+    <title>TAE30 Temperature and Humidity Offline Monitoring</title>
     <link rel="icon" href="../DataFiles/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
@@ -253,7 +253,7 @@
             margin-bottom: 40px;
         }
         
-        /* NEW MINIMALIST TEMPERATURE GAUGE */
+        /* TEMPERATURE CARD - REDESIGNED TO MATCH HUMIDITY STYLE */
         .temperature-card {
             width: 280px;
             height: 350px;
@@ -314,111 +314,85 @@
             color: white;
         }
         
-        /* New minimalist gauge design */
-        .temperature-gauge-container {
+        /* Temperature display container - MATCHING HUMIDITY STYLE */
+        .temperature-display-container {
             position: relative;
-            width: 220px;
-            height: 220px;
-            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            margin: 10px 0 20px;
         }
         
-        .temperature-gauge {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .temperature-gauge-bg {
+        .temperature-wave-container {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             background: white;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
         }
         
-        .temperature-scale {
+        .temperature-wave {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            bottom: 0;
+            background: linear-gradient(0deg, #e74c3c 0%, #f39c12 100%);
+            border-radius: 0;
+            transition: height 1s ease-in-out;
         }
         
-        .temperature-tick {
+        .temperature-wave::before,
+        .temperature-wave::after {
+            content: '';
             position: absolute;
-            width: 2px;
-            height: 10px;
-            background-color: rgba(0, 0, 0, 0.2);
-            transform-origin: center 110px;
-            left: calc(50% - 1px);
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            left: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 45%;
+            transform: translate(-50%, -70%) rotate(0);
+            animation: temp-wave 6s linear infinite;
+            z-index: 10;
+        }
+        
+        .temperature-wave::after {
+            border-radius: 47%;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -70%) rotate(0);
+            animation: temp-wave 10s linear -5s infinite;
+        }
+        
+        @keyframes temp-wave {
+            0% {
+                transform: translate(-50%, -70%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -70%) rotate(360deg);
+            }
+        }
+        
+        .temperature-value-container {
+            position: absolute;
             top: 0;
-        }
-        
-        .temperature-tick.major {
-            height: 15px;
-            width: 3px;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        
-        .temperature-label {
-            position: absolute;
-            font-size: 12px;
-            color: #666;
-            transform-origin: center 110px;
-            width: 30px;
-            text-align: center;
-            left: calc(50% - 15px);
-        }
-        
-        .temperature-arc {
-            position: absolute;
+            left: 0;
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            clip: rect(0, 220px, 220px, 110px);
-        }
-        
-        .temperature-arc-inner {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            clip: rect(0, 110px, 220px, 0);
-            transform: rotate(0deg);
-            background: conic-gradient(
-                from 270deg,
-                #3498db 0%,
-                #2ecc71 16.67%,
-                #f1c40f 33.33%,
-                #e67e22 50%,
-                #e74c3c 66.67%,
-                #c0392b 83.33%,
-                #8e44ad 100%
-            );
-            transition: transform 1s ease;
-        }
-        
-        .temperature-center {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            top: 40px;
-            left: 40px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            z-index: 20;
         }
         
         .temperature-value {
             font-family: 'Quicksand', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .temperature-unit {
@@ -428,44 +402,11 @@
             margin-top: 5px;
         }
         
-        .temperature-needle-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            transform: rotate(0deg);
-            transition: transform 1s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-            z-index: 10;
-        }
-        
-        .temperature-needle {
-            position: absolute;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, rgba(231, 76, 60, 0.2) 0%, rgba(231, 76, 60, 1) 100%);
-            top: 108px;
-            right: 10px;
-            transform-origin: right center;
-            border-radius: 2px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .temperature-needle::after {
-            content: '';
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e74c3c;
-            right: -6px;
-            top: -4px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-        
         .temperature-info {
             width: 100%;
             display: flex;
             justify-content: space-between;
-            margin-top: 15px;
+            margin-top: 10px;
             font-family: 'Quicksand', sans-serif;
         }
         
@@ -480,6 +421,56 @@
         
         .temperature-range-max {
             text-align: right;
+        }
+        
+        .temperature-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .temperature-bubble {
+            position: absolute;
+            background-color: rgba(231, 76, 60, 0.3);
+            border-radius: 50%;
+            transform: scale(1);
+            animation: bubble-float 3s infinite ease-in-out;
+        }
+        
+        .temperature-bubble:nth-child(1) {
+            width: 12px;
+            height: 12px;
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+        
+        .temperature-bubble:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            top: 30%;
+            right: 20%;
+            animation-delay: 0.5s;
+        }
+        
+        .temperature-bubble:nth-child(3) {
+            width: 10px;
+            height: 10px;
+            bottom: 30%;
+            left: 30%;
+            animation-delay: 1s;
+        }
+        
+        @keyframes bubble-float {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.2) translateY(-10px);
+                opacity: 0.3;
+            }
         }
         
         /* HUMIDITY DISPLAY */
@@ -933,7 +924,7 @@
             <nav class="navbar">
                 <a href="../index.html" class="logo">
                     <img src="../DataFiles/favicon.png" alt="Logo">
-                    <span>TAE30 Temp&RH Offline Mode</span>
+                    <span>TAE30 Temperature and Humidity Offline Monitoring</span>
                 </a>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="../index.html">Home</a></li>
@@ -979,7 +970,7 @@
                 <h2 class="dashboard-title fade-in">Current Readings</h2>
                 
                 <div class="gauges-container">
-                    <!-- NEW MINIMALIST TEMPERATURE GAUGE -->
+                    <!-- TEMPERATURE DISPLAY - REDESIGNED TO MATCH HUMIDITY STYLE -->
                     <div class="temperature-card fade-in">
                         <div class="temperature-header">
                             <h3 class="temperature-title">Temperature</h3>
@@ -990,30 +981,18 @@
                             </div>
                         </div>
                         
-                        <div class="temperature-gauge-container">
-                            <div class="temperature-gauge">
-                                <div class="temperature-gauge-bg"></div>
-                                
-                                <!-- Scale markings -->
-                                <div class="temperature-scale" id="temperatureScale">
-                                    <!-- Ticks will be added by JavaScript -->
-                                </div>
-                                
-                                <!-- Colored arc background -->
-                                <div class="temperature-arc">
-                                    <div class="temperature-arc-inner" id="temperatureArc"></div>
-                                </div>
-                                
-                                <!-- Needle -->
-                                <div class="temperature-needle-container" id="temperatureNeedle">
-                                    <div class="temperature-needle"></div>
-                                </div>
-                                
-                                <!-- Center display -->
-                                <div class="temperature-center">
-                                    <div class="temperature-value" id="temperatureValue">--</div>
-                                    <div class="temperature-unit">°F</div>
-                                </div>
+                        <div class="temperature-display-container">
+                            <div class="temperature-wave-container">
+                                <div class="temperature-wave" id="temperatureWave"></div>
+                            </div>
+                            <div class="temperature-bubbles">
+                                <div class="temperature-bubble"></div>
+                                <div class="temperature-bubble"></div>
+                                <div class="temperature-bubble"></div>
+                            </div>
+                            <div class="temperature-value-container">
+                                <div class="temperature-value" id="temperatureValue">--</div>
+                                <div class="temperature-unit">°F</div>
                             </div>
                         </div>
                         
@@ -1160,42 +1139,6 @@
             }
         });
         
-        // Create temperature gauge scale
-        function createTemperatureScale() {
-            const scale = document.getElementById('temperatureScale');
-            
-            // Create tick marks and labels
-            for (let i = 0; i <= 10; i++) {
-                // Calculate angle (0 = -135deg, 10 = 135deg)
-                const angle = -135 + (i * 27);
-                
-                // Create tick mark
-                const tick = document.createElement('div');
-                tick.className = i % 2 === 0 ? 'temperature-tick major' : 'temperature-tick';
-                tick.style.transform = `rotate(${angle}deg)`;
-                scale.appendChild(tick);
-                
-                // Add labels for major ticks
-                if (i % 2 === 0) {
-                    const label = document.createElement('div');
-                    label.className = 'temperature-label';
-                    label.textContent = (50 + (i * 5)).toString();
-                    
-                    // Position label
-                    const labelAngle = angle * (Math.PI / 180);
-                    const labelRadius = 90; // Distance from center
-                    const x = Math.cos(labelAngle) * labelRadius;
-                    const y = Math.sin(labelAngle) * labelRadius;
-                    
-                    label.style.transform = `translate(${x}px, ${y}px)`;
-                    scale.appendChild(label);
-                }
-            }
-        }
-        
-        // Initialize temperature gauge
-        createTemperatureScale();
-        
         // File upload handling
         const uploadContainer = document.getElementById('uploadContainer');
         const fileInput = document.getElementById('fileInput');
@@ -1318,24 +1261,16 @@
         // Update temperature and humidity gauges
         function updateGauges(latestData) {
             const temperatureValue = document.getElementById('temperatureValue');
-            const temperatureNeedle = document.getElementById('temperatureNeedle');
-            const temperatureArc = document.getElementById('temperatureArc');
+            const temperatureWave = document.getElementById('temperatureWave');
             const humidityValue = document.getElementById('humidityValue');
             const humidityWave = document.getElementById('humidityWave');
             
             // Update temperature
             temperatureValue.textContent = latestData.temperature.toFixed(1);
             
-            // Calculate temperature angle (-135° to 135°, 50°F to 100°F)
-            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1);
-            const tempAngle = -135 + (tempPercentage * 270);
-            
-            // Update needle position
-            temperatureNeedle.style.transform = `rotate(${tempAngle}deg)`;
-            
-            // Update arc fill (transform based on percentage)
-            const arcRotation = tempPercentage * 180;
-            temperatureArc.style.transform = `rotate(${arcRotation}deg)`;
+            // Calculate temperature height (50°F to 100°F mapped to 0% to 100%)
+            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1) * 100;
+            temperatureWave.style.height = `${tempPercentage}%`;
             
             // Update humidity
             humidityValue.textContent = latestData.humidity.toFixed(1);
@@ -1555,5 +1490,5 @@
         // Check on scroll
         window.addEventListener('scroll', fadeInOnScroll);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429f956f3436e7e',t:'MTc0NzcyNDYwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942a07b0a11732bf',t:'MTc0NzcyNTE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
