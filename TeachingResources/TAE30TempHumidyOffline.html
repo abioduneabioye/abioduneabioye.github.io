@@ -253,7 +253,7 @@
             margin-bottom: 40px;
         }
         
-        /* NEW CREATIVE TEMPERATURE DISPLAY */
+        /* NEW IMPROVED TEMPERATURE DISPLAY */
         .temperature-card {
             width: 280px;
             height: 350px;
@@ -319,35 +319,119 @@
             width: 200px;
             height: 200px;
             margin: 10px 0 20px;
-        }
-        
-        .temperature-circle {
-            width: 100%;
-            height: 100%;
             border-radius: 50%;
             background: white;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            overflow: hidden;
         }
         
-        .temperature-circle::before {
+        .temperature-tube {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 0%;
+            background: linear-gradient(to top, #e74c3c, #f39c12);
+            border-radius: 20px 20px 0 0;
+            transition: height 1s ease-in-out;
+            z-index: 1;
+        }
+        
+        .temperature-tube::before {
             content: '';
             position: absolute;
-            width: 90%;
-            height: 90%;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: #e74c3c;
             border-radius: 50%;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            z-index: 0;
         }
         
-        .temperature-value-container {
-            position: relative;
+        .temperature-bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
             z-index: 2;
+        }
+        
+        .temperature-bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: bubble-rise 3s infinite ease-in-out;
+        }
+        
+        .temperature-bubble:nth-child(1) {
+            width: 10px;
+            height: 10px;
+            bottom: 10%;
+            left: 45%;
+            animation-delay: 0s;
+        }
+        
+        .temperature-bubble:nth-child(2) {
+            width: 14px;
+            height: 14px;
+            bottom: 20%;
+            left: 55%;
+            animation-delay: 0.5s;
+        }
+        
+        .temperature-bubble:nth-child(3) {
+            width: 8px;
+            height: 8px;
+            bottom: 15%;
+            left: 48%;
+            animation-delay: 1s;
+        }
+        
+        @keyframes bubble-rise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        .temperature-markings {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+        
+        .temperature-marking {
+            position: absolute;
+            left: 50%;
+            width: 80px;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .temperature-marking:nth-child(1) { bottom: 20%; }
+        .temperature-marking:nth-child(2) { bottom: 40%; }
+        .temperature-marking:nth-child(3) { bottom: 60%; }
+        .temperature-marking:nth-child(4) { bottom: 80%; }
+        
+        .temperature-value-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            z-index: 4;
         }
         
         .temperature-value {
@@ -356,6 +440,7 @@
             font-weight: 700;
             color: var(--primary-color);
             line-height: 1;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         .temperature-unit {
@@ -363,42 +448,6 @@
             font-size: 1.2rem;
             color: #888;
             margin-top: 5px;
-        }
-        
-        .temperature-scale {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-        }
-        
-        .temperature-marker {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            clip: rect(0px, 200px, 200px, 100px);
-        }
-        
-        .temperature-progress {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            clip: rect(0px, 100px, 200px, 0px);
-            transform: rotate(0deg);
-            transition: transform 1s ease-in-out;
-        }
-        
-        .temperature-progress-fill {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            position: absolute;
-            clip: rect(0px, 100px, 200px, 0px);
-            background: linear-gradient(90deg, #e74c3c, #f39c12);
-            transform: rotate(180deg);
         }
         
         .temperature-info {
@@ -422,7 +471,7 @@
             text-align: right;
         }
         
-        /* NEW CREATIVE HUMIDITY DISPLAY */
+        /* HUMIDITY DISPLAY */
         .humidity-card {
             width: 280px;
             height: 350px;
@@ -919,7 +968,7 @@
                 <h2 class="dashboard-title fade-in">Current Readings</h2>
                 
                 <div class="gauges-container">
-                    <!-- NEW CREATIVE TEMPERATURE DISPLAY -->
+                    <!-- NEW IMPROVED TEMPERATURE DISPLAY -->
                     <div class="temperature-card fade-in">
                         <div class="temperature-header">
                             <h3 class="temperature-title">Temperature</h3>
@@ -931,18 +980,21 @@
                         </div>
                         
                         <div class="temperature-display-container">
-                            <div class="temperature-circle">
-                                <div class="temperature-scale">
-                                    <div class="temperature-marker">
-                                        <div class="temperature-progress" id="temperatureProgress">
-                                            <div class="temperature-progress-fill"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="temperature-value-container">
-                                    <div class="temperature-value" id="temperatureValue">--</div>
-                                    <div class="temperature-unit">°F</div>
-                                </div>
+                            <div class="temperature-markings">
+                                <div class="temperature-marking"></div>
+                                <div class="temperature-marking"></div>
+                                <div class="temperature-marking"></div>
+                                <div class="temperature-marking"></div>
+                            </div>
+                            <div class="temperature-tube" id="temperatureTube"></div>
+                            <div class="temperature-bubbles">
+                                <div class="temperature-bubble"></div>
+                                <div class="temperature-bubble"></div>
+                                <div class="temperature-bubble"></div>
+                            </div>
+                            <div class="temperature-value-container">
+                                <div class="temperature-value" id="temperatureValue">--</div>
+                                <div class="temperature-unit">°F</div>
                             </div>
                         </div>
                         
@@ -952,7 +1004,7 @@
                         </div>
                     </div>
                     
-                    <!-- NEW CREATIVE HUMIDITY DISPLAY -->
+                    <!-- HUMIDITY DISPLAY -->
                     <div class="humidity-card fade-in delay-1">
                         <div class="humidity-header">
                             <h3 class="humidity-title">Humidity</h3>
@@ -1211,17 +1263,23 @@
         // Update temperature and humidity gauges
         function updateGauges(latestData) {
             const temperatureValue = document.getElementById('temperatureValue');
-            const temperatureProgress = document.getElementById('temperatureProgress');
+            const temperatureTube = document.getElementById('temperatureTube');
             const humidityValue = document.getElementById('humidityValue');
             const humidityWave = document.getElementById('humidityWave');
             
             // Update temperature
             temperatureValue.textContent = latestData.temperature.toFixed(1);
             
-            // Calculate temperature progress (50°F to 100°F range)
-            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1);
-            const tempRotation = tempPercentage * 180; // 0 to 180 degrees
-            temperatureProgress.style.transform = `rotate(${tempRotation}deg)`;
+            // Calculate temperature height (50°F to 100°F range)
+            const tempPercentage = Math.min(Math.max((latestData.temperature - 50) / 50, 0), 1) * 100;
+            temperatureTube.style.height = `${tempPercentage}%`;
+            
+            // Update bubble animation speed based on temperature
+            const bubbles = document.querySelectorAll('.temperature-bubble');
+            const animationDuration = Math.max(5 - (tempPercentage / 20), 1); // Faster at higher temps
+            bubbles.forEach(bubble => {
+                bubble.style.animationDuration = `${animationDuration}s`;
+            });
             
             // Update humidity
             humidityValue.textContent = latestData.humidity.toFixed(1);
@@ -1441,5 +1499,5 @@
         // Check on scroll
         window.addEventListener('scroll', fadeInOnScroll);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429d9fdb087d7cf',t:'MTc0NzcyMzMyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9429ea8394a93525',t:'MTc0NzcyMzk5Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
