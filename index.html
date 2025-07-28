@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +112,23 @@
             color: var(--white);
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Mobile menu overlay */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+        
+        .nav-overlay.active {
+            display: block;
         }
         
         /* Hero section */
@@ -271,24 +287,38 @@
         
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-                position: absolute;
+                position: fixed;
                 top: 70px;
-                left: 0;
+                left: -100%;
                 width: 100%;
+                height: calc(100vh - 70px);
                 background-color: var(--primary-color);
                 flex-direction: column;
                 align-items: center;
-                padding: 20px 0;
+                justify-content: flex-start;
+                padding: 40px 0;
                 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+                z-index: 999;
+                overflow-y: auto;
             }
             
             .nav-links.active {
-                display: flex;
+                left: 0;
             }
             
             .nav-links li {
-                margin: 10px 0;
+                margin: 15px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 15px 20px;
+                font-size: 1.1rem;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             
             .mobile-menu-btn {
@@ -298,6 +328,10 @@
             .profile-circle {
                 width: 220px;
                 height: 220px;
+            }
+            
+            .hero {
+                padding-top: 100px;
             }
         }
         
@@ -314,6 +348,19 @@
             .social-icon {
                 padding: 8px 12px;
                 font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero {
+                padding-top: 90px;
+                padding-bottom: 40px;
+            }
+            
+            .hero-content {
+                gap: 30px;
             }
         }
         
@@ -361,6 +408,8 @@
     </style>
 </head>
 <body>
+    <div class="nav-overlay" id="navOverlay"></div>
+    
     <header>
         <div class="container">
             <nav class="navbar">
@@ -390,6 +439,7 @@
                     </div>
                     <div class="profile-accent"></div>
                 </div>
+                
                 <div class="hero-text">
                     <h1>Hi, I'm Mohammadreza Narimani!</h1>
                     <h2>Ph.D. Candidate at the University of California, Davis</h2>
@@ -401,6 +451,7 @@
                         <span class="academic-highlight">machine learning</span> and 
                         <span class="academic-highlight">deep learning</span> models to extract insights from these diverse data sources.
                     </p>
+                    <p>Please feel free to get in touch!</p>
                     <a href="mailto:mnarimani@ucdavis.edu" class="contact-btn">
                         <i class="fas fa-envelope"></i> Get in Touch
                     </a>
@@ -446,33 +497,51 @@
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
         
-        mobileMenuBtn.addEventListener('click', () => {
+        function toggleMobileMenu() {
             navLinks.classList.toggle('active');
+            navOverlay.classList.toggle('active');
             
             // Change icon based on menu state
             const icon = mobileMenuBtn.querySelector('i');
             if (navLinks.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
+                document.body.style.overflow = 'auto'; // Restore scrolling
             }
-        });
+        }
+        
+        function closeMobileMenu() {
+            navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            document.body.style.overflow = 'auto';
+        }
+        
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        
+        // Close mobile menu when clicking overlay
+        navOverlay.addEventListener('click', closeMobileMenu);
         
         // Close mobile menu when clicking a link
         const navItems = document.querySelectorAll('.nav-links a');
         navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
+            item.addEventListener('click', closeMobileMenu);
+        });
+        
+        // Close mobile menu on window resize if screen becomes larger
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9428337ef3b232b4',t:'MTc0NzcwNjAxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9660ef263502cf29',t:'MTc1MzY2OTYxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
