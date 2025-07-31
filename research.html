@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,35 +9,42 @@
     <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
     <style>
         :root {
-            --primary-color: #022851; /* UC Davis blue */
-            --secondary-color: #FFBF00; /* UC Davis gold */
-            --accent-color: #8FA8C5; /* Lighter blue */
+            --primary-color: #022851;
+            --secondary-color: #FFBF00;
+            --accent-color: #8FA8C5;
             --text-color: #333;
             --light-bg: #f9f9f9;
             --white: #ffffff;
             --green-accent: #4CAF50;
             --blue-accent: #2196F3;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             color: var(--text-color);
             line-height: 1.6;
             background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         /* Header styles */
         header {
             background-color: var(--primary-color);
@@ -49,14 +54,15 @@
             top: 0;
             z-index: 1000;
         }
-        
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
+            position: relative;
         }
-        
+
         .logo {
             font-family: 'Lora', serif;
             font-size: 1.5rem;
@@ -66,21 +72,21 @@
             display: flex;
             align-items: center;
         }
-        
+
         .logo img {
             height: 30px;
             margin-right: 10px;
         }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
         }
-        
+
         .nav-links li {
             margin-left: 30px;
         }
-        
+
         .nav-links a {
             color: var(--white);
             text-decoration: none;
@@ -89,11 +95,11 @@
             transition: color 0.3s;
             position: relative;
         }
-        
+
         .nav-links a:hover {
             color: var(--secondary-color);
         }
-        
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -104,26 +110,112 @@
             background-color: var(--secondary-color);
             transition: width 0.3s;
         }
-        
+
         .nav-links a:hover::after {
             width: 100%;
         }
-        
+
+        /* Mobile menu button */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
             color: var(--white);
-            font-size: 1.5rem;
             cursor: pointer;
+            padding: 8px;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
         }
-        
+
+        /* Hamburger icon */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover .hamburger span {
+            background-color: var(--secondary-color);
+        }
+
+        /* Mobile dropdown */
+        .mobile-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            z-index: 1001;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .mobile-dropdown.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-dropdown a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-dropdown a:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        /* Main content area */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         /* Page content */
         .page-content {
             padding-top: 100px;
             padding-bottom: 60px;
         }
-        
+
         .page-title {
             font-family: 'Lora', serif;
             font-size: 2.5rem;
@@ -133,7 +225,7 @@
             position: relative;
             padding-bottom: 15px;
         }
-        
+
         .page-title::after {
             content: '';
             position: absolute;
@@ -144,13 +236,13 @@
             height: 3px;
             background-color: var(--secondary-color);
         }
-        
+
         /* Research project card */
         .research-container {
             max-width: 900px;
             margin: 40px auto;
         }
-        
+
         .research-card {
             background-color: var(--white);
             border-radius: 15px;
@@ -161,18 +253,18 @@
             color: var(--text-color);
             display: block;
         }
-        
+
         .research-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-        
+
         .research-header {
             position: relative;
             height: 250px;
             overflow: hidden;
         }
-        
+
         .satellite-animation {
             position: absolute;
             width: 100%;
@@ -180,7 +272,7 @@
             background: linear-gradient(135deg, #1a4b8c, #022851);
             overflow: hidden;
         }
-        
+
         .earth {
             position: absolute;
             width: 180px;
@@ -193,7 +285,7 @@
             box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
             overflow: hidden;
         }
-        
+
         .earth::after {
             content: '';
             position: absolute;
@@ -204,12 +296,12 @@
             opacity: 0.5;
             animation: earthRotate 60s linear infinite;
         }
-        
+
         @keyframes earthRotate {
             0% { background-position: 0 0; }
             100% { background-position: 100% 100%; }
         }
-        
+
         .satellite {
             position: absolute;
             width: 40px;
@@ -221,7 +313,7 @@
             animation: satelliteMove 15s linear infinite;
             z-index: 2;
         }
-        
+
         .satellite::before {
             content: '';
             position: absolute;
@@ -232,7 +324,7 @@
             left: -10px;
             transform: rotate(45deg);
         }
-        
+
         .satellite::after {
             content: '';
             position: absolute;
@@ -244,7 +336,7 @@
             right: 5px;
             animation: blink 1s infinite;
         }
-        
+
         @keyframes satelliteMove {
             0% { left: -40px; top: 50px; }
             25% { left: 25%; top: 30px; }
@@ -252,12 +344,12 @@
             75% { left: 75%; top: 70px; }
             100% { left: 100%; top: 50px; }
         }
-        
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        
+
         .scan-line {
             position: absolute;
             width: 2px;
@@ -268,12 +360,12 @@
             transform: translateX(-50%);
             animation: scanMove 4s ease-in-out infinite;
         }
-        
+
         @keyframes scanMove {
             0%, 100% { height: 0; opacity: 0; }
             50% { height: 200px; opacity: 1; }
         }
-        
+
         .stars {
             position: absolute;
             width: 100%;
@@ -290,7 +382,7 @@
             background-size: 200px 200px;
             opacity: 0.5;
         }
-        
+
         .title-overlay {
             position: absolute;
             bottom: 0;
@@ -301,33 +393,33 @@
             color: var(--white);
             z-index: 3;
         }
-        
+
         .title-overlay h2 {
             font-family: 'Lora', serif;
             font-size: 1.8rem;
             margin-bottom: 5px;
         }
-        
+
         .title-overlay .subtitle {
             font-size: 1rem;
             opacity: 0.9;
         }
-        
+
         .research-content {
             padding: 30px;
         }
-        
+
         .research-description {
             margin-bottom: 25px;
         }
-        
+
         .feature-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 15px;
             margin-bottom: 25px;
         }
-        
+
         .feature-item {
             display: flex;
             align-items: flex-start;
@@ -336,36 +428,36 @@
             background-color: rgba(143, 168, 197, 0.1);
             transition: transform 0.2s;
         }
-        
+
         .feature-item:hover {
             transform: translateY(-3px);
             background-color: rgba(143, 168, 197, 0.2);
         }
-        
+
         .feature-icon {
             color: var(--primary-color);
             font-size: 1.2rem;
             margin-right: 10px;
             margin-top: 3px;
         }
-        
+
         .feature-text {
             flex: 1;
         }
-        
+
         .feature-title {
             font-weight: 600;
             margin-bottom: 3px;
             color: var(--primary-color);
         }
-        
+
         .indices-preview {
             background-color: rgba(143, 168, 197, 0.1);
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 25px;
         }
-        
+
         .indices-title {
             font-weight: 600;
             margin-bottom: 10px;
@@ -373,17 +465,17 @@
             display: flex;
             align-items: center;
         }
-        
+
         .indices-title i {
             margin-right: 8px;
         }
-        
+
         .indices-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 10px;
         }
-        
+
         .index-item {
             padding: 8px;
             border-radius: 5px;
@@ -393,23 +485,23 @@
             display: flex;
             align-items: center;
         }
-        
+
         .index-item:hover {
             background-color: var(--secondary-color);
             color: var(--white);
             transform: translateY(-2px);
         }
-        
+
         .index-item::before {
             content: '•';
             margin-right: 5px;
             color: var(--primary-color);
         }
-        
+
         .index-item:hover::before {
             color: var(--white);
         }
-        
+
         .research-footer {
             display: flex;
             justify-content: space-between;
@@ -417,13 +509,13 @@
             padding-top: 20px;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
-        
+
         .research-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        
+
         .research-tag {
             padding: 5px 10px;
             border-radius: 20px;
@@ -431,7 +523,7 @@
             color: var(--white);
             font-size: 0.8rem;
         }
-        
+
         .research-btn {
             display: inline-flex;
             align-items: center;
@@ -442,98 +534,105 @@
             font-weight: 600;
             transition: all 0.3s;
         }
-        
+
         .research-btn:hover {
             background-color: var(--secondary-color);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .research-btn i {
             margin-left: 8px;
             transition: transform 0.3s;
         }
-        
+
         .research-card:hover .research-btn i {
             transform: translateX(5px);
         }
-        
+
         /* Footer */
         footer {
             background-color: var(--primary-color);
             color: var(--white);
             padding: 20px 0;
             text-align: center;
+            margin-top: auto;
         }
-        
+
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        
+
         .footer-logo {
             font-family: 'Lora', serif;
             font-size: 1.3rem;
             margin-bottom: 10px;
         }
-        
+
         .footer-text {
             font-size: 0.9rem;
             opacity: 0.8;
         }
-        
+
         /* Responsive styles */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary-color);
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-            }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .feature-list {
                 grid-template-columns: 1fr;
             }
-            
+
             .indices-grid {
                 grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             }
-            
+
             .research-footer {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .research-tags {
                 justify-content: center;
             }
         }
-        
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .title-overlay h2 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .mobile-dropdown {
+                min-width: 180px;
+                right: -10px;
+            }
+        }
+
         /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .research-container {
             animation: fadeIn 0.8s ease-out forwards;
         }
@@ -547,121 +646,139 @@
                     <img src="DataFiles/favicon.png" alt="Logo">
                     <span>Research & Blog</span>
                 </a>
-                <ul class="nav-links" id="navLinks">
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Me</a></li>
                     <li><a href="research.html">Research & Blog</a></li>
                     <li><a href="teaching.html">Teaching Resources</a></li>
                 </ul>
+                
+                <!-- Mobile Menu Button with hamburger icon -->
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Me</a>
+                    <a href="research.html">Research & Blog</a>
+                    <a href="teaching.html">Teaching Resources</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <div class="page-content">
-        <div class="container">
-            <h1 class="page-title">Research & Blog</h1>
-            
-            <div class="research-container">
-                <a href="Research&Blog/Satellite_VI_Visualizer.html" class="research-card">
-                    <div class="research-header">
-                        <div class="satellite-animation">
-                            <div class="stars"></div>
-                            <div class="earth"></div>
-                            <div class="satellite"></div>
-                            <div class="scan-line"></div>
-                        </div>
-                        <div class="title-overlay">
-                            <h2>Sentinel2 Vegetation Index Visualizer</h2>
-                            <div class="subtitle">Digital Agriculture Laboratory, UC Davis</div>
-                        </div>
-                    </div>
-                    
-                    <div class="research-content">
-                        <p class="research-description">
-                            A Google Earth Engine (GEE) script that facilitates dynamic visualization and analysis of multiple vegetation indices using Sentinel-2 imagery for user-defined regions and time periods. This tool enables researchers and agricultural professionals to monitor crop health and environmental conditions with precision.
-                        </p>
-                        
-                        <div class="feature-list">
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="fas fa-map-marked-alt"></i>
-                                </div>
-                                <div class="feature-text">
-                                    <div class="feature-title">Interactive Mapping</div>
-                                    <div>Visualize indices overlaid on Sentinel-2 imagery</div>
-                                </div>
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">Research & Blog</h1>
+                
+                <div class="research-container">
+                    <a href="Research&Blog/Satellite_VI_Visualizer.html" class="research-card">
+                        <div class="research-header">
+                            <div class="satellite-animation">
+                                <div class="stars"></div>
+                                <div class="earth"></div>
+                                <div class="satellite"></div>
+                                <div class="scan-line"></div>
                             </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="fas fa-draw-polygon"></i>
-                                </div>
-                                <div class="feature-text">
-                                    <div class="feature-title">Polygon Drawing</div>
-                                    <div>Define custom Areas of Interest (AOI)</div>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="fas fa-calendar-alt"></i>
-                                </div>
-                                <div class="feature-text">
-                                    <div class="feature-title">Date Selection</div>
-                                    <div>Filter imagery by specific dates</div>
-                                </div>
-                            </div>
-                            
-                            <div class="feature-item">
-                                <div class="feature-icon">
-                                    <i class="fas fa-cloud-sun"></i>
-                                </div>
-                                <div class="feature-text">
-                                    <div class="feature-title">Cloud Masking</div>
-                                    <div>Automatically removes cloudy pixels</div>
-                                </div>
+                            <div class="title-overlay">
+                                <h2>Sentinel2 Vegetation Index Visualizer</h2>
+                                <div class="subtitle">Digital Agriculture Laboratory, UC Davis</div>
                             </div>
                         </div>
                         
-                        <div class="indices-preview">
-                            <div class="indices-title">
-                                <i class="fas fa-leaf"></i> Vegetation Indices Available
+                        <div class="research-content">
+                            <p class="research-description">
+                                A Google Earth Engine (GEE) script that facilitates dynamic visualization and analysis of multiple vegetation indices using Sentinel-2 imagery for user-defined regions and time periods. This tool enables researchers and agricultural professionals to monitor crop health and environmental conditions with precision.
+                            </p>
+                            
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </div>
+                                    <div class="feature-text">
+                                        <div class="feature-title">Interactive Mapping</div>
+                                        <div>Visualize indices overlaid on Sentinel-2 imagery</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-draw-polygon"></i>
+                                    </div>
+                                    <div class="feature-text">
+                                        <div class="feature-title">Polygon Drawing</div>
+                                        <div>Define custom Areas of Interest (AOI)</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="feature-text">
+                                        <div class="feature-title">Date Selection</div>
+                                        <div>Filter imagery by specific dates</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="feature-item">
+                                    <div class="feature-icon">
+                                        <i class="fas fa-cloud-sun"></i>
+                                    </div>
+                                    <div class="feature-text">
+                                        <div class="feature-title">Cloud Masking</div>
+                                        <div>Automatically removes cloudy pixels</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="indices-grid">
-                                <div class="index-item">NDVI</div>
-                                <div class="index-item">ARI</div>
-                                <div class="index-item">mARI</div>
-                                <div class="index-item">CHL_REDEDGE</div>
-                                <div class="index-item">EVI</div>
-                                <div class="index-item">GNDVI</div>
-                                <div class="index-item">MCARI</div>
-                                <div class="index-item">MSI</div>
-                                <div class="index-item">NDMI</div>
-                                <div class="index-item">NDWI</div>
-                                <div class="index-item">NDCI</div>
-                                <div class="index-item">SAVI</div>
+                            
+                            <div class="indices-preview">
+                                <div class="indices-title">
+                                    <i class="fas fa-leaf"></i> Vegetation Indices Available
+                                </div>
+                                <div class="indices-grid">
+                                    <div class="index-item">NDVI</div>
+                                    <div class="index-item">ARI</div>
+                                    <div class="index-item">mARI</div>
+                                    <div class="index-item">CHL_REDEDGE</div>
+                                    <div class="index-item">EVI</div>
+                                    <div class="index-item">GNDVI</div>
+                                    <div class="index-item">MCARI</div>
+                                    <div class="index-item">MSI</div>
+                                    <div class="index-item">NDMI</div>
+                                    <div class="index-item">NDWI</div>
+                                    <div class="index-item">NDCI</div>
+                                    <div class="index-item">SAVI</div>
+                                </div>
+                            </div>
+                            
+                            <div class="research-footer">
+                                <div class="research-tags">
+                                    <span class="research-tag">Remote Sensing</span>
+                                    <span class="research-tag">Google Earth Engine</span>
+                                    <span class="research-tag">Sentinel-2</span>
+                                    <span class="research-tag">Agriculture</span>
+                                </div>
+                                <div class="research-btn">
+                                    View Project <i class="fas fa-arrow-right"></i>
+                                </div>
                             </div>
                         </div>
-                        
-                        <div class="research-footer">
-                            <div class="research-tags">
-                                <span class="research-tag">Remote Sensing</span>
-                                <span class="research-tag">Google Earth Engine</span>
-                                <span class="research-tag">Sentinel-2</span>
-                                <span class="research-tag">Agriculture</span>
-                            </div>
-                            <div class="research-btn">
-                                View Project <i class="fas fa-arrow-right"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="container">
@@ -673,36 +790,37 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
+        const mobileDropdown = document.getElementById('mobileDropdown');
         
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            
-            // Change icon based on menu state
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        // Toggle mobile dropdown
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !mobileDropdown.contains(e.target)) {
+                mobileDropdown.classList.remove('active');
             }
         });
         
-        // Close mobile menu when clicking a link
-        const navItems = document.querySelectorAll('.nav-links a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
+        // Close dropdown when clicking a link
+        const dropdownLinks = mobileDropdown.querySelectorAll('a');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileDropdown.classList.remove('active');
             });
         });
+        
+        // Close dropdown on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mobileDropdown.classList.remove('active');
+            }
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942966b3c521351e',t:'MTc0NzcxODU5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942966b3c521351e',t:'MTc0NzcxODU5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
 </html>
