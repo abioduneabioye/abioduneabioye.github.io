@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary-color: #022851; /* UC Davis blue */
-            --secondary-color: #FFBF00; /* UC Davis gold */
-            --accent-color: #8FA8C5; /* Lighter blue */
+            --primary-color: #022851;
+            --secondary-color: #FFBF00;
+            --accent-color: #8FA8C5;
             --text-color: #333;
             --light-bg: #f9f9f9;
             --white: #ffffff;
@@ -23,26 +21,33 @@
             --red-accent: #e74c3c;
             --section-padding: 60px 0;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html, body {
+            height: 100%;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             color: var(--text-color);
             line-height: 1.6;
             background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
+
         /* Header styles */
         header {
             background-color: var(--primary-color);
@@ -52,14 +57,15 @@
             top: 0;
             z-index: 1000;
         }
-        
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
+            position: relative;
         }
-        
+
         .logo {
             font-family: 'Lora', serif;
             font-size: 1.5rem;
@@ -69,21 +75,21 @@
             display: flex;
             align-items: center;
         }
-        
+
         .logo img {
             height: 30px;
             margin-right: 10px;
         }
-        
+
         .nav-links {
             display: flex;
             list-style: none;
         }
-        
+
         .nav-links li {
             margin-left: 30px;
         }
-        
+
         .nav-links a {
             color: var(--white);
             text-decoration: none;
@@ -92,11 +98,11 @@
             transition: color 0.3s;
             position: relative;
         }
-        
+
         .nav-links a:hover {
             color: var(--secondary-color);
         }
-        
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -107,26 +113,107 @@
             background-color: var(--secondary-color);
             transition: width 0.3s;
         }
-        
+
         .nav-links a:hover::after {
             width: 100%;
         }
-        
+
+        /* Mobile menu button */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
             color: var(--white);
-            font-size: 1.5rem;
             cursor: pointer;
+            padding: 8px;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
         }
-        
-        /* Main content */
-        .main-content {
-            padding-top: 100px;
-            padding-bottom: 60px;
+
+        /* Hamburger icon */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
         }
-        
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover .hamburger span {
+            background-color: var(--secondary-color);
+        }
+
+        /* Mobile dropdown */
+        .mobile-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            z-index: 1001;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .mobile-dropdown.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-dropdown a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-dropdown a:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        /* Main content area */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 80px;
+        }
+
         .page-title {
             font-family: 'Lora', serif;
             font-size: 2.5rem;
@@ -136,7 +223,7 @@
             position: relative;
             padding-bottom: 15px;
         }
-        
+
         .page-title::after {
             content: '';
             position: absolute;
@@ -147,14 +234,14 @@
             height: 3px;
             background-color: var(--secondary-color);
         }
-        
+
         .intro-text {
             text-align: center;
             max-width: 800px;
             margin: 0 auto 40px;
             color: #666;
         }
-        
+
         /* File upload section */
         .upload-section {
             background-color: var(--white);
@@ -164,14 +251,14 @@
             margin-bottom: 40px;
             text-align: center;
         }
-        
+
         .upload-title {
             font-family: 'Lora', serif;
             font-size: 1.8rem;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        
+
         .upload-container {
             border: 2px dashed var(--accent-color);
             border-radius: 10px;
@@ -182,38 +269,38 @@
             cursor: pointer;
             position: relative;
         }
-        
+
         .upload-container:hover {
             border-color: var(--primary-color);
             background-color: rgba(143, 168, 197, 0.05);
         }
-        
+
         .upload-container.dragover {
             border-color: var(--secondary-color);
             background-color: rgba(255, 191, 0, 0.05);
         }
-        
+
         .upload-icon {
             font-size: 3rem;
             color: var(--accent-color);
             margin-bottom: 15px;
             transition: color 0.3s;
         }
-        
+
         .upload-container:hover .upload-icon {
             color: var(--primary-color);
         }
-        
+
         .upload-text {
             font-size: 1.2rem;
             margin-bottom: 10px;
         }
-        
+
         .upload-subtext {
             font-size: 0.9rem;
             color: #888;
         }
-        
+
         .file-input {
             position: absolute;
             top: 0;
@@ -223,20 +310,20 @@
             opacity: 0;
             cursor: pointer;
         }
-        
+
         .upload-status {
             margin-top: 20px;
             font-weight: 600;
             color: var(--green-accent);
             display: none;
         }
-        
+
         /* Dashboard section */
         .dashboard-section {
             display: none;
             margin-top: 40px;
         }
-        
+
         .dashboard-title {
             font-family: 'Lora', serif;
             font-size: 2rem;
@@ -244,7 +331,7 @@
             margin-bottom: 30px;
             text-align: center;
         }
-        
+
         .gauges-container {
             display: flex;
             flex-wrap: wrap;
@@ -252,8 +339,8 @@
             gap: 40px;
             margin-bottom: 40px;
         }
-        
-        /* TEMPERATURE CARD - REDESIGNED TO MATCH HUMIDITY STYLE */
+
+        /* TEMPERATURE CARD */
         .temperature-card {
             width: 280px;
             height: 350px;
@@ -268,11 +355,11 @@
             align-items: center;
             transition: transform 0.3s ease;
         }
-        
+
         .temperature-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .temperature-card::before {
             content: '';
             position: absolute;
@@ -282,7 +369,7 @@
             height: 8px;
             background: linear-gradient(90deg, #e74c3c, #f39c12);
         }
-        
+
         .temperature-header {
             width: 100%;
             display: flex;
@@ -290,14 +377,14 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         .temperature-title {
             font-family: 'Quicksand', sans-serif;
             font-weight: 700;
             font-size: 1.4rem;
             color: var(--primary-color);
         }
-        
+
         .temperature-icon-container {
             width: 50px;
             height: 50px;
@@ -308,20 +395,19 @@
             align-items: center;
             box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
         }
-        
+
         .temperature-icon {
             font-size: 1.8rem;
             color: white;
         }
-        
-        /* Temperature display container - MATCHING HUMIDITY STYLE */
+
         .temperature-display-container {
             position: relative;
             width: 200px;
             height: 200px;
             margin: 10px 0 20px;
         }
-        
+
         .temperature-wave-container {
             position: absolute;
             width: 200px;
@@ -331,7 +417,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
-        
+
         .temperature-wave {
             position: absolute;
             width: 200px;
@@ -341,7 +427,7 @@
             border-radius: 0;
             transition: height 1s ease-in-out;
         }
-        
+
         .temperature-wave::before,
         .temperature-wave::after {
             content: '';
@@ -356,14 +442,14 @@
             animation: temp-wave 6s linear infinite;
             z-index: 10;
         }
-        
+
         .temperature-wave::after {
             border-radius: 47%;
             background-color: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -70%) rotate(0);
             animation: temp-wave 10s linear -5s infinite;
         }
-        
+
         @keyframes temp-wave {
             0% {
                 transform: translate(-50%, -70%) rotate(0);
@@ -372,7 +458,7 @@
                 transform: translate(-50%, -70%) rotate(360deg);
             }
         }
-        
+
         .temperature-value-container {
             position: absolute;
             top: 0;
@@ -385,7 +471,7 @@
             align-items: center;
             z-index: 20;
         }
-        
+
         .temperature-value {
             font-family: 'Quicksand', sans-serif;
             font-size: 3.5rem;
@@ -394,14 +480,14 @@
             line-height: 1;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .temperature-unit {
             font-family: 'Quicksand', sans-serif;
             font-size: 1.2rem;
             color: #888;
             margin-top: 5px;
         }
-        
+
         .temperature-info {
             width: 100%;
             display: flex;
@@ -409,27 +495,27 @@
             margin-top: 10px;
             font-family: 'Quicksand', sans-serif;
         }
-        
+
         .temperature-range {
             font-size: 0.9rem;
             color: #888;
         }
-        
+
         .temperature-range-min {
             text-align: left;
         }
-        
+
         .temperature-range-max {
             text-align: right;
         }
-        
+
         .temperature-bubbles {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
         }
-        
+
         .temperature-bubble {
             position: absolute;
             background-color: rgba(231, 76, 60, 0.3);
@@ -437,7 +523,7 @@
             transform: scale(1);
             animation: bubble-float 3s infinite ease-in-out;
         }
-        
+
         .temperature-bubble:nth-child(1) {
             width: 12px;
             height: 12px;
@@ -445,7 +531,7 @@
             left: 20%;
             animation-delay: 0s;
         }
-        
+
         .temperature-bubble:nth-child(2) {
             width: 15px;
             height: 15px;
@@ -453,7 +539,7 @@
             right: 20%;
             animation-delay: 0.5s;
         }
-        
+
         .temperature-bubble:nth-child(3) {
             width: 10px;
             height: 10px;
@@ -461,7 +547,7 @@
             left: 30%;
             animation-delay: 1s;
         }
-        
+
         @keyframes bubble-float {
             0%, 100% {
                 transform: scale(1) translateY(0);
@@ -472,7 +558,7 @@
                 opacity: 0.3;
             }
         }
-        
+
         /* HUMIDITY DISPLAY */
         .humidity-card {
             width: 280px;
@@ -488,11 +574,11 @@
             align-items: center;
             transition: transform 0.3s ease;
         }
-        
+
         .humidity-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .humidity-card::before {
             content: '';
             position: absolute;
@@ -502,7 +588,7 @@
             height: 8px;
             background: linear-gradient(90deg, #3498db, #2ecc71);
         }
-        
+
         .humidity-header {
             width: 100%;
             display: flex;
@@ -510,14 +596,14 @@
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         .humidity-title {
             font-family: 'Quicksand', sans-serif;
             font-weight: 700;
             font-size: 1.4rem;
             color: var(--primary-color);
         }
-        
+
         .humidity-icon-container {
             width: 50px;
             height: 50px;
@@ -528,19 +614,19 @@
             align-items: center;
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.2);
         }
-        
+
         .humidity-icon {
             font-size: 1.8rem;
             color: white;
         }
-        
+
         .humidity-display-container {
             position: relative;
             width: 200px;
             height: 200px;
             margin: 10px 0 20px;
         }
-        
+
         .humidity-wave-container {
             position: absolute;
             width: 200px;
@@ -550,7 +636,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
         }
-        
+
         .humidity-wave {
             position: absolute;
             width: 200px;
@@ -560,7 +646,7 @@
             border-radius: 0;
             transition: height 1s ease-in-out;
         }
-        
+
         .humidity-wave::before,
         .humidity-wave::after {
             content: '';
@@ -575,14 +661,14 @@
             animation: wave 6s linear infinite;
             z-index: 10;
         }
-        
+
         .humidity-wave::after {
             border-radius: 47%;
             background-color: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -70%) rotate(0);
             animation: wave 10s linear -5s infinite;
         }
-        
+
         @keyframes wave {
             0% {
                 transform: translate(-50%, -70%) rotate(0);
@@ -591,7 +677,7 @@
                 transform: translate(-50%, -70%) rotate(360deg);
             }
         }
-        
+
         .humidity-value-container {
             position: absolute;
             top: 0;
@@ -604,7 +690,7 @@
             align-items: center;
             z-index: 20;
         }
-        
+
         .humidity-value {
             font-family: 'Quicksand', sans-serif;
             font-size: 3.5rem;
@@ -613,14 +699,14 @@
             line-height: 1;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        
+
         .humidity-unit {
             font-family: 'Quicksand', sans-serif;
             font-size: 1.2rem;
             color: #888;
             margin-top: 5px;
         }
-        
+
         .humidity-info {
             width: 100%;
             display: flex;
@@ -628,27 +714,27 @@
             margin-top: 10px;
             font-family: 'Quicksand', sans-serif;
         }
-        
+
         .humidity-range {
             font-size: 0.9rem;
             color: #888;
         }
-        
+
         .humidity-range-min {
             text-align: left;
         }
-        
+
         .humidity-range-max {
             text-align: right;
         }
-        
+
         .humidity-drops {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
         }
-        
+
         .humidity-drop {
             position: absolute;
             background-color: rgba(52, 152, 219, 0.3);
@@ -656,7 +742,7 @@
             transform: rotate(-45deg);
             animation: drop-float 3s infinite ease-in-out;
         }
-        
+
         .humidity-drop:nth-child(1) {
             width: 12px;
             height: 12px;
@@ -664,7 +750,7 @@
             left: 20%;
             animation-delay: 0s;
         }
-        
+
         .humidity-drop:nth-child(2) {
             width: 15px;
             height: 15px;
@@ -672,7 +758,7 @@
             right: 20%;
             animation-delay: 0.5s;
         }
-        
+
         .humidity-drop:nth-child(3) {
             width: 10px;
             height: 10px;
@@ -680,7 +766,7 @@
             left: 30%;
             animation-delay: 1s;
         }
-        
+
         @keyframes drop-float {
             0%, 100% {
                 transform: rotate(-45deg) translateY(0);
@@ -691,26 +777,26 @@
                 opacity: 0.3;
             }
         }
-        
+
         /* Charts section */
         .charts-section {
             margin-top: 60px;
         }
-        
+
         .charts-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
             margin-top: 30px;
         }
-        
+
         .chart-card {
             background-color: var(--white);
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
-        
+
         .chart-title {
             font-family: 'Lora', serif;
             font-size: 1.5rem;
@@ -718,24 +804,24 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .chart-container {
             position: relative;
             height: 300px;
         }
-        
+
         /* Summary section */
         .summary-section {
             margin-top: 60px;
         }
-        
+
         .summary-card {
             background-color: var(--white);
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
-        
+
         .summary-title {
             font-family: 'Lora', serif;
             font-size: 1.8rem;
@@ -743,14 +829,14 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .summary-item {
             text-align: center;
             padding: 15px;
@@ -758,140 +844,151 @@
             background-color: var(--light-bg);
             transition: transform 0.3s;
         }
-        
+
         .summary-item:hover {
             transform: translateY(-5px);
         }
-        
+
         .summary-label {
             font-size: 0.9rem;
             color: #888;
             margin-bottom: 5px;
         }
-        
+
         .summary-value {
             font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary-color);
         }
-        
+
         .summary-table-container {
             overflow-x: auto;
             margin-top: 30px;
         }
-        
+
         .summary-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
+
         .summary-table th,
         .summary-table td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-        
+
         .summary-table th {
             background-color: var(--primary-color);
             color: var(--white);
             font-weight: 600;
         }
-        
+
         .summary-table tr:nth-child(even) {
             background-color: var(--light-bg);
         }
-        
+
         .summary-table tr:hover {
             background-color: rgba(143, 168, 197, 0.1);
         }
-        
+
         /* Footer */
         footer {
             background-color: var(--primary-color);
             color: var(--white);
             padding: 20px 0;
             text-align: center;
+            margin-top: auto;
         }
-        
+
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        
+
         .footer-logo {
             font-family: 'Lora', serif;
             font-size: 1.3rem;
             margin-bottom: 10px;
         }
-        
+
         .footer-text {
             font-size: 0.9rem;
             opacity: 0.8;
         }
-        
+
         /* Responsive styles */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary-color);
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
             }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-            }
-            
+
             .mobile-menu-btn {
                 display: block;
             }
-            
+
             .charts-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .gauges-container {
                 flex-direction: column;
                 align-items: center;
             }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .dashboard-title {
+                font-size: 1.8rem;
+            }
         }
-        
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .mobile-dropdown {
+                min-width: 180px;
+                right: -10px;
+            }
+        }
+
         /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeIn 0.8s ease-out forwards;
         }
-        
+
         .delay-1 {
             animation-delay: 0.2s;
         }
-        
+
         .delay-2 {
             animation-delay: 0.4s;
         }
-        
+
         .delay-3 {
             animation-delay: 0.6s;
         }
-        
+
         /* No data message */
         .no-data-message {
             text-align: center;
@@ -900,19 +997,19 @@
             border-radius: 10px;
             margin-top: 40px;
         }
-        
+
         .no-data-icon {
             font-size: 3rem;
             color: var(--accent-color);
             margin-bottom: 20px;
         }
-        
+
         .no-data-text {
             font-size: 1.2rem;
             color: var(--primary-color);
             margin-bottom: 10px;
         }
-        
+
         .no-data-subtext {
             color: #888;
         }
@@ -922,24 +1019,40 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="../index.html" class="logo">
+                <a href="../../index.html" class="logo">
                     <img src="../DataFiles/favicon.png" alt="Logo">
                     <span>TAE30 Temp&RH Offline Mode</span>
                 </a>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../about.html">About Me</a></li>
-                    <li><a href="../research.html">Research & Blog</a></li>
-                    <li><a href="../teaching.html">Teaching Resources</a></li>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../about.html">About Me</a></li>
+                    <li><a href="../../research.html">Research & Blog</a></li>
+                    <li><a href="../../teaching.html">Teaching Resources</a></li>
                 </ul>
+                
+                <!-- Mobile Menu Button with hamburger icon -->
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../index.html">Home</a>
+                    <a href="../../about.html">About Me</a>
+                    <a href="../../research.html">Research & Blog</a>
+                    <a href="../../teaching.html">Teaching Resources</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <div class="main-content">
+    <main>
         <div class="container">
             <h1 class="page-title">Temperature and Humidity Monitoring</h1>
             <p class="intro-text">
@@ -970,7 +1083,7 @@
                 <h2 class="dashboard-title fade-in">Current Readings</h2>
                 
                 <div class="gauges-container">
-                    <!-- TEMPERATURE DISPLAY - REDESIGNED TO MATCH HUMIDITY STYLE -->
+                    <!-- TEMPERATURE DISPLAY -->
                     <div class="temperature-card fade-in">
                         <div class="temperature-header">
                             <h3 class="temperature-title">Temperature</h3>
@@ -1109,7 +1222,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="container">
@@ -1121,24 +1234,37 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
+        const mobileDropdown = document.getElementById('mobileDropdown');
         
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            
-            // Change icon based on menu state
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+        // Toggle mobile dropdown
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !mobileDropdown.contains(e.target)) {
+                mobileDropdown.classList.remove('active');
             }
         });
         
+        // Close dropdown when clicking a link
+        const dropdownLinks = mobileDropdown.querySelectorAll('a');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileDropdown.classList.remove('active');
+            });
+        });
+        
+        // Close dropdown on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mobileDropdown.classList.remove('active');
+            }
+        });
+
         // File upload handling
         const uploadContainer = document.getElementById('uploadContainer');
         const fileInput = document.getElementById('fileInput');
@@ -1214,35 +1340,35 @@
             reader.readAsText(file);
         }
         
-        // Parse CSV data - Fixed to properly handle header row
+        // Parse CSV data
         function parseCSV(csvText) {
-        const lines   = csvText.split(/\r?\n/).filter(l => l.trim() !== '');
-        if (lines.length < 2) return [];
+            const lines = csvText.split(/\r?\n/).filter(l => l.trim() !== '');
+            if (lines.length < 2) return [];
 
-        // Detect delimiter (first data row, not header, in case header has spaces)
-        const sample  = lines[1];
-        const delim   = sample.includes('\t') ? '\t' : ',';
+            // Detect delimiter
+            const sample = lines[1];
+            const delim = sample.includes('\t') ? '\t' : ',';
 
-        // Map header names ➔ column indexes
-        const header  = lines[0].trim().split(delim).map(h => h.trim().toLowerCase());
-        const idxIter = header.findIndex(h => h.startsWith('iter'));
-        const idxTemp = header.findIndex(h => h.startsWith('temp'));
-        const idxHum  = header.findIndex(h => h.startsWith('hum'));
+            // Map header names to column indexes
+            const header = lines[0].trim().split(delim).map(h => h.trim().toLowerCase());
+            const idxIter = header.findIndex(h => h.startsWith('iter'));
+            const idxTemp = header.findIndex(h => h.startsWith('temp'));
+            const idxHum = header.findIndex(h => h.startsWith('hum'));
 
-        const out = [];
-        for (let i = 1; i < lines.length; i++) {
-            const vals = lines[i].trim().split(delim);
-            if (vals.length < 3) continue;
+            const out = [];
+            for (let i = 1; i < lines.length; i++) {
+                const vals = lines[i].trim().split(delim);
+                if (vals.length < 3) continue;
 
-            const iter = parseInt(vals[idxIter]);
-            const temp = parseFloat(vals[idxTemp]);
-            const hum  = parseFloat(vals[idxHum]);
+                const iter = parseInt(vals[idxIter]);
+                const temp = parseFloat(vals[idxTemp]);
+                const hum = parseFloat(vals[idxHum]);
 
-            if (!Number.isNaN(iter) && !Number.isNaN(temp) && !Number.isNaN(hum)) {
-            out.push({ iteration: iter, temperature: temp, humidity: hum });
+                if (!Number.isNaN(iter) && !Number.isNaN(temp) && !Number.isNaN(hum)) {
+                    out.push({ iteration: iter, temperature: temp, humidity: hum });
+                }
             }
-        }
-        return out;
+            return out;
         }
                 
         // Process and display data
@@ -1494,5 +1620,6 @@
         // Check on scroll
         window.addEventListener('scroll', fadeInOnScroll);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942a07b0a11732bf',t:'MTc0NzcyNTE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942a07b0a11732bf',t:'MTc0NzcyNTE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
 </html>
