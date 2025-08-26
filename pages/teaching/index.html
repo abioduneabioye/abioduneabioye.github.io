@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Resources | Mohammadreza Narimani</title>
+    <link rel="icon" href="../../assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #022851;
+            --secondary-color: #FFBF00;
+            --accent-color: #8FA8C5;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Lora', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            padding: 8px;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Hamburger icon */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 18px;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover .hamburger span {
+            background-color: var(--secondary-color);
+        }
+
+        /* Mobile dropdown */
+        .mobile-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            z-index: 1001;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .mobile-dropdown.active {
+            display: block;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-dropdown a {
+            display: block;
+            padding: 15px 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.3s;
+        }
+
+        .mobile-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-dropdown a:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+        }
+
+        /* Main content area */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Page content */
+        .page-content {
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        .page-title {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        /* Resource cards */
+        .resources-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .resource-card {
+            background-color: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-icon {
+            background: linear-gradient(135deg, var(--primary-color), #1a4b8c);
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-icon i {
+            font-size: 4rem;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .resource-icon .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .resource-icon .animated-bg .bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .resource-icon .animated-bg .bubble:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            left: 10%;
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .resource-icon .animated-bg .bubble:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            left: 70%;
+            top: 30%;
+            animation-delay: 1s;
+        }
+
+        .resource-icon .animated-bg .bubble:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            left: 40%;
+            top: 60%;
+            animation-delay: 2s;
+        }
+
+        .resource-icon .animated-bg .bubble:nth-child(4) {
+            width: 20px;
+            height: 20px;
+            left: 85%;
+            top: 70%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .resource-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resource-title {
+            font-family: 'Lora', serif;
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .resource-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+
+        .resource-description {
+            color: var(--text-color);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .resource-tag {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .resource-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .resource-btn {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .resource-btn i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .resource-card:hover .resource-btn {
+            color: var(--secondary-color);
+        }
+
+        .resource-card:hover .resource-btn i {
+            transform: translateX(5px);
+        }
+
+        /* Temperature animation */
+        .temp-animation {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .thermometer {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px 10px 0 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .thermometer::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .mercury {
+            position: absolute;
+            width: 8px;
+            height: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 4px;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: temperature 3s infinite ease-in-out;
+        }
+
+        @keyframes temperature {
+            0%, 100% {
+                height: 15px;
+                background-color: #3498db;
+            }
+            50% {
+                height: 30px;
+                background-color: #e74c3c;
+            }
+        }
+
+        /* Wifi animation */
+        .wifi-animation {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
+        }
+
+        .wifi-circle {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            left: 50%;
+            bottom: 5px;
+            transform: translateX(-50%);
+        }
+
+        .wifi-circle:nth-child(1) {
+            width: 50px;
+            height: 50px;
+            animation: pulse 2s infinite;
+        }
+
+        .wifi-circle:nth-child(2) {
+            width: 35px;
+            height: 35px;
+            animation: pulse 2s infinite 0.4s;
+        }
+
+        .wifi-circle:nth-child(3) {
+            width: 20px;
+            height: 20px;
+            animation: pulse 2s infinite 0.8s;
+        }
+
+        .wifi-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: var(--white);
+            border-radius: 50%;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+                transform: translateX(-50%) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                opacity: 0.6;
+                transform: translateX(-50%) scale(0.8);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .resource-title {
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            .mobile-dropdown {
+                min-width: 180px;
+                right: -10px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .resources-container {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../index.html" class="logo">
+                    <img src="../../assets/favicon.png" alt="Logo">
+                    <span>Teaching Resources</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../about/">About Me</a></li>
+                    <li><a href="../research/">Research & Blog</a></li>
+                    <li><a href="../teaching/">Teaching Resources</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button with hamburger icon -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../index.html">Home</a>
+                    <a href="../about/">About Me</a>
+                    <a href="../research/">Research & Blog</a>
+                    <a href="../teaching/">Teaching Resources</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">Teaching Resources</h1>
+                
+                <div class="resources-container">
+                    <!-- Offline Temperature Monitoring Resource -->
+                    <a href="IoT_Course/TAE30TempHumidyOffline.html" class="resource-card">
+                        <div class="resource-icon">
+                            <div class="animated-bg">
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                            </div>
+                            <div class="temp-animation">
+                                <div class="thermometer"></div>
+                                <div class="mercury"></div>
+                            </div>
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3 class="resource-title">Greenhouse Monitoring (Offline)</h3>
+                            <p class="resource-description">
+                                Learn how to set up a temperature and humidity monitoring system for greenhouses using the Parallax Activity Board and DHT22 sensor. This offline version provides fundamental knowledge about sensor integration and data collection.
+                            </p>
+                            <div>
+                                <span class="resource-tag">TAE30</span>
+                                <span class="resource-tag">UC Davis</span>
+                                <span class="resource-tag">DHT22</span>
+                            </div>
+                            <div class="resource-footer">
+                                <span class="resource-btn">View Resource <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Online Temperature Monitoring Resource -->
+                    <a href="IoT_Course/TAE30TempHumidyOnline.html" class="resource-card">
+                        <div class="resource-icon">
+                            <div class="animated-bg">
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                                <div class="bubble"></div>
+                            </div>
+                            <div class="wifi-animation">
+                                <div class="wifi-circle"></div>
+                                <div class="wifi-circle"></div>
+                                <div class="wifi-circle"></div>
+                                <div class="wifi-dot"></div>
+                            </div>
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <div class="resource-content">
+                            <h3 class="resource-title">Greenhouse Monitoring (Online)</h3>
+                            <p class="resource-description">
+                                Take your greenhouse monitoring to the next level with this online version. Learn to integrate the Parallax Activity Board with DHT22 sensor and ESP8266 Wi-Fi module for real-time data transmission and remote monitoring.
+                            </p>
+                            <div>
+                                <span class="resource-tag">TAE30</span>
+                                <span class="resource-tag">UC Davis</span>
+                                <span class="resource-tag">ESP8266</span>
+                                <span class="resource-tag">IoT</span>
+                            </div>
+                            <div class="resource-footer">
+                                <span class="resource-btn">View Resource <i class="fas fa-arrow-right"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDropdown = document.getElementById('mobileDropdown');
+        
+        // Toggle mobile dropdown
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuBtn.contains(e.target) && !mobileDropdown.contains(e.target)) {
+                mobileDropdown.classList.remove('active');
+            }
+        });
+        
+        // Close dropdown when clicking a link
+        const dropdownLinks = mobileDropdown.querySelectorAll('a');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileDropdown.classList.remove('active');
+            });
+        });
+        
+        // Close dropdown on window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mobileDropdown.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
