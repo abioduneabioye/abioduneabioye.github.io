@@ -256,7 +256,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 2px dashed var(--secondary-color);
+            border: 2px dashed var(--primary-color);
             top: -10px;
             left: 10px;
             z-index: -1;
@@ -477,13 +477,15 @@
             }
         }
         
-        .hero-text h1, .hero-text h2, .hero-text p, .social-links {
+        .hero-text h1, .hero-text h2, .hero-text p, .contact-btn, .social-links, .profile-image {
             animation: fadeIn 0.8s ease-out forwards;
         }
         
+        .profile-image { animation-delay: 0.1s; }
         .hero-text h1 { animation-delay: 0.2s; }
         .hero-text h2 { animation-delay: 0.4s; }
         .hero-text p { animation-delay: 0.6s; }
+        .contact-btn { animation-delay: 0.7s; }
         .social-links { animation-delay: 0.8s; }
     </style>
 </head>
