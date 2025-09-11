@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps | Mohammadreza Narimani</title>
-    <link rel="icon" href="../../assets/icons/favicon.png">
+    <title>IoT Course Resources | Mohammadreza Narimani</title>
+    <link rel="icon" href="../../../assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
     <style>
@@ -15,20 +15,14 @@
             --text-color: #333;
             --light-bg: #f9f9f9;
             --white: #ffffff;
-            --green-accent: #4CAF50;
-            --blue-accent: #2196F3;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        html, body {
-            height: 100%;
-        }
-
+        
         body {
             font-family: 'Open Sans', sans-serif;
             color: var(--text-color);
@@ -38,13 +32,13 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
+        
         /* Header styles */
         header {
             background-color: var(--primary-color);
@@ -55,14 +49,14 @@
             right: 0;
             z-index: 1000;
         }
-
+        
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
         }
-
+        
         .logo {
             display: flex;
             align-items: center;
@@ -72,22 +66,22 @@
             font-weight: 600;
             font-size: 1.2rem;
         }
-
+        
         .logo img {
             width: 30px;
             height: 30px;
             margin-right: 10px;
         }
-
+        
         .nav-links {
             display: flex;
             list-style: none;
         }
-
+        
         .nav-links li {
             margin-left: 30px;
         }
-
+        
         .nav-links a {
             color: var(--white);
             text-decoration: none;
@@ -96,18 +90,18 @@
             transition: color 0.3s;
             position: relative;
         }
-
+        
         .nav-links a:hover {
             color: var(--secondary-color);
         }
-
+        
         /* Main content */
         main {
             flex: 1;
             padding-top: 100px;
             padding-bottom: 60px;
         }
-
+        
         .page-title {
             font-family: 'Lora', serif;
             font-size: 2.5rem;
@@ -117,7 +111,7 @@
             position: relative;
             padding-bottom: 15px;
         }
-
+        
         .page-title::after {
             content: '';
             position: absolute;
@@ -128,7 +122,7 @@
             height: 3px;
             background-color: var(--secondary-color);
         }
-
+        
         .intro-text {
             text-align: center;
             max-width: 800px;
@@ -136,15 +130,15 @@
             color: #666;
             font-size: 1.1rem;
         }
-
-        .apps-container {
+        
+        .resources-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
-
-        .app-card {
+        
+        .resource-card {
             background: var(--white);
             border-radius: 15px;
             overflow: hidden;
@@ -153,13 +147,13 @@
             text-decoration: none;
             color: inherit;
         }
-
-        .app-card:hover {
+        
+        .resource-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
-
-        .app-header {
+        
+        .resource-icon {
             height: 200px;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             position: relative;
@@ -168,31 +162,31 @@
             justify-content: center;
             overflow: hidden;
         }
-
-        .app-icon {
+        
+        .resource-icon i {
             font-size: 4rem;
             color: var(--white);
             z-index: 2;
         }
-
-        .app-content {
+        
+        .resource-content {
             padding: 25px;
         }
-
-        .app-title {
+        
+        .resource-title {
             font-family: 'Lora', serif;
             font-size: 1.4rem;
             color: var(--primary-color);
             margin-bottom: 15px;
         }
-
-        .app-description {
+        
+        .resource-description {
             color: #666;
             margin-bottom: 20px;
             line-height: 1.6;
         }
-
-        .app-tag {
+        
+        .resource-tag {
             display: inline-block;
             background-color: var(--light-bg);
             color: var(--primary-color);
@@ -202,51 +196,21 @@
             margin-right: 8px;
             margin-bottom: 8px;
         }
-
-        .app-footer {
+        
+        .resource-footer {
             margin-top: 20px;
         }
-
-        .app-btn {
+        
+        .resource-btn {
             color: var(--primary-color);
             font-weight: 600;
             transition: color 0.3s;
         }
-
-        .app-card:hover .app-btn {
+        
+        .resource-card:hover .resource-btn {
             color: var(--secondary-color);
         }
-
-        /* Coming Soon Styles */
-        .coming-soon {
-            text-align: center;
-            padding: 80px 20px;
-            background-color: var(--white);
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            margin: 40px 0;
-        }
-
-        .coming-soon-icon {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .coming-soon h2 {
-            font-family: 'Lora', serif;
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .coming-soon p {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
+        
         /* Mobile styles */
         @media (max-width: 768px) {
             .nav-links {
@@ -257,7 +221,7 @@
                 font-size: 2rem;
             }
             
-            .apps-container {
+            .resources-container {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -268,19 +232,17 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="../../index.html" class="logo">
-                    <img src="../../assets/icons/favicon.png" alt="Logo">
-                    <span>Apps</span>
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/favicon.png" alt="Logo">
+                    <span>IoT Course Resources</span>
                 </a>
                 
                 <!-- Desktop Navigation -->
                 <ul class="nav-links">
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../about/">About Me</a></li>
-                    <li><a href="../research/">Research</a></li>
-                    <li><a href="../teaching/">Teaching</a></li>
-                    <li><a href="../apps/">Apps</a></li>
-                    <li><a href="../blogs/">Blogs</a></li>
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research & Blog</a></li>
+                    <li><a href="../../teaching/">Teaching Resources</a></li>
                 </ul>
             </nav>
         </div>
@@ -288,18 +250,54 @@
 
     <main>
         <div class="container">
-            <h1 class="page-title">Apps</h1>
+            <h1 class="page-title">IoT Course Resources</h1>
             <p class="intro-text">
-                Interactive applications and tools developed for research, education, and data visualization.
+                Temperature and humidity monitoring systems using DHT22 sensors and Parallax Activity Board for TAE30 course at UC Davis.
             </p>
             
-            <div class="coming-soon">
-                <i class="fas fa-cogs coming-soon-icon"></i>
-                <h2>Coming Soon</h2>
-                <p>
-                    Interactive applications and tools for research, education, and data visualization 
-                    will be featured here. Stay tuned for exciting new developments!
-                </p>
+            <div class="resources-container">
+                <!-- Offline Temperature Monitoring Resource -->
+                <a href="TAE30TempHumidyOffline.html" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3 class="resource-title">Greenhouse Monitoring (Offline)</h3>
+                        <p class="resource-description">
+                            Learn how to set up a temperature and humidity monitoring system for greenhouses using the Parallax Activity Board and DHT22 sensor. This offline version provides fundamental knowledge about sensor integration and data collection.
+                        </p>
+                        <div>
+                            <span class="resource-tag">TAE30</span>
+                            <span class="resource-tag">UC Davis</span>
+                            <span class="resource-tag">DHT22</span>
+                        </div>
+                        <div class="resource-footer">
+                            <span class="resource-btn">View Resource <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Online Temperature Monitoring Resource -->
+                <a href="TAE30TempHumidyOnline.html" class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div class="resource-content">
+                        <h3 class="resource-title">Greenhouse Monitoring (Online)</h3>
+                        <p class="resource-description">
+                            Take your greenhouse monitoring to the next level with this online version. Learn to integrate the Parallax Activity Board with DHT22 sensor and ESP8266 Wi-Fi module for real-time data transmission and remote monitoring.
+                        </p>
+                        <div>
+                            <span class="resource-tag">TAE30</span>
+                            <span class="resource-tag">UC Davis</span>
+                            <span class="resource-tag">ESP8266</span>
+                            <span class="resource-tag">IoT</span>
+                        </div>
+                        <div class="resource-footer">
+                            <span class="resource-btn">View Resource <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </main>
