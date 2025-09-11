@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research & Blog | Mohammadreza Narimani</title>
-    <link rel="icon" href="../../assets/favicon.png">
+    <title>Research | Mohammadreza Narimani</title>
+    <link rel="icon" href="../../assets/icons/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
     <style>
@@ -550,6 +550,33 @@
             transform: translateX(5px);
         }
 
+        /* Coming Soon section */
+        .coming-soon {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .coming-soon-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .coming-soon h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .coming-soon p {
+            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
         /* Footer */
         footer {
             background-color: var(--primary-color);
@@ -643,16 +670,18 @@
         <div class="container">
             <nav class="navbar">
                 <a href="../../index.html" class="logo">
-                    <img src="../../assets/favicon.png" alt="Logo">
-                    <span>Research & Blog</span>
+                    <img src="../../assets/icons/favicon.png" alt="Logo">
+                    <span>Research</span>
                 </a>
                 
                 <!-- Desktop Navigation -->
                 <ul class="nav-links">
                     <li><a href="../../index.html">Home</a></li>
                     <li><a href="../about/">About Me</a></li>
-                    <li><a href="../research/">Research & Blog</a></li>
-                    <li><a href="../teaching/">Teaching Resources</a></li>
+                    <li><a href="../research/">Research</a></li>
+                    <li><a href="../teaching/">Teaching</a></li>
+                    <li><a href="../apps/">Apps</a></li>
+                    <li><a href="../blogs/">Blogs</a></li>
                 </ul>
                 
                 <!-- Mobile Menu Button with hamburger icon -->
@@ -668,8 +697,10 @@
                 <div class="mobile-dropdown" id="mobileDropdown">
                     <a href="../../index.html">Home</a>
                     <a href="../about/">About Me</a>
-                    <a href="../research/">Research & Blog</a>
-                    <a href="../teaching/">Teaching Resources</a>
+                    <a href="../research/">Research</a>
+                    <a href="../teaching/">Teaching</a>
+                    <a href="../apps/">Apps</a>
+                    <a href="../blogs/">Blogs</a>
                 </div>
             </nav>
         </div>
@@ -678,10 +709,18 @@
     <main>
         <div class="page-content">
             <div class="container">
-                <h1 class="page-title">Research & Blog</h1>
+                <h1 class="page-title">Research</h1>
                 
                 <div class="research-container">
-                    <a href="Satellite_VI_Visualizer/" class="research-card">
+                    <div class="coming-soon">
+                        <i class="fas fa-flask coming-soon-icon"></i>
+                        <h2>Coming Soon</h2>
+                        <p>
+                            Research publications, projects, and findings in digital agriculture, 
+                            remote sensing, and precision farming will be featured here. Stay tuned for updates!
+                        </p>
+                    </div>
+                </div>
                         <div class="research-header">
                             <div class="satellite-animation">
                                 <div class="stars"></div>
