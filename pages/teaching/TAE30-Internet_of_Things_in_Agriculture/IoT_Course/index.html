@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IoT Course Resources | Mohammadreza Narimani</title>
-    <link rel="icon" href="../../../assets/favicon.png">
+    <link rel="icon" href="../../../../assets/icons/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
     <style>
@@ -63,8 +63,8 @@
             color: var(--white);
             text-decoration: none;
             font-family: 'Lora', serif;
-            font-weight: 600;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-size: 1.5rem;
         }
         
         .logo img {
@@ -226,6 +226,174 @@
                 gap: 20px;
             }
         }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 20px 0;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Lora', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Course Activity Card Styles */
+        .course-activity-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #022851 0%, #1e3a5f 50%, #3a5998 100%) !important;
+            text-decoration: none !important;
+            color: white !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        
+        .course-activity-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(2, 40, 81, 0.2);
+            text-decoration: none !important;
+            color: white !important;
+        }
+
+        .course-activity-card * {
+            color: white !important;
+        }
+
+        .no-underline {
+            text-decoration: none !important;
+        }
+        
+        .icon-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .icon-bounce {
+            animation: bounce 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-6px); }
+        }
+
+        /* Ensure proper spacing and centering */
+        .space-y-4 > * + * {
+            margin-top: 1rem;
+        }
+
+        /* Override any conflicting Tailwind styles */
+        .max-w-4xl {
+            max-width: 56rem;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .rounded-xl {
+            border-radius: 0.75rem;
+        }
+
+        .p-6 {
+            padding: 1.5rem;
+        }
+
+        .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+
+        .mr-6 {
+            margin-right: 1.5rem;
+        }
+
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .leading-relaxed {
+            line-height: 1.625;
+        }
+
+        .text-blue-100 {
+            color: rgb(219 234 254);
+        }
+
+        .w-12 {
+            width: 3rem;
+        }
+
+        .h-12 {
+            height: 3rem;
+        }
+
+        .text-white {
+            color: rgb(255 255 255) !important;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -252,56 +420,115 @@
 
     <main>
         <div class="container">
-            <h1 class="page-title">IoT Course Resources</h1>
+            <h1 class="page-title">TAE 30 - IoT Course Resources</h1>
             <p class="intro-text">
-                Temperature and humidity monitoring systems using DHT22 sensors and Parallax Activity Board for TAE30 course at UC Davis.
+                Communication and Computing Technologies for a Mobile Society - Hands-on laboratory sessions and monitoring systems.
             </p>
+        </div>
+        
+        <!-- Course Activity Cards Section -->
+        <div class="max-w-4xl mx-auto space-y-4 px-8 py-8">
             
-            <div class="resources-container">
-                <!-- Offline Temperature Monitoring Resource -->
-                <a href="TAE30TempHumidyOffline.html" class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-temperature-high"></i>
+            <!-- TAE 30 Main Labs and Class Activities -->
+            <a href="https://mohammadrezanarimaniucdavis.github.io/TAE30-IoT-Lab-Materials/" target="_blank" class="course-activity-card rounded-xl p-6 text-white shadow-lg flex items-center block no-underline">
+                <div class="flex-shrink-0 mr-6">
+                    <div class="icon-bounce">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Central hub -->
+                            <circle cx="12" cy="12" r="3" stroke-width="2" fill="currentColor" opacity="0.8"/>
+                            <!-- Network nodes -->
+                            <circle cx="6" cy="6" r="2" stroke-width="2" fill="currentColor" opacity="0.7"/>
+                            <circle cx="18" cy="6" r="2" stroke-width="2" fill="currentColor" opacity="0.7"/>
+                            <circle cx="6" cy="18" r="2" stroke-width="2" fill="currentColor" opacity="0.7"/>
+                            <circle cx="18" cy="18" r="2" stroke-width="2" fill="currentColor" opacity="0.7"/>
+                            <!-- Connection lines -->
+                            <path d="M9.5 9.5L8 8M14.5 9.5L16 8M9.5 14.5L8 16M14.5 14.5L16 16" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+                            <!-- Data flow indicators -->
+                            <circle cx="10" cy="8" r="0.5" fill="currentColor" opacity="0.9">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="14" cy="16" r="0.5" fill="currentColor" opacity="0.9">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
                     </div>
-                    <div class="resource-content">
-                        <h3 class="resource-title">Greenhouse Monitoring (Offline)</h3>
-                        <p class="resource-description">
-                            Learn how to set up a temperature and humidity monitoring system for greenhouses using the Parallax Activity Board and DHT22 sensor. This offline version provides fundamental knowledge about sensor integration and data collection.
-                        </p>
-                        <div>
-                            <span class="resource-tag">TAE30</span>
-                            <span class="resource-tag">UC Davis</span>
-                            <span class="resource-tag">DHT22</span>
-                        </div>
-                        <div class="resource-footer">
-                            <span class="resource-btn">View Resource <i class="fas fa-arrow-right"></i></span>
-                        </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold mb-2">TAE 30 Main Labs and Class Activities</h3>
+                    <p class="text-blue-100 text-sm leading-relaxed">Hands-on laboratory sessions covering microcontroller programming, sensor integration, and IoT device development with BlocklyProp and C++.</p>
+                </div>
+            </a>
+
+            <!-- Greenhouse Monitoring (Offline) -->
+            <a href="TAE30TempHumidyOffline.html" class="course-activity-card rounded-xl p-6 text-white shadow-lg flex items-center block no-underline">
+                <div class="flex-shrink-0 mr-6">
+                    <div class="icon-pulse">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Thermometer body -->
+                            <rect x="10" y="4" width="4" height="14" rx="2" stroke-width="2" fill="none"/>
+                            <!-- Thermometer bulb -->
+                            <circle cx="12" cy="19" r="3" stroke-width="2" fill="currentColor" opacity="0.8"/>
+                            <!-- Temperature scale -->
+                            <path d="M15 6h2M15 8h2M15 10h2M15 12h2M15 14h2" stroke-width="1.5" opacity="0.7"/>
+                            <!-- Mercury/liquid inside -->
+                            <rect x="11" y="16" width="2" height="2" fill="currentColor" opacity="0.9"/>
+                            <circle cx="12" cy="19" r="2" fill="white" opacity="0.9"/>
+                            <!-- Temperature indicator animation -->
+                            <rect x="11" y="14" width="2" height="1" fill="currentColor" opacity="0.7">
+                                <animate attributeName="opacity" values="0.3;0.9;0.3" dur="3s" repeatCount="indefinite"/>
+                            </rect>
+                        </svg>
                     </div>
-                </a>
-                
-                <!-- Online Temperature Monitoring Resource -->
-                <a href="TAE30TempHumidyOnline.html" class="resource-card">
-                    <div class="resource-icon">
-                        <i class="fas fa-wifi"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold mb-2">Greenhouse Monitoring (Offline)</h3>
+                    <p class="text-blue-100 text-sm leading-relaxed">Local data collection system using sensors for temperature, humidity with standalone microcontroller data logging capabilities.</p>
+                </div>
+            </a>
+
+            <!-- Greenhouse Monitoring (Online) -->
+            <a href="TAE30TempHumidyOnline.html" class="course-activity-card rounded-xl p-6 text-white shadow-lg flex items-center block no-underline">
+                <div class="flex-shrink-0 mr-6">
+                    <div class="icon-bounce">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Thermometer body -->
+                            <rect x="8" y="4" width="3" height="12" rx="1.5" stroke-width="1.5" fill="none" opacity="0.8"/>
+                            <!-- Thermometer bulb -->
+                            <circle cx="9.5" cy="17" r="2" stroke-width="1.5" fill="currentColor" opacity="0.7"/>
+                            <!-- Temperature scale -->
+                            <path d="M12 6h1M12 8h1M12 10h1M12 12h1" stroke-width="1" opacity="0.6"/>
+                            <!-- Network connectivity -->
+                            <circle cx="16" cy="8" r="2" stroke-width="1.5" fill="currentColor" opacity="0.8"/>
+                            <circle cx="20" cy="6" r="1.5" stroke-width="1.5" fill="currentColor" opacity="0.7"/>
+                            <circle cx="20" cy="10" r="1.5" stroke-width="1.5" fill="currentColor" opacity="0.7"/>
+                            <!-- Connection lines -->
+                            <path d="M14 8L18.5 6M14 8L18.5 10" stroke="currentColor" stroke-width="1" opacity="0.8"/>
+                            <!-- Data transmission animation -->
+                            <circle cx="15" cy="7" r="0.5" fill="currentColor" opacity="0.9">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="17" cy="9" r="0.5" fill="currentColor" opacity="0.9">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
                     </div>
-                    <div class="resource-content">
-                        <h3 class="resource-title">Greenhouse Monitoring (Online)</h3>
-                        <p class="resource-description">
-                            Take your greenhouse monitoring to the next level with this online version. Learn to integrate the Parallax Activity Board with DHT22 sensor and ESP8266 Wi-Fi module for real-time data transmission and remote monitoring.
-                        </p>
-                        <div>
-                            <span class="resource-tag">TAE30</span>
-                            <span class="resource-tag">UC Davis</span>
-                            <span class="resource-tag">ESP8266</span>
-                            <span class="resource-tag">IoT</span>
-                        </div>
-                        <div class="resource-footer">
-                            <span class="resource-btn">View Resource <i class="fas fa-arrow-right"></i></span>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold mb-2">Greenhouse Monitoring (Online)</h3>
+                    <p class="text-blue-100 text-sm leading-relaxed">Internet-connected monitoring system with real-time data transmission, web-based dashboards, and remote control capabilities for greenhouse automation.</p>
+                </div>
+            </a>
+
         </div>
     </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
