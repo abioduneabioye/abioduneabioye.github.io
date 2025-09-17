@@ -1,0 +1,44 @@
+/* Research page specific styles */
+:root {
+    --green-accent: #4CAF50;
+    --blue-accent: #2196F3;
+}
+
+/* Coming Soon section */
+.coming-soon {
+    text-align: center;
+    padding: 80px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.coming-soon-icon {
+    font-size: 4rem;
+    color: var(--accent-color);
+    margin-bottom: 30px;
+}
+
+.coming-soon h2 {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.coming-soon p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Research project card */
+.research-container {
+    max-width: 900px;
+    margin: 40px auto;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
