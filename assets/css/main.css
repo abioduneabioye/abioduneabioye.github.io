@@ -1,4 +1,4 @@
-/* ===== SINGLE UNIFIED CSS FOR ALL PAGES ===== */
+﻿/* ===== SINGLE UNIFIED CSS FOR ALL PAGES ===== */
 
 /* CSS VARIABLES */
 :root {
@@ -20,11 +20,13 @@
     box-sizing: border-box;
 }
 
-html, body {
+html {
     height: 100%;
+    scrollbar-gutter: stable;
 }
 
 body {
+    height: 100%;
     font-family: 'Open Sans', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
@@ -35,6 +37,17 @@ body {
 }
 
 .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Override Tailwind container when it loads */
+header .container,
+main .container,
+section .container,
+footer .container,
+.page-content .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -56,6 +69,7 @@ header {
     align-items: center;
     padding: 15px 0;
     position: relative;
+    min-height: 72px;
 }
 
 .logo {
@@ -206,6 +220,11 @@ main {
     padding-bottom: 60px;
 }
 
+/* Helper class for pages without .page-content */
+.offset-main {
+    padding-top: 100px;
+}
+
 .page-title {
     font-family: 'Lora', serif;
     font-size: 2.5rem;
@@ -214,6 +233,7 @@ main {
     text-align: center;
     position: relative;
     padding-bottom: 15px;
+    font-weight: 700;
 }
 
 .page-title::after {
@@ -481,7 +501,7 @@ main {
 }
 
 .skill-list li::before {
-    content: '•';
+    content: 'â€¢';
     position: absolute;
     left: -15px;
     color: var(--secondary-color);
@@ -501,7 +521,7 @@ main {
 }
 
 .research-item::before, .teaching-item::before, .leadership-item::before, .award-item::before, .work-item::before {
-    content: '•';
+    content: 'â€¢';
     position: absolute;
     left: 5px;
     color: var(--secondary-color);
@@ -529,7 +549,7 @@ main {
 }
 
 .publication-item::before, .mentee-item::before, .media-item::before {
-    content: '•';
+    content: 'â€¢';
     position: absolute;
     left: 5px;
     color: var(--secondary-color);
@@ -746,6 +766,11 @@ footer {
         display: flex;
     }
     
+    .mobile-dropdown {
+        right: 0;
+        left: auto;
+    }
+    
     .page-title {
         font-size: 2rem;
     }
@@ -784,7 +809,12 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .container {
+    .container,
+    header .container,
+    main .container,
+    section .container,
+    footer .container,
+    .page-content .container {
         padding: 0 15px;
     }
     
