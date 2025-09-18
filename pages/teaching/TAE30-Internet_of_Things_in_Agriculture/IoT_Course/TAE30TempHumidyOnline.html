@@ -1119,25 +1119,6 @@
                     <a href="../../../apps/">Apps</a>
                     <a href="../../../blogs/">Blogs</a>
                 </div>
-                
-                <!-- Mobile Menu Button with hamburger icon -->
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <div class="hamburger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </button>
-                
-                <!-- Mobile Dropdown -->
-                <div class="mobile-dropdown" id="mobileDropdown">
-                    <a href="../../../../index.html">Home</a>
-                    <a href="../../../about/">About Me</a>
-                    <a href="../../../research/">Research</a>
-                    <a href="../../../teaching/">Teaching</a>
-                    <a href="../../../apps/">Apps</a>
-                    <a href="../../../blogs/">Blogs</a>
-                </div>
             </nav>
         </div>
     </header>
@@ -1333,36 +1314,7 @@
     </footer>
 
     <script>
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileDropdown = document.getElementById('mobileDropdown');
-        
-        // Toggle mobile dropdown
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            mobileDropdown.classList.toggle('active');
-        });
-        
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !mobileDropdown.contains(e.target)) {
-                mobileDropdown.classList.remove('active');
-            }
-        });
-        
-        // Close dropdown when clicking a link
-        const dropdownLinks = mobileDropdown.querySelectorAll('a');
-        dropdownLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileDropdown.classList.remove('active');
-            });
-        });
-        
-        // Close dropdown on window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                mobileDropdown.classList.remove('active');
-            }
-        });
+
 
         // Live clock
         function updateClock() {
