@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhancing Wildfire Monitoring With Sentinel-2 Imagery and Python | Mohammadreza Narimani</title>
+    <meta name="description" content="PhD research by Mohammadreza Narimani on wildfire monitoring using Sentinel-2 satellite imagery, Google Earth Engine, and Python programming. UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, wildfire monitoring, Sentinel-2, remote sensing, Google Earth Engine, Python, UC Davis, digital agriculture, satellite imagery, SWIR, fire detection, PhD candidate">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="Enhancing Wildfire Monitoring With Sentinel-2 Imagery and Python">
+    <meta property="og:description" content="PhD research on wildfire monitoring using satellite imagery and AI by Mohammadreza Narimani at UC Davis">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/blogs/ESEARCH_Spring2024/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wildfire Monitoring Research by Mohammadreza Narimani">
+    <meta name="twitter:description" content="Advanced wildfire detection using Sentinel-2 satellite imagery and Python programming">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Blog</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../../apps/">Apps</a></li>
+                    <li><a href="../">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <li><a href="../../apps/">Apps</a></li>
+                    <a href="../">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🌲 Enhancing Wildfire Monitoring With Sentinel-2 Imagery and Python</h1>
+                <div class="intro-text">
+                    <strong>By Mohammadreza Narimani, PhD Candidate at UC Davis</strong><br>
+                    Published: Spring 2024 | Digital Agriculture Laboratory
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> Introduction</h2>
+                    <p>Wildfires are among the most devastating natural disasters affecting California and many regions around the world. As a <strong>PhD Candidate at UC Davis focusing on remote sensing, digital agriculture, and environmental monitoring</strong>, I have always been passionate about applying satellite data and AI tools to solve real-world problems.</p>
+                    
+                    <p>In Spring 2024, I had the privilege of mentoring <strong>my undergraduate mentee</strong>, through a complete research project—from ideation, dataset creation, coding, and visualization all the way to <strong>building a technical research poster and presenting it at the UC Davis College of Engineering</strong>.</p>
+                    
+                    <p>This blog post highlights our work, the methods we used, and the outcomes of our wildfire monitoring research using <strong>Google Earth Engine (GEE)</strong> and <strong>Sentinel-2 imagery</strong>.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-satellite"></i> Project Overview</h2>
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-left: 4px solid var(--green-accent); margin: 1rem 0; border-radius: 5px;">
+                        <p><strong>Project Title:</strong> <em>Enhancing Wildfire Monitoring Through Remote Sensing With Sentinel-2 Imagery and Python Programming</em></p>
+                        <p><strong>Authors:</strong> Quynh Tran, Mohammadreza Narimani, Ali Moghimi, Alireza Pourreza</p>
+                        <p><strong>Affiliation:</strong> Digital Agriculture Laboratory, UC Davis</p>
+                    </div>
+
+                    <p>This project focuses on leveraging the <strong>SWIR (Short-Wave Infrared)</strong> bands of Sentinel-2 to identify wildfire-affected pixels, analyze fire progression, and build a dataset suitable for training deep learning segmentation models such as U-Net.</p>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ This research is part of my broader work in remote sensing, environmental monitoring, and AI-based detection systems.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Mentoring the Project</h2>
+                    <p>As part of UC Davis' ESEARCH program, I guided my mentee through:</p>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">🧩 Step-by-Step Research Mentorship</h3>
+                    <ul class="skill-list">
+                        <li>Designing the project objective</li>
+                        <li>Learning Google Earth Engine from scratch</li>
+                        <li>Understanding Sentinel-2 spectral properties</li>
+                        <li>Identifying optimal fire-sensitive bands (SWIR2, SWIR1, Red)</li>
+                        <li>Building Python preprocessing pipelines</li>
+                        <li>Visualizing fire progression</li>
+                        <li>Creating an annotated dataset for segmentation</li>
+                        <li>Designing and presenting a full scientific research poster</li>
+                    </ul>
+
+                    <p>Seeing my mentee confidently present our work at the <strong>UC Davis College of Engineering</strong> was one of the most rewarding moments of my mentorship career.</p>
+
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Spring2024/Assets/ESEARCH_Spring_2024.png" alt="Mohammadreza Narimani and Quynh Tran presenting wildfire monitoring research poster at UC Davis" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Mohammadreza Narimani mentoring undergraduate student during poster presentation at UC Davis ESEARCH Spring 2024</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-fire"></i> Why Sentinel-2 for Wildfire Monitoring?</h2>
+                    <p>Sentinel-2 provides:</p>
+                    <ul class="skill-list">
+                        <li><strong>13 spectral bands</strong> including critical SWIR wavelengths</li>
+                        <li><strong>Frequent revisit time (~5 days)</strong></li>
+                        <li><strong>High resolution (10m–20m)</strong></li>
+                        <li><strong>Free and publicly available imagery</strong></li>
+                    </ul>
+
+                    <p>SWIR bands (Bands 11 & 12) are particularly powerful for wildfire detection because:</p>
+                    <ul class="skill-list">
+                        <li>They are highly sensitive to heat</li>
+                        <li>They penetrate smoke better than visible light</li>
+                        <li>They clearly separate fire pixels from vegetation and soil</li>
+                    </ul>
+
+                    <p>This makes Sentinel-2 one of the strongest tools for operational and research-level fire monitoring.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> Methods & Pipeline</h2>
+                    <p>Our end-to-end workflow included:</p>
+
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ ROI Selection & Cloud Filtering</h4>
+                            <p>We used Google Earth Engine to:</p>
+                            <ul class="skill-list">
+                                <li>Select regions affected by the August Complex Fire</li>
+                                <li>Sort images by cloud percentage</li>
+                                <li>Remove scenes with >10% cloud coverage</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ False-Color SWIR Visualization</h4>
+                            <p>We produced fire-enhanced images using:</p>
+                            <p><strong>SWIR2 (B12) + SWIR1 (B11) + Red (B4)</strong></p>
+                            <p>This made active fire zones immediately visible.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Data Preprocessing & Export</h4>
+                            <ul class="skill-list">
+                                <li>Cropped all images to 128×128 pixels</li>
+                                <li>Standardized image formatting</li>
+                                <li>Exported images to Google Drive for offline work</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Dataset Annotation</h4>
+                            <p>Using <strong>Label Studio</strong>, we manually annotated all 500 images to create a segmentation-ready dataset for fire-pixel identification.</p>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">5️⃣ Deep Learning Readiness</h3>
+                    <p>Our final dataset is structured for future use with:</p>
+                    <ul class="skill-list">
+                        <li>U-Net</li>
+                        <li>SegNet</li>
+                        <li>Attention U-Net</li>
+                        <li>Any custom wildfire-segmentation architecture</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Spring2024/Assets/UCDavis_ESEARCH_Spring_2024_Poster.png" alt="Wildfire monitoring research poster using Sentinel-2 imagery and Python" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Research poster: "Enhancing Wildfire Monitoring Through Remote Sensing With Sentinel-2 Imagery And Python Programming"</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Results</h2>
+                    <p>The project successfully produced:</p>
+                    <ul class="skill-list">
+                        <li>A high-quality 500-image annotated dataset</li>
+                        <li>Accurate SWIR-based fire enhancement maps</li>
+                        <li>Reliable cloud-filtered GEE exports</li>
+                        <li>A complete research poster presented at UC Davis</li>
+                    </ul>
+
+                    <p>This work lays the foundation for future graduate-level wildfire detection models using deep learning frameworks.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-chart-line"></i> Future Work</h2>
+                    <p>As part of the Digital Agriculture Lab's ongoing research, our next steps include:</p>
+                    <ul class="skill-list">
+                        <li>Training a <strong>modified U-Net</strong> model on our dataset</li>
+                        <li>Performing hyperparameter optimization</li>
+                        <li>Extending the system to track multi-day fire progression</li>
+                        <li>Comparing Sentinel-2 results with Landsat-8, MODIS, and VIIRS</li>
+                        <li>Building an automated pipeline deployable for emergency agencies</li>
+                    </ul>
+
+                    <p>This upcoming work will further strengthen our contributions to wildfire detection research.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fab fa-github"></i> GitHub Repository</h2>
+                    <p>Explore the full code, scripts, and workflow here:</p>
+                    
+                    <div style="text-align: center;">
+                        <a href="https://github.com/MohammadrezaNarimaniUCDavis/GEE_Sentinel2_Wildfire_Monitoring" class="contact-btn" target="_blank">
+                            <i class="fab fa-github"></i> GitHub: GEE Sentinel-2 Wildfire Monitoring
+                        </a>
+                    </div>
+
+                    <p>This repository includes:</p>
+                    <ul class="skill-list">
+                        <li>GEE script for filtering and visualizing Sentinel-2 imagery</li>
+                        <li>ROI-based extraction tools</li>
+                        <li>Cloud filtering logic</li>
+                        <li>Python preprocessing and annotation pipeline</li>
+                        <li>Ready-to-train wildfire segmentation dataset structure</li>
+                    </ul>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Author</h2>
+                    <p><strong>Mohammadreza Narimani</strong><br>
+                    <em>PhD Candidate, University of California, Davis</em></p>
+                    
+                    <p>Remote Sensing • Digital Agriculture • AI for Environmental Monitoring</p>
+                    
+                    <p>I mentor students in satellite data analytics, drone sensing, Python, AI model development, and geospatial research through the <strong>Digital Agriculture Laboratory</strong> at UC Davis.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Conclusion</h2>
+                    <p>This project demonstrates how undergraduate mentorship, modern satellite imagery, and powerful cloud-based tools like Google Earth Engine can come together to produce meaningful real-world research.</p>
+
+                    <p>I am incredibly proud of my mentee for her dedication and hard work, and I look forward to expanding this wildfire monitoring research as part of my PhD at UC Davis.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

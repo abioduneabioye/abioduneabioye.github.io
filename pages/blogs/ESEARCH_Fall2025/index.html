@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhancing Orchard Management with Deep Learning: Tree Segmentation Using Geospatial SAM2 | Mohammadreza Narimani</title>
+    <meta name="description" content="PhD research by Mohammadreza Narimani on orchard management using Geospatial SAM2 model, deep learning, and aerial imagery. Mentoring Sarbani Kumar at UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, orchard management, deep learning, tree segmentation, Geospatial SAM2, aerial imagery, NAIP, UC Davis, digital agriculture, AI agriculture, PhD candidate">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="Enhancing Orchard Management with Deep Learning: Tree Segmentation Using Geospatial SAM2">
+    <meta property="og:description" content="PhD research on orchard management using deep learning and aerial imagery by Mohammadreza Narimani at UC Davis Digital Agriculture Laboratory">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/blogs/ESEARCH_Fall2025/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orchard Management Deep Learning Research by Mohammadreza Narimani">
+    <meta name="twitter:description" content="Advanced tree segmentation using Geospatial SAM2 model and aerial imagery for agricultural applications">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Blog</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../../apps/">Apps</a></li>
+                    <li><a href="../">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <a href="../../apps/">Apps</a>
+                    <a href="../">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🌳 Enhancing Orchard Management with Deep Learning</h1>
+                <div class="intro-text">
+                    <strong>Tree Segmentation Using the Geospatial SAM2 Model and Aerial Imagery</strong><br>
+                    <strong>By Mohammadreza Narimani, PhD Candidate at UC Davis</strong><br>
+                    Published: Fall 2024 | Digital Agriculture Laboratory
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> Introduction</h2>
+                    <p>Orchard management is rapidly transforming with the rise of AI-driven analytics, high-resolution imagery, and deep learning. As a <strong>PhD Candidate at UC Davis specializing in remote sensing, digital agriculture, and deep learning</strong>, I had the privilege of mentoring <strong>my undergraduate mentee, Sarbani Kumar</strong>, through a full research project in the <strong>2024 UC Davis ESEARCH Program</strong>.</p>
+                    
+                    <p>Over ten weeks, we developed a cutting-edge workflow using the <strong>Geospatial Segment Anything Model 2 (SAM2)</strong> to automatically segment individual orchard trees from NAIP, Google Maps, and WorldView-3 high-resolution imagery. My mentee presented this work at the <strong>UC Davis College of Engineering poster showcase</strong>, where we were recognized for our contributions to agricultural AI research.</p>
+                    
+                    <p>This post summarizes our project, including methods, results, poster, and presentation.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-satellite"></i> Project Overview</h2>
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-left: 4px solid var(--green-accent); margin: 1rem 0; border-radius: 5px;">
+                        <p><strong>Project Title:</strong> <em>Enhancing Orchard Management with Deep Learning: Tree Segmentation Using Geospatial SAM2 Model and Aerial Imagery</em></p>
+                        <p><strong>Authors:</strong> Sarbani Kumar, Mohammadreza Narimani, Ali Moghimi, Alireza Pourreza</p>
+                        <p><strong>Affiliation:</strong> Digital Agriculture Laboratory, UC Davis</p>
+                    </div>
+
+                    <p>This project addresses a critical agricultural challenge: <strong>accurately identifying and segmenting individual trees</strong> in orchards to support yield estimation, biomass calculation, and resource planning.</p>
+
+                    <p>Using <strong>SAM2</strong>, an extension of the Segment Anything family optimized for geospatial tasks, we designed a system capable of:</p>
+
+                    <ul class="skill-list">
+                        <li>Precise tree canopy segmentation</li>
+                        <li>Bounding-box-based tree isolation</li>
+                        <li>Area calculation for each segmented tree</li>
+                        <li>Comparison with ground truth labels</li>
+                        <li>Deployment as an interactive Google Earth Engine tool</li>
+                    </ul>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ This research demonstrates how AI and remote sensing can revolutionize precision agriculture and orchard management.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Mentoring the Project</h2>
+                    <p>Mentoring my undergraduate student on this project involved guiding her through:</p>
+
+                    <ul class="skill-list">
+                        <li>Understanding deep learning architectures (SAM2)</li>
+                        <li>Processing high-resolution aerial imagery (NAIP, WorldView-3)</li>
+                        <li>Implementing bounding-box-assisted segmentation</li>
+                        <li>Ground truth annotation using Label Studio</li>
+                        <li>Performance evaluation and validation metrics</li>
+                        <li>Google Earth Engine app development</li>
+                        <li>Scientific poster design and presentation</li>
+                        <li>Presenting at UC Davis College of Engineering showcase</li>
+                    </ul>
+
+                    <p>My mentee showed exceptional dedication and technical skills, and I am proud to highlight her outstanding work here.</p>
+
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Fall2025/Assets/ESEARCH_Fall2025.png" alt="Mohammadreza Narimani and Sarbani Kumar presenting orchard management research poster at UC Davis" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Mohammadreza Narimani mentoring undergraduate student during poster presentation at UC Davis ESEARCH Fall 2024</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-tree"></i> Why Tree Segmentation Matters</h2>
+                    <p>Individual tree-level analytics are essential for:</p>
+                    <ul class="skill-list">
+                        <li>Yield prediction</li>
+                        <li>Fruit and nut production estimation</li>
+                        <li>Canopy health monitoring</li>
+                        <li>Biomass estimation</li>
+                        <li>Efficient irrigation and nutrient planning</li>
+                        <li>Sustainable orchard management</li>
+                    </ul>
+
+                    <p>Traditional methods require time-consuming manual labeling. SAM2 dramatically accelerates this process by combining <strong>AI</strong>, <strong>geospatial alignment</strong>, and <strong>high-resolution imagery</strong>.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> Methodology Summary</h2>
+                    <p>According to the project poster (Fall 2024), our workflow included:</p>
+
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ High-Resolution Imagery Acquisition</h4>
+                            <p>We used:</p>
+                            <ul class="skill-list">
+                                <li><strong>NAIP imagery</strong> (<1 m resolution)</li>
+                                <li><strong>Google aerial tiles</strong></li>
+                                <li><strong>WorldView-3 imagery</strong> (31 cm resolution)</li>
+                                <li>Limited Maxar satellite samples</li>
+                            </ul>
+                            <p>This level of detail is crucial for distinguishing trees from shadows and soil.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ SAM2 Architecture & Application</h4>
+                            <p>The SAM2 pipeline includes:</p>
+                            <ul class="skill-list">
+                                <li>Image Encoder</li>
+                                <li>Memory Attention Module</li>
+                                <li>Mask Decoder</li>
+                            </ul>
+                            <p>We optimized SAM2 for orchards by adjusting hyperparameters and creating consistent bounding boxes.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Bounding-Box-Assisted Segmentation</h4>
+                            <p>Bounding boxes dramatically improved accuracy:</p>
+                            <ul class="skill-list">
+                                <li>Each box contains exactly one tree</li>
+                                <li>SAM2 focuses solely on one object</li>
+                                <li>Reduces false positives</li>
+                                <li>Reduces tree-splitting errors</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Ground Truth Validation</h4>
+                            <p>Using <strong>Label Studio</strong>, we manually annotated hundreds of orchard trees for evaluation, ensuring strong visual alignment between model predictions and ground truth.</p>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">5️⃣ Area Estimation & Performance Evaluation</h3>
+                    <p>We computed area per tree using pixel counts and compared distributions using KDE plots, demonstrating strong modeling accuracy with close alignment between ground truth and SAM2-predicted areas.</p>
+                </section>
+
+                <section class="section">
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Fall2025/Assets/ESEARCH_Fall2024_Poster_GeoSAM2_Tree_Segmentation.png" alt="Orchard management deep learning research poster using Geospatial SAM2" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Research poster: "Enhancing Orchard Management with Deep Learning: Tree Segmentation Using Geospatial SAM2 Model and Aerial Imagery"</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Results</h2>
+                    <p>Key outcomes from our research:</p>
+                    <ul class="skill-list">
+                        <li><strong>91.17% overall accuracy</strong></li>
+                        <li>Excellent precision, recall, and F1 scores</li>
+                        <li>Strong performance in normalized confusion matrix</li>
+                        <li>Interactive Google Earth Engine tool for visualization</li>
+                        <li>SAM2 significantly outperforms baseline methods</li>
+                        <li>Close alignment between ground truth and predicted tree areas</li>
+                    </ul>
+
+                    <p>This fully demonstrates the potential of SAM2 for real-world orchard analytics and precision agriculture applications.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-rocket"></i> Explore the App & Code</h2>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <a href="https://ee-mnarimani.projects.earthengine.app/view/deeplearningtreemappingvisualizer" class="contact-btn" target="_blank" style="margin: 0.5rem;">
+                            <i class="fas fa-tree"></i> Live Tree Segmentation Visualizer
+                        </a>
+                        <a href="https://github.com/MohammadrezaNarimaniUCDavis/GeoSAM2_Tree_Segmentation" class="contact-btn" target="_blank" style="margin: 0.5rem;">
+                            <i class="fab fa-github"></i> GitHub Repository
+                        </a>
+                    </div>
+
+                    <p>The repository includes:</p>
+                    <ul class="skill-list">
+                        <li>NAIP & Google imagery processing scripts</li>
+                        <li>Python SAM2 segmentation notebook</li>
+                        <li>Bounding box generation scripts</li>
+                        <li>Ground truth datasets</li>
+                        <li>The full research poster</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-award"></i> Achievements</h2>
+                    <p>At the UC Davis College of Engineering poster presentation, my mentee delivered an excellent overview of our deep-learning workflow and geospatial methods. The project received strong attention from faculty and attendees, recognizing its significance for agricultural automation and environmental AI.</p>
+
+                    <p>This mentorship experience highlights the mission of the <strong>Digital Agriculture Laboratory</strong>—empowering students with modern AI, remote sensing, and geospatial tools.</p>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Author</h2>
+                    <p><strong>Mohammadreza Narimani</strong><br>
+                    <em>PhD Candidate, University of California, Davis</em></p>
+                    
+                    <p>Remote Sensing • AI for Agriculture • Geospatial Deep Learning • Earth Observation</p>
+                    
+                    <p>I mentor students in applied machine learning, satellite analytics, Python, and GEE as part of the Digital Agriculture Lab at UC Davis.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Conclusion</h2>
+                    <p>The <strong>GeoSAM2 Tree Segmentation Project</strong> demonstrates how high-resolution imagery and advanced deep learning models can revolutionize orchard management. Through this project, my mentee gained real-world experience in AI development, geospatial analysis, and scientific communication.</p>
+
+                    <p>This work forms the foundation for scalable orchard analytics tools that support smarter farming, better yield predictions, and data-driven resource management.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

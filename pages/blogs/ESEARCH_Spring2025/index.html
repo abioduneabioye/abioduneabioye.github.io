@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning–Based Snow Monitoring in California Using Sentinel-2 Satellite Data | Mohammadreza Narimani</title>
+    <meta name="description" content="PhD research by Mohammadreza Narimani on snow monitoring using deep learning, Sentinel-2 satellite data, and Google Earth Engine for California snowpack management. UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, snow monitoring, deep learning, Sentinel-2, satellite data, snowpack management, California water resources, UC Davis, digital agriculture, PhD candidate">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="Deep Learning–Based Snow Monitoring in California Using Sentinel-2 Satellite Data">
+    <meta property="og:description" content="PhD research on snow monitoring using deep learning and satellite imagery by Mohammadreza Narimani at UC Davis Digital Agriculture Laboratory">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/blogs/ESEARCH_Spring2025/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Snow Monitoring Deep Learning Research by Mohammadreza Narimani">
+    <meta name="twitter:description" content="Advanced snow detection using Sentinel-2 satellite data and deep learning for California water resource management">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Blog</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../../apps/">Apps</a></li>
+                    <li><a href="../">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <a href="../../apps/">Apps</a>
+                    <a href="../">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🌨️ Deep Learning–Based Snow Monitoring in California</h1>
+                <div class="intro-text">
+                    <strong>Sentinel-2 Satellite Data for Snowpack and Water Resource Management</strong><br>
+                    <strong>By Mohammadreza Narimani, PhD Candidate at UC Davis</strong><br>
+                    Published: Summer 2025 | Digital Agriculture Laboratory
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> Introduction</h2>
+                    <p>California's water system depends heavily on <strong>Sierra Nevada snowpack</strong>, which acts as a natural reservoir that slowly releases water to rivers, reservoirs, and agriculture. With <strong>climate change and prolonged drought</strong>, it is increasingly important to monitor snow cover accurately and automatically.</p>
+                    
+                    <p>As a <strong>PhD Candidate at UC Davis working in remote sensing and environmental monitoring</strong>, I mentored my undergraduate mentee through a full research project in the <strong>ESEARCH Summer 2025 program</strong>. Together, we developed a <strong>deep learning–based snow detection pipeline</strong> using <strong>Sentinel-2 imagery, Google Earth Engine, and open-source Python tools</strong>. My mentee presented our work at the <strong>UC Davis College of Engineering poster showcase</strong>, highlighting how deep learning can support snowpack and drought management.</p>
+                    
+                    <p>This blog post summarizes our workflow, poster, and GitHub repository.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-satellite"></i> Project Overview</h2>
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-left: 4px solid var(--green-accent); margin: 1rem 0; border-radius: 5px;">
+                        <p><strong>Project Title:</strong> <em>Deep Learning–Based Snow Monitoring in California Using Sentinel-2 Satellite Data for Management of Snowpack Resources</em></p>
+                        <p><strong>Authors:</strong> Vivian Jiaheng Sun, Mohammadreza Narimani</p>
+                        <p><strong>Affiliation:</strong> Computer Science and Biological & Agricultural Engineering, UC Davis – Digital Agriculture Lab</p>
+                    </div>
+
+                    <p>The project builds an <strong>end-to-end, reproducible workflow</strong> for:</p>
+
+                    <ul class="skill-list">
+                        <li>Interactively sampling <strong>512×512 pixel regions of interest (ROIs)</strong> from Sentinel-2</li>
+                        <li>Downloading multi-band Sentinel-2 imagery for each ROI</li>
+                        <li>Visualizing snow, clouds, and bright surfaces using RGB and false-color composites</li>
+                        <li>Training a <strong>convolutional encoder–decoder network</strong> to perform pixel-wise snow classification</li>
+                        <li>Producing <strong>snow probability maps</strong> that can scale across California and beyond</li>
+                    </ul>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ This research demonstrates how deep learning and satellite data can support California's water resource management and drought resilience.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-snowflake"></i> Why Snow Monitoring Matters in California</h2>
+                    <ul class="skill-list">
+                        <li>Snowpack in the <strong>Sierra Nevada</strong> is a <strong>vital seasonal water source</strong>, supplying rivers, reservoirs, and irrigation during the dry season</li>
+                        <li>Declining snowpack and <strong>more frequent droughts</strong> increase uncertainty for water managers</li>
+                        <li>Continuous snow monitoring supports:
+                            <ul class="skill-list" style="margin-top: 0.5rem;">
+                                <li>Drought resilience and early warning</li>
+                                <li>Year-to-year water supply forecasting</li>
+                                <li>Sustainable allocation between urban, agricultural, and environmental needs</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p>Our study uses <strong>open Sentinel-2 satellite data</strong> and deep learning to create an affordable, scalable monitoring solution.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-satellite-dish"></i> Sentinel-2 and Spectral Bands for Snow Detection</h2>
+                    <p>Sentinel-2 provides <strong>13 spectral bands</strong> from visible (VIS) to shortwave infrared (SWIR). For snow detection:</p>
+
+                    <ul class="skill-list">
+                        <li>Standard <strong>RGB composites</strong> make snow, clouds, and bright urban features all appear white</li>
+                        <li>By using a <strong>false-color composite (B11 – SWIR, B8 – NIR, B4 – Red)</strong>, snow becomes spectrally distinct from clouds and other bright surfaces</li>
+                        <li>SWIR bands <strong>B11 and B12</strong> are especially sensitive to snow vs. cloud differences and wet vs. dry surfaces</li>
+                    </ul>
+
+                    <p>This spectral design forms the foundation of our deep learning model.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-brain"></i> Deep Learning Workflow</h2>
+                    <p>Our GitHub repository implements a full training and analysis pipeline:</p>
+
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ ROI Drawing & Sentinel-2 Download</h4>
+                            <p>Using interactive notebooks, we can:</p>
+                            <ul class="skill-list">
+                                <li>Draw <strong>square ROIs</strong> directly on an interactive Sentinel-2 map</li>
+                                <li>Automatically save each ROI as a <strong>shapefile</strong></li>
+                                <li>Batch-download bands <strong>B1–B12 (excluding B10)</strong> for each ROI</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ Dataset Creation</h4>
+                            <p>We compile:</p>
+                            <ul class="skill-list">
+                                <li><strong>100 snow-covered images</strong></li>
+                                <li><strong>100 non-snow images</strong> (agriculture, desert, urban, ocean)</li>
+                                <li>Each image clipped to 512×512 pixels</li>
+                                <li>Converted into stacked multi-band TIFFs</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Encoder–Decoder Network</h4>
+                            <p>A <strong>convolutional encoder–decoder architecture</strong> that outputs:</p>
+                            <ul class="skill-list">
+                                <li>Input: Sentinel-2 bands (RGB + SWIR)</li>
+                                <li>Output: 512×512 probability map</li>
+                                <li>Data splits: 60% training, 15% validation, 25% testing</li>
+                            </ul>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Drought Context & Visualization</h4>
+                            <p>We generate <strong>Palmer Drought Severity Index (PDSI) time series</strong>, showing long-term wet and dry periods in California and emphasizing the need for robust snowpack monitoring.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Spring2025/Assets/ESEARCH_Summer_2025.png" alt="Deep learning snow monitoring research poster using Sentinel-2 satellite data" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Research poster: "Deep Learning–Based Snow Monitoring in California Using Sentinel-2 Satellite Data for Management of Snowpack Resources"</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-chart-bar"></i> Results</h2>
+                    <p>The deep learning model shows strong performance in distinguishing snow vs. non-snow pixels:</p>
+                    <ul class="skill-list">
+                        <li><strong>Accuracy:</strong> 0.895</li>
+                        <li><strong>Precision:</strong> 0.869</li>
+                        <li><strong>Recall:</strong> 0.930</li>
+                        <li><strong>F1-Score:</strong> 0.899</li>
+                        <li><strong>Intersection over Union (IoU):</strong> 0.816</li>
+                    </ul>
+
+                    <p>A confusion matrix confirms clear separation between snow and non-snow classes, leading to reliable snow cover maps suitable for large-scale monitoring. These metrics demonstrate that combining Sentinel-2 spectral features with deep learning provides high-quality data for <strong>water resource planning</strong> and <strong>snowpack management</strong>.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-rocket"></i> Repository Features</h2>
+                    <p>The <strong>Sentinel2_Snow_Monitoring</strong> repository offers:</p>
+                    <ul class="skill-list">
+                        <li>✅ <strong>Interactive ROI selection</strong> and auto-saving of shapefiles</li>
+                        <li>✅ <strong>Batch Sentinel-2 download</strong> for B1–B12 (excluding B10)</li>
+                        <li>✅ <strong>Cloud and date filtering</strong> for clean imagery</li>
+                        <li>✅ <strong>Visualization utilities</strong> for RGB and B11–B8–B4 composites</li>
+                        <li>✅ <strong>Deep learning training notebook</strong> for snow segmentation</li>
+                        <li>✅ <strong>Drought analysis notebook</strong> linking snow to long-term climate variability</li>
+                    </ul>
+
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <a href="https://github.com/MohammadrezaNarimaniUCDavis/Sentinel2_Snow_Monitoring" class="contact-btn" target="_blank">
+                            <i class="fab fa-github"></i> GitHub: Sentinel2 Snow Monitoring
+                        </a>
+                    </div>
+
+                    <p>This makes it an excellent <strong>teaching and research resource</strong> for snow monitoring, hydrology, and environmental remote sensing.</p>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Author</h2>
+                    <p><strong>Mohammadreza Narimani</strong><br>
+                    <em>PhD Candidate, University of California, Davis</em></p>
+                    
+                    <p>Remote Sensing • Digital Agriculture • Earth Observation • Deep Learning for Environmental Monitoring</p>
+                    
+                    <p>I mentor undergraduate and graduate students in satellite data processing, Python, Google Earth Engine, and AI-based environmental applications as part of the Digital Agriculture Lab at UC Davis.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Conclusion</h2>
+                    <p>The <strong>Sentinel2_Snow_Monitoring project</strong> demonstrates how Sentinel-2 multispectral imagery, deep learning, and open-source geospatial tools can come together to create a robust, scalable snow monitoring workflow for California and other snow-dependent regions.</p>
+
+                    <p>Through this project, my mentee gained hands-on experience in remote sensing, machine learning, and scientific communication, while we developed a tool that supports drought resilience and sustainable water management.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

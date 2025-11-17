@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Vegetation and Climate Insights Portal (GVCIP) | Mohammadreza Narimani</title>
+    <meta name="description" content="PhD research by Mohammadreza Narimani on global environmental monitoring using Google Earth Engine, MODIS, and ERA5 datasets. UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, GVCIP, global vegetation monitoring, climate insights, Google Earth Engine, MODIS, ERA5, UC Davis, digital agriculture, environmental monitoring, NDVI, LST, PhD candidate">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="Global Vegetation and Climate Insights Portal (GVCIP)">
+    <meta property="og:description" content="PhD research on global environmental monitoring using satellite data and Google Earth Engine by Mohammadreza Narimani at UC Davis Digital Agriculture Laboratory">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/blogs/ESEARCH_Summer2024/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Global Environmental Monitoring Research by Mohammadreza Narimani">
+    <meta name="twitter:description" content="Interactive global vegetation and climate monitoring portal using Google Earth Engine">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Blog</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../../apps/">Apps</a></li>
+                    <li><a href="../">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <a href="../../apps/">Apps</a>
+                    <a href="../">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🌎 Global Vegetation and Climate Insights Portal (GVCIP)</h1>
+                <div class="intro-text">
+                    <strong>A Google Earth Engine–Based Monitoring Tool</strong><br>
+                    <strong>By Mohammadreza Narimani, PhD Candidate at UC Davis</strong><br>
+                    Published: Summer 2024 | Digital Agriculture Laboratory
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-book"></i> Introduction</h2>
+                    <p>Global climate variability, environmental change, and extreme weather events increasingly demand <strong>reliable, high-resolution environmental monitoring tools</strong>. As a <strong>PhD Candidate at UC Davis specializing in remote sensing, climate analytics, and AI for environmental applications</strong>, I mentored <strong>my undergraduate mentee</strong>, through an ambitious project: building an interactive, global-scale environmental monitoring portal powered by <strong>Google Earth Engine (GEE)</strong>.</p>
+                    
+                    <p>Together, we developed the <strong>Global Vegetation and Climate Insights Portal (GVCIP)</strong>—a web application that visualizes global vegetation health, land surface temperature, evapotranspiration, precipitation, and more. My mentee successfully presented this project at the <strong>UC Davis College of Engineering</strong>, where both of us received certificates for our contributions.</p>
+                    
+                    <p>This blog post highlights the project goals, features, methodology, poster, and our presentation.</p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-satellite"></i> Project Overview</h2>
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-left: 4px solid var(--green-accent); margin: 1rem 0; border-radius: 5px;">
+                        <p><strong>Project Title:</strong> <em>Global Vegetation and Climate Insights Portal (GVCIP): A Google Earth Engine–Based Monitoring Tool</em></p>
+                        <p><strong>Authors:</strong> Nicholas Richmond, Mohammadreza Narimani, Ali Moghimi, Alireza Pourreza</p>
+                        <p><strong>Affiliation:</strong> Digital Agriculture Laboratory, UC Davis</p>
+                    </div>
+
+                    <p>The GVCIP portal uses MODIS, Sentinel, and ERA5 datasets within GEE to provide <strong>global, interactive maps</strong> of key environmental indicators, including:</p>
+
+                    <ul class="skill-list">
+                        <li><strong>NDVI (Normalized Difference Vegetation Index)</strong></li>
+                        <li><strong>Evapotranspiration (ET)</strong></li>
+                        <li><strong>Land Surface Temperature (LST)</strong></li>
+                        <li><strong>Leaf Area Index (LAI)</strong></li>
+                        <li><strong>Fraction of Photosynthetically Active Radiation (FPAR)</strong></li>
+                        <li><strong>Mean 2-meter Air Temperature (ERA5)</strong></li>
+                        <li><strong>Total Daily Precipitation (ERA5)</strong></li>
+                    </ul>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ This makes it a powerful resource for researchers, farmers, educators, policymakers, and climate analysts.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Mentoring the Project</h2>
+                    <p>Mentoring my undergraduate student on this project involved guiding them through:</p>
+
+                    <ul class="skill-list">
+                        <li>Understanding remote sensing datasets (MODIS, ERA5, Sentinel)</li>
+                        <li>Learning Earth Engine JavaScript programming</li>
+                        <li>Designing interactive UI elements (dropdown menus, map layers, charts)</li>
+                        <li>Implementing time-series extraction</li>
+                        <li>Creating data legends and visualization styles</li>
+                        <li>Developing and deploying the web app</li>
+                        <li>Writing the full research poster</li>
+                        <li>Presenting at the UC Davis ESEARCH and COE events</li>
+                    </ul>
+
+                    <p>My mentee showed exceptional dedication and creativity, and I am proud to highlight their work here.</p>
+
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Summer2024/Assets/ESEARCH_Summer_2024.png" alt="Mohammadreza Narimani and Nicholas Richmond presenting GVCIP research poster at UC Davis" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Mohammadreza Narimani mentoring undergraduate student during poster presentation at UC Davis ESEARCH Summer 2024</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-globe"></i> Key Features of the Portal</h2>
+                    
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ Interactive Global Environmental Mapping</h4>
+                            <p>Users can explore global datasets with smooth map visualization, zooming, and clicking to retrieve time-series data.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ Dynamic Data Layer Selection</h4>
+                            <p>Switch between NDVI, LST, ET, precipitation, vegetation indexes, and more.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Time-Series Chart Extraction</h4>
+                            <p>Click any location on the map to visualize the full year's data trend.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Automated Scaling & Color Legend</h4>
+                            <p>The legend updates based on the dataset selected, providing accurate interpretation.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--blue-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">5️⃣ Region-Specific Environmental Analysis</h4>
+                            <p>Analyze climate and vegetation conditions for any country, region, or pixel.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> Methodology Overview</h2>
+                    <p>According to the project poster:</p>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">1. Dataset Selection</h3>
+                    <ul class="skill-list">
+                        <li><strong>MODIS</strong> for NDVI, LAI, FPAR, ET, and LST</li>
+                        <li><strong>ERA5</strong> for temperature and precipitation</li>
+                    </ul>
+                    <p>These datasets provide high spatial and temporal resolution, essential for environmental monitoring.</p>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">2. Visualization & Mapping</h3>
+                    <p>Each environmental indicator is mapped using custom visualization parameters for clarity and consistency.</p>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">3. Time-Series Analysis</h3>
+                    <p>The app fetches year-long data for any clicked pixel, generating a plot for insights into seasonal changes.</p>
+
+                    <h3 style="color: var(--primary-color); font-size: 1.4rem; margin: 2rem 0 1rem 0;">4. User-Friendly Interface</h3>
+                    <p>A clean GEE-based UI ensures ease of use for both technical and non-technical audiences.</p>
+                </section>
+
+                <section class="section">
+                    <div style="text-align: center; margin: 2.5rem 0;">
+                        <img src="../../../assets/Blog/ESEARCH_Summer2024/Assets/ESEARCH2024_Summer_GVCIP.png" alt="Global Vegetation and Climate Insights Portal research poster" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Research poster: "Global Vegetation and Climate Insights Portal (GVCIP): A Google Earth Engine–Based Monitoring Tool"</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-rocket"></i> Explore the App & Code</h2>
+                    
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <a href="https://ee-mnarimani.projects.earthengine.app/view/global-vegetation-and-climate-insights-portal" class="contact-btn" target="_blank" style="margin: 0.5rem;">
+                            <i class="fas fa-globe"></i> Live GVCIP Portal
+                        </a>
+                        <a href="https://github.com/MohammadrezaNarimaniUCDavis/Global_Vegetation_and_Climate_Insights_Portal" class="contact-btn" target="_blank" style="margin: 0.5rem;">
+                            <i class="fab fa-github"></i> GitHub Repository
+                        </a>
+                        <a href="https://code.earthengine.google.com/?accept_repo=users/mnarimani/ESEARCHSummer2025" class="contact-btn" target="_blank" style="margin: 0.5rem;">
+                            <i class="fas fa-code"></i> Earth Engine Code
+                        </a>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-award"></i> Achievements</h2>
+                    <p>At the <strong>UC Davis College of Engineering Poster Presentation</strong>, my mentee and I were recognized with certificates for our contribution to environmental monitoring and remote sensing research.</p>
+
+                    <p>This mentorship experience further reinforced my passion for guiding students in advanced remote sensing, climate analytics, and Google Earth Engine workflows.</p>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Author</h2>
+                    <p><strong>Mohammadreza Narimani</strong><br>
+                    <em>PhD Candidate, University of California, Davis</em></p>
+                    
+                    <p>Remote Sensing • Digital Agriculture • Earth Observation • AI for Climate Analytics</p>
+                    
+                    <p>I specialize in developing satellite-based environmental monitoring systems and mentoring students in remote sensing, Python, GEE, and applied AI.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Conclusion</h2>
+                    <p>The <strong>Global Vegetation and Climate Insights Portal</strong> represents an important step toward building accessible, interactive environmental intelligence tools. Through this project, my mentee gained hands-on experience in satellite analytics, Earth Engine development, scientific communication, and research presentation.</p>
+
+                    <p>As climate challenges continue to grow, tools like GVCIP will play a vital role in supporting environmental research, sustainable agriculture, and data-driven policy.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>
