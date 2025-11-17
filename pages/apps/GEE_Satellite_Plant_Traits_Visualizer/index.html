@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEE Satellite Plant Traits Visualizer | Mohammadreza Narimani</title>
+    <meta name="description" content="Interactive Google Earth Engine app by Mohammadreza Narimani for visualizing satellite-derived plant traits including LAI, NDVI, and canopy chlorophyll using Sentinel-2 and Landsat data. UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, satellite plant traits, Google Earth Engine, LAI, NDVI, remote sensing, digital agriculture, Sentinel-2, Landsat, UC Davis, precision agriculture, crop monitoring, AI environmental monitoring">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="GEE Satellite Plant Traits Visualizer by Mohammadreza Narimani">
+    <meta property="og:description" content="Interactive satellite-based plant trait visualization tool developed at UC Davis Digital Agriculture Laboratory">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/apps/GEE_Satellite_Plant_Traits_Visualizer/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Satellite Plant Traits Visualizer - Mohammadreza Narimani">
+    <meta name="twitter:description" content="Interactive Google Earth Engine application for crop monitoring and precision agriculture">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Apps</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../">Apps</a></li>
+                    <li><a href="../../blogs/">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <a href="../">Apps</a>
+                    <a href="../../blogs/">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🌿 GEE Satellite Plant Traits Visualizer</h1>
+                <div class="intro-text">
+                    <strong>By Mohammadreza Narimani, PhD Candidate at UC Davis</strong><br>
+                    <strong>Collaboration with Alireza Pourreza</strong><br>
+                    Digital Agriculture Laboratory | University of California, Davis
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-satellite"></i> Interactive Plant Trait Monitoring</h2>
+                    <p>This <strong>Google Earth Engine application</strong> enables real-time visualization of satellite-derived plant traits anywhere in the world. Draw a polygon over your field or region of interest and instantly explore <strong>Leaf Area Index (LAI)</strong>, <strong>canopy and leaf chlorophyll content</strong>, <strong>canopy and leaf water content</strong>, <strong>canopy and leaf dry matter</strong>, <strong>NDVI</strong>, and <strong>Landsat 8 thermal data</strong> using Sentinel-2 and Landsat imagery.</p>
+                    
+                    <p>Developed at the <strong>Digital Agriculture Laboratory, UC Davis</strong>, this tool supports researchers, growers, and students in precision agriculture and environmental monitoring applications.</p>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ Real-time satellite data processing • Global coverage • Cloud-masked imagery • Dynamic legends
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-tools"></i> How to Use the App</h2>
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--green-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ Select Date Range</h4>
+                            <p>Choose your date of interest (the app uses a 3-month window around it for optimal data availability).</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--green-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ Draw Your Region</h4>
+                            <p>Use the drawing tools to create a polygon over your field or area of interest anywhere in the world.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--green-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Choose Plant Trait Layer</h4>
+                            <p>Select from LAI, NDVI, Canopy Chlorophyll, or Thermal layers to visualize different crop characteristics.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--green-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Analyze Results</h4>
+                            <p>View results with dynamic legends and cloud-masked imagery for accurate crop condition assessment.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-map"></i> Example: Davis, California</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 2rem 0;">
+                        <div style="text-align: center;">
+                            <img src="../../../assets/Apps/GEE_Satellite_Plant_Traits_Visualizer/Assets/GEE_Sentinel2.png" 
+                                 alt="Sentinel-2 True Color imagery near Davis, California showing agricultural fields" 
+                                 style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <p style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Sentinel-2 True Color Near Davis, California</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="../../../assets/Apps/GEE_Satellite_Plant_Traits_Visualizer/Assets/GEE_LAI.png" 
+                                 alt="Leaf Area Index (LAI) map derived from Sentinel-2 data near Davis, California" 
+                                 style="width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <p style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Leaf Area Index (LAI) Near Davis, California</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-rocket"></i> Try the Interactive App</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary);">
+                        Use the embedded tool below to explore satellite-derived plant traits for your own fields and regions
+                    </p>
+                    <div>
+                        <iframe
+                            src="https://ee-mnarimani.projects.earthengine.app/view/digitalaglabsatelliteplanttraitsvisualizer"
+                            width="100%"
+                            height="700"
+                            style="border: none; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                            loading="lazy"
+                            title="GEE Satellite Plant Traits Visualizer - Interactive Google Earth Engine Application">
+                        </iframe>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div>
+                        <h2 class="section-title"><i class="fas fa-info-circle"></i> Technical Information</h2>
+                        
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h3><i class="fas fa-satellite-dish"></i> Data Sources</h3>
+                            <ul class="skill-list">
+                                <li>Sentinel-2 MSI Level-1C (Top-of-Atmosphere)</li>
+                                <li>Landsat 8 Collection 2 Level-1</li>
+                                <li>Google Earth Engine cloud computing platform</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h3><i class="fas fa-chart-line"></i> Available Plant Traits</h3>
+                            <ul class="skill-list">
+                                <li>Leaf Area Index (LAI)</li>
+                                <li>Canopy Chlorophyll Content</li>
+                                <li>Canopy Water Content</li>
+                                <li>Canopy Dry Matter</li>
+                                <li>Leaf Chlorophyll Content</li>
+                                <li>Leaf Water Content</li>
+                                <li>Leaf Dry Matter</li>
+                                <li>Normalized Difference Vegetation Index (NDVI)</li>
+                                <li>Landsat 8 Thermal Data</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-left: 4px solid var(--secondary-color); border-radius: 5px;">
+                            <h3><i class="fas fa-quote-left"></i> Citation</h3>
+                            <p><strong>Model Development:</strong></p>
+                            <p style="font-style: italic; margin-bottom: 1rem;">
+                                Estévez, J., Salinero-Delgado, M., Berger, K., Pipia, L., Rivera-Caicedo, J. P., Wocher, M., ... & Verrelst, J. (2022). 
+                                Gaussian processes retrieval of crop traits in Google Earth Engine based on Sentinel-2 top-of-atmosphere data. 
+                                <em>Remote Sensing of Environment</em>, 273, 112958.
+                            </p>
+                            <p><strong>Application Development:</strong></p>
+                            <p style="font-style: italic;">
+                                Interactive Google Earth Engine application developed by Mohammadreza Narimani at the Digital Agriculture Laboratory, 
+                                University of California, Davis.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-link"></i> Resources & Links</h2>
+                    
+                    <div class="skills-container">
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="https://github.com/MohammadrezaNarimaniUCDavis/GEE_Satellite_Plant_Traits_Visualizer" 
+                               style="text-decoration: none; color: inherit; display: block;"
+                               target="_blank" rel="noopener noreferrer">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fab fa-github" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">GitHub Repository</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Access the complete Earth Engine scripts and documentation</p>
+                            </a>
+                        </div>
+                        
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="mailto:mnarimani@ucdavis.edu" 
+                               style="text-decoration: none; color: inherit; display: block;">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Contact</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Questions or collaboration opportunities</p>
+                            </a>
+                        </div>
+                        
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" 
+                               style="text-decoration: none; color: inherit; display: block;"
+                               target="_blank" rel="noopener noreferrer">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Google Scholar</h4>
+                                <p style="color: #666; font-size: 0.9rem;">View related publications and research</p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Developer</h2>
+                    <p><strong>Mohammadreza Narimani</strong><br>
+                    <em>PhD Candidate, University of California, Davis</em></p>
+                    
+                    <p>Remote Sensing • Digital Agriculture • Google Earth Engine • AI for Environmental Monitoring</p>
+                    
+                    <p>Developing satellite-based tools for precision agriculture and environmental monitoring at the <strong>Digital Agriculture Laboratory</strong> at UC Davis.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

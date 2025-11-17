@@ -1,0 +1,11 @@
+# Hide roadmap folder from public repository
+Roadmap/
+
+# Common files to ignore
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.env
+.vscode/
+.idea/

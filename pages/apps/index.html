@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apps | Mohammadreza Narimani</title>
+    <title>Interactive Apps | Mohammadreza Narimani</title>
+    <meta name="description" content="Interactive applications and tools by Mohammadreza Narimani for remote sensing, digital agriculture, and environmental monitoring. Google Earth Engine apps, satellite data visualization tools.">
+    <meta name="keywords" content="Mohammadreza Narimani, interactive apps, Google Earth Engine, satellite visualization, remote sensing tools, digital agriculture apps, environmental monitoring, UC Davis">
     <link rel="icon" href="../../assets/icons/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/3b0b36b74c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="../../assets/css/main.css">
-
 </head>
 <body>
     <header>
@@ -29,7 +30,7 @@
                     <li><a href="../blogs/">Blogs</a></li>
                 </ul>
                 
-                <!-- Mobile Menu Button with hamburger icon -->
+                <!-- Mobile Menu Button -->
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <div class="hamburger">
                         <span></span>
@@ -54,18 +55,101 @@
     <main>
         <div class="page-content">
             <div class="container">
-                <h1 class="page-title">Apps</h1>
+                <h1 class="page-title">Interactive Applications</h1>
                 <p class="intro-text">
-                    Interactive applications and tools developed for research, education, and data visualization.
+                    Explore interactive tools and applications developed for remote sensing, digital agriculture, 
+                    and environmental monitoring using Google Earth Engine and satellite data.
                 </p>
                 
-                <div class="coming-soon">
-                    <i class="fas fa-cogs coming-soon-icon"></i>
-                    <h2>Coming Soon</h2>
-                    <p>
-                        Interactive applications and tools for research, education, and data visualization 
-                        will be featured here. Stay tuned for exciting new developments!
-                    </p>
+                <div class="skills-container">
+                    <a href="GEE_Satellite_Plant_Traits_Visualizer/" class="course-card section" style="text-decoration: none; color: inherit; background: linear-gradient(135deg, var(--green-accent) 0%, var(--blue-accent) 100%); color: white;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <i class="fas fa-satellite" style="font-size: 3rem; color: white;"></i>
+                        </div>
+                        <h3 style="color: white; font-size: 1.4rem; margin-bottom: 1rem; text-align: center;">🌿 Satellite Plant Traits Visualizer</h3>
+                        <p style="color: white; margin-bottom: 1rem; text-align: center;">Interactive Google Earth Engine App for Real-Time Plant Monitoring</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Features:</strong> LAI, NDVI, chlorophyll content, water content, dry matter, thermal data visualization</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Data Sources:</strong> Sentinel-2, Landsat 8, Google Earth Engine cloud computing platform</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Application:</strong> Precision agriculture, crop monitoring, environmental research</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="background: white; color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">Launch App →</span>
+                        </div>
+                    </a>
+
+                    <a href="CA_Tomato_Landcover_Viewer/" class="course-card section" style="text-decoration: none; color: inherit; background: linear-gradient(135deg, var(--red-accent) 0%, var(--secondary-color) 100%); color: white;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <i class="fas fa-map-marked-alt" style="font-size: 3rem; color: white;"></i>
+                        </div>
+                        <h3 style="color: white; font-size: 1.4rem; margin-bottom: 1rem; text-align: center;">🍅 California Tomato Landcover Viewer</h3>
+                        <p style="color: white; margin-bottom: 1rem; text-align: center;">Interactive USDA CDL Tomato Crop Distribution Mapping Tool</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Time Series:</strong> 2015-2023 annual tomato crop mapping across California</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Data Source:</strong> USDA Cropland Data Layer (CDL), 30-meter resolution</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Application:</strong> Agricultural planning, policy development, crop distribution analysis</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="background: white; color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">Launch App →</span>
+                        </div>
+                    </a>
+
+                    <a href="GeoSAM2_Tree_Segmentation/" class="course-card section" style="text-decoration: none; color: inherit; background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <i class="fas fa-brain" style="font-size: 3rem; color: white;"></i>
+                        </div>
+                        <h3 style="color: white; font-size: 1.4rem; margin-bottom: 1rem; text-align: center;">🌳 GeoSAM2 Tree Segmentation</h3>
+                        <p style="color: white; margin-bottom: 1rem; text-align: center;">Deep Learning for Orchard Management and Tree Detection</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Technology:</strong> Geospatial SAM2 model, bounding-box assisted segmentation</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Data Sources:</strong> High-resolution aerial imagery (NAIP, Google)</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Applications:</strong> Orchard inventory, yield estimation, precision agriculture</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="background: white; color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">Launch App →</span>
+                        </div>
+                    </a>
+
+                    <a href="Sentinel2_Vegetation_Index_Visualizer/" class="course-card section" style="text-decoration: none; color: inherit; background: linear-gradient(135deg, var(--green-accent) 0%, var(--blue-accent) 100%); color: white;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <i class="fas fa-leaf" style="font-size: 3rem; color: white;"></i>
+                        </div>
+                        <h3 style="color: white; font-size: 1.4rem; margin-bottom: 1rem; text-align: center;">🌿 Sentinel-2 Vegetation Index Visualizer</h3>
+                        <p style="color: white; margin-bottom: 1rem; text-align: center;">Interactive Tool for Computing 16+ Vegetation Indices</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Indices:</strong> NDVI, EVI, SAVI, NDCI, ARI, GNDVI, MCARI, MSI, and more</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Features:</strong> Cloud masking, dynamic legends, interactive polygon drawing</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 0.8rem; border-radius: 5px; margin-bottom: 1rem;">
+                            <p style="color: white; font-size: 0.9rem; margin: 0;"><strong>Applications:</strong> Vegetation monitoring, crop health assessment, environmental research</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="background: white; color: var(--primary-color); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">Launch App →</span>
+                        </div>
+                    </a>
+
+                    <!-- Placeholder for future apps -->
+                    <div class="course-card section" style="background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; min-height: 400px;">
+                        <div style="text-align: center; color: #888;">
+                            <i class="fas fa-plus-circle" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                            <h3 style="color: #666; font-size: 1.2rem; margin-bottom: 0.5rem;">More Apps Coming Soon</h3>
+                            <p style="color: #888; font-size: 0.9rem;">Additional interactive tools and applications in development</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

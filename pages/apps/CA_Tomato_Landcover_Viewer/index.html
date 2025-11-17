@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Tomato Landcover Viewer | Mohammadreza Narimani</title>
+    <meta name="description" content="Interactive Google Earth Engine app by Mohammadreza Narimani for visualizing tomato crop distribution across California from 2015-2023 using USDA Cropland Data Layer. UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, California tomato landcover, USDA CDL, Google Earth Engine, crop distribution, digital agriculture, UC Davis, precision agriculture, tomato farming, cropland mapping">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="California Tomato Landcover Viewer by Mohammadreza Narimani">
+    <meta property="og:description" content="Interactive tool for exploring tomato crop distribution across California using USDA Cropland Data Layer">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/apps/CA_Tomato_Landcover_Viewer/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="California Tomato Landcover Viewer - Mohammadreza Narimani">
+    <meta name="twitter:description" content="Interactive Google Earth Engine application for California tomato crop mapping">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Apps</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../">Apps</a></li>
+                    <li><a href="../../blogs/">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <a href="../">Apps</a>
+                    <a href="../../blogs/">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🍅 California Tomato Landcover Viewer</h1>
+                <div class="intro-text">
+                    <strong>Developed by Mohammadreza Narimani, PhD Candidate at UC Davis</strong><br>
+                    Digital Agriculture Laboratory | University of California, Davis
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Interactive Tomato Crop Mapping</h2>
+                    <p>This <strong>Google Earth Engine application</strong> allows users to explore <strong>tomato crop distribution across California</strong> from <strong>2015–2023</strong>. Using USDA Cropland Data Layer (CDL) data, the app highlights tomato fields in <strong>bright red</strong>, making it easy for growers, researchers, and policymakers to understand statewide tomato production patterns.</p>
+                    
+                    <p>Developed at the <strong>Digital Agriculture Laboratory, UC Davis</strong>, this tool supports agricultural planning, policy development, and research in California's vital tomato industry.</p>
+
+                    <div style="background: linear-gradient(135deg, var(--red-accent) 0%, var(--secondary-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ Annual tomato mapping • 30-meter resolution • 2015-2023 time series • USDA CDL data
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-calendar-alt"></i> How to Use the App</h2>
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--red-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ Select Year</h4>
+                            <p>Choose any year from 2015 to 2023 to view tomato crop distribution for that specific growing season.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--red-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ Explore California</h4>
+                            <p>Navigate across California to see tomato production areas highlighted in bright red on the interactive map.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--red-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Compare Years</h4>
+                            <p>Switch between different years to analyze changes in tomato cultivation patterns over time.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--red-accent);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Analyze Patterns</h4>
+                            <p>Identify major tomato growing regions and understand spatial distribution across California's agricultural landscape.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-images"></i> Visual Examples</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 2rem 0;">
+                        <div style="text-align: center;">
+                            <img src="../../../assets/Apps/CA_Tomato_Landcover_Viewer/Assets/USDA_Crops_2025.png" 
+                                 alt="USDA Cropland Data Layer showing all crops in California" 
+                                 style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <p style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">USDA Cropland Data Layer (All Crops, 2024)</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <img src="../../../assets/Apps/CA_Tomato_Landcover_Viewer/Assets/GEE_Tomato_2023.png" 
+                                 alt="California tomato landcover visualization from the interactive app" 
+                                 style="width: 100%; height: 300px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                            <p style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">Tomato Landcover (California, 2023 – From Our App)</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-rocket"></i> Try the Interactive App</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary);">
+                        Select a year (2015–2023) and instantly visualize tomato acres across California
+                    </p>
+                    <div>
+                        <iframe
+                            src="https://ee-mnarimani.projects.earthengine.app/view/catomatolandcoverviewer"
+                            width="100%"
+                            height="700"
+                            style="border: none; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                            loading="lazy"
+                            title="California Tomato Landcover Viewer - Interactive Google Earth Engine Application">
+                        </iframe>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div>
+                        <h2 class="section-title"><i class="fas fa-info-circle"></i> Technical Information</h2>
+                        
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h3><i class="fas fa-database"></i> Data Source</h3>
+                            <ul class="skill-list">
+                                <li>USDA Cropland Data Layer (CDL) from NASS</li>
+                                <li>30-meter resolution annual crop maps</li>
+                                <li>Covers 2015-2023 growing seasons</li>
+                                <li>Google Earth Engine cloud computing platform</li>
+                            </ul>
+                            <p style="margin-top: 1rem;"><strong>Source:</strong> <a href="https://www.nass.usda.gov/Research_and_Science/Cropland/Release/index.php" target="_blank" style="color: var(--primary-color);">USDA NASS Cropland Data Layer</a></p>
+                        </div>
+
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h3><i class="fas fa-chart-area"></i> Application Features</h3>
+                            <ul class="skill-list">
+                                <li>Interactive year selection (2015-2023)</li>
+                                <li>Tomato fields highlighted in bright red</li>
+                                <li>Statewide California coverage</li>
+                                <li>High-resolution crop mapping</li>
+                                <li>Time-series analysis capability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-link"></i> Resources & Links</h2>
+                    
+                    <div class="skills-container">
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="https://github.com/MohammadrezaNarimaniUCDavis/CA_Tomato_Landcover_Viewer" 
+                               style="text-decoration: none; color: inherit; display: block;"
+                               target="_blank" rel="noopener noreferrer">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fab fa-github" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">GitHub Repository</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Access the complete Earth Engine scripts and documentation</p>
+                            </a>
+                        </div>
+                        
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="mailto:mnarimani@ucdavis.edu" 
+                               style="text-decoration: none; color: inherit; display: block;">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Contact</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Questions or collaboration opportunities</p>
+                            </a>
+                        </div>
+                        
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="https://digitalag.ucdavis.edu/" 
+                               style="text-decoration: none; color: inherit; display: block;"
+                               target="_blank" rel="noopener noreferrer">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fas fa-university" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Digital Ag Lab</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Visit the Digital Agriculture Laboratory website</p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Developer</h2>
+                    <p><strong>Mohammadreza Narimani</strong><br>
+                    <em>PhD Candidate, University of California, Davis</em></p>
+                    
+                    <p>Remote Sensing • Digital Agriculture • Google Earth Engine • Agricultural Mapping</p>
+                    
+                    <p>Developing satellite-based tools for crop monitoring and agricultural analysis at the <strong>Digital Agriculture Laboratory</strong> at UC Davis.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

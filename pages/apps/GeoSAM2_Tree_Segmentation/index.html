@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoSAM2 Tree Segmentation | Mohammadreza Narimani</title>
+    <meta name="description" content="Deep learning tree segmentation tool by Mohammadreza Narimani using Geospatial SAM2 model for orchard management. Automatic tree detection from aerial imagery for precision agriculture. UC Davis Digital Agriculture Laboratory.">
+    <meta name="keywords" content="Mohammadreza Narimani, GeoSAM2, tree segmentation, deep learning, orchard management, aerial imagery, precision agriculture, SAM2, UC Davis, digital agriculture, tree detection, canopy analysis">
+    <meta name="author" content="Mohammadreza Narimani">
+    <meta property="og:title" content="GeoSAM2 Tree Segmentation by Mohammadreza Narimani">
+    <meta property="og:description" content="Deep learning tool for automatic tree segmentation from aerial imagery using Geospatial SAM2 model">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohammadrezanarimaniucdavis.github.io/pages/apps/GeoSAM2_Tree_Segmentation/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GeoSAM2 Tree Segmentation - Mohammadreza Narimani">
+    <meta name="twitter:description" content="Deep learning application for orchard management and tree detection">
+    
+    <link rel="icon" href="../../../assets/icons/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/css/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../../../index.html" class="logo">
+                    <img src="../../../assets/icons/favicon.png" alt="Logo">
+                    <span>Apps</span>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <ul class="nav-links">
+                    <li><a href="../../../index.html">Home</a></li>
+                    <li><a href="../../about/">About Me</a></li>
+                    <li><a href="../../research/">Research</a></li>
+                    <li><a href="../../teaching/">Teaching</a></li>
+                    <li><a href="../">Apps</a></li>
+                    <li><a href="../../blogs/">Blogs</a></li>
+                </ul>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+                
+                <!-- Mobile Dropdown -->
+                <div class="mobile-dropdown" id="mobileDropdown">
+                    <a href="../../../index.html">Home</a>
+                    <a href="../../about/">About Me</a>
+                    <a href="../../research/">Research</a>
+                    <a href="../../teaching/">Teaching</a>
+                    <a href="../">Apps</a>
+                    <a href="../../blogs/">Blogs</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-content">
+            <div class="container">
+                <h1 class="page-title">🌳 GeoSAM2 Tree Segmentation</h1>
+                <div class="intro-text">
+                    <strong>Developed by Mohammadreza Narimani & Sarbani Kumar</strong><br>
+                    Digital Agriculture Laboratory | University of California, Davis
+                </div>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-brain"></i> Deep Learning for Orchard Management</h2>
+                    <p>This project applies the <strong>Geospatial SAM2 model</strong> to automatically segment individual trees from <strong>high-resolution aerial imagery</strong> (Google & NAIP). By delineating each tree canopy and estimating canopy area, the tool supports orchard inventory, yield estimation, vigor analysis, and precision agriculture workflows.</p>
+                    
+                    <p>Developed at the <strong>Digital Agriculture Laboratory, UC Davis</strong> as part of the <strong>UC Davis ESEARCH Program (Fall 2024)</strong>, this tool leverages cutting-edge deep learning for agricultural applications.</p>
+
+                    <div style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 1.5rem; border-radius: 10px; margin: 2rem 0; font-style: italic;">
+                        ✔️ SAM2 deep learning • Bounding-box assisted segmentation • Per-tree area estimation • Multi-orchard support
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-cogs"></i> How the Model Works</h2>
+                    <div class="skills-container">
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--primary-color);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">1️⃣ Image Input</h4>
+                            <p>Upload high-resolution aerial imagery from NAIP, Google, or other sources for tree detection analysis.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--primary-color);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">2️⃣ SAM2 Processing</h4>
+                            <p>The Geospatial SAM2 model automatically identifies and segments individual tree canopies using deep learning.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--primary-color);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">3️⃣ Bounding Box Refinement</h4>
+                            <p>Bounding-box assisted segmentation improves accuracy by focusing on individual tree regions.</p>
+                        </div>
+
+                        <div class="skill-category" style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-left: 4px solid var(--primary-color);">
+                            <h4 style="color: var(--primary-color); margin-bottom: 1rem;">4️⃣ Output Generation</h4>
+                            <p>Generate per-tree polygons with canopy area estimates for orchard management and analysis.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-image"></i> Before & After Tree Segmentation</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: #666;">Example showing raw aerial imagery and GeoSAM2 tree detection results with automatic canopy delineation.</p>
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <img src="../../../assets/Apps/GeoSAM2_Tree_Segmentation/Assets/GeoSAM_Tree_Segmentation.png" 
+                             alt="GeoSAM2 tree segmentation results showing before and after comparison" 
+                             style="width: 100%; height: auto; max-width: 800px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <p style="font-style: italic; color: var(--accent-color); margin-top: 0.5rem; font-size: 0.9rem;">GeoSAM2 Tree Segmentation Results</p>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-rocket"></i> Try the Interactive App</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: var(--text-secondary);">
+                        Explore tree segmentation directly in your browser using the deep learning visualizer
+                    </p>
+                    <div>
+                        <iframe
+                            src="https://ee-mnarimani.projects.earthengine.app/view/deeplearningtreemappingvisualizer"
+                            width="100%"
+                            height="700"
+                            style="border: none; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);"
+                            loading="lazy"
+                            title="Deep Learning Tree Mapping Visualizer - GeoSAM2 Tree Segmentation Application">
+                        </iframe>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div>
+                        <h2 class="section-title"><i class="fas fa-info-circle"></i> Technical Information</h2>
+                        
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h3><i class="fas fa-brain"></i> Deep Learning Framework</h3>
+                            <ul class="skill-list">
+                                <li>Geospatial SAM2 (Segment Anything Model 2)</li>
+                                <li>Segment-Geospatial framework by Dr. Qiusheng Wu</li>
+                                <li>Bounding-box assisted segmentation</li>
+                                <li>High-resolution aerial imagery support</li>
+                            </ul>
+                            <p style="margin-top: 1rem;"><strong>Framework:</strong> <a href="https://samgeo.gishub.org/" target="_blank" style="color: var(--primary-color);">Segment-Geospatial SAM2</a></p>
+                        </div>
+
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                            <h3><i class="fas fa-seedling"></i> Orchard Applications</h3>
+                            <ul class="skill-list">
+                                <li>Almond, walnut, pistachio orchards</li>
+                                <li>Citrus and olive groves</li>
+                                <li>Orchard inventory and tree counting</li>
+                                <li>Yield estimation and vigor analysis</li>
+                                <li>Precision agriculture workflows</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--light-bg); padding: 1.5rem; border-left: 4px solid var(--secondary-color); border-radius: 5px;">
+                            <h3><i class="fas fa-users"></i> Project Team</h3>
+                            <p><strong>Development:</strong> Mohammadreza Narimani (PhD Candidate) & Sarbani Kumar (Undergraduate Mentee)</p>
+                            <p><strong>Program:</strong> UC Davis ESEARCH Fall 2024</p>
+                            <p><strong>Acknowledgment:</strong> Built on the Segment-Geospatial ecosystem by Dr. Qiusheng Wu and collaborators</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-link"></i> Resources & Links</h2>
+                    
+                    <div class="skills-container">
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="https://github.com/MohammadrezaNarimaniUCDavis/GeoSAM2_Tree_Segmentation" 
+                               style="text-decoration: none; color: inherit; display: block;"
+                               target="_blank" rel="noopener noreferrer">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fab fa-github" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">GitHub Repository</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Full code and documentation for GeoSAM2 tree segmentation</p>
+                            </a>
+                        </div>
+                        
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="mailto:mnarimani@ucdavis.edu" 
+                               style="text-decoration: none; color: inherit; display: block;">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Contact</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Questions or collaboration opportunities</p>
+                            </a>
+                        </div>
+                        
+                        <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" 
+                               style="text-decoration: none; color: inherit; display: block;"
+                               target="_blank" rel="noopener noreferrer">
+                                <div style="margin-bottom: 1rem;">
+                                    <i class="fas fa-graduation-cap" style="font-size: 2.5rem; color: var(--primary-color);"></i>
+                                </div>
+                                <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Google Scholar</h4>
+                                <p style="color: #666; font-size: 0.9rem;">View related publications and research</p>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section" style="text-align: center;">
+                    <h2 class="section-title"><i class="fas fa-user-graduate"></i> About the Developers</h2>
+                    <p><strong>Mohammadreza Narimani</strong> (PhD Candidate) & <strong>Sarbani Kumar</strong> (Undergraduate Mentee)<br>
+                    <em>University of California, Davis</em></p>
+                    
+                    <p>Deep Learning • Remote Sensing • Digital Agriculture • Tree Segmentation • Precision Agriculture</p>
+                    
+                    <p>Developing AI-powered tools for orchard management and agricultural automation at the <strong>Digital Agriculture Laboratory</strong> at UC Davis.</p>
+                    
+                    <p>📧 <strong>mnarimani@ucdavis.edu</strong> | <strong>srbkumar@ucdavis.edu</strong><br>
+                    🎓 <a href="https://scholar.google.com/citations?user=BV95fNoAAAAJ&hl=en&oi=ao" target="_blank" style="color: var(--primary-color); text-decoration: none;"><strong>Google Scholar Profile</strong></a></p>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Mohammadreza Narimani</div>
+                <div class="footer-text">Personal Website 2025</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../assets/js/main.js"></script>
+</body>
+</html>
