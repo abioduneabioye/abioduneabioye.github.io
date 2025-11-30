@@ -1,0 +1,331 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkblue,
+    urlcolor=linkblue,
+    citecolor=linkblue
+}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{multicol}
+
+% UC Davis Colors
+\definecolor{ucdavisblue}{RGB}{0,78,146}
+\definecolor{ucdavisgold}{RGB}{255,191,0}
+\definecolor{ucdavisgolddark}{RGB}{204,153,0}
+\definecolor{lightgray}{RGB}{248,249,250}
+\definecolor{darkgray}{RGB}{75,85,99}
+\definecolor{green}{RGB}{34,197,94}
+\definecolor{linkblue}{RGB}{0,102,204}
+
+% Header and footer
+\setlength{\headheight}{15pt}
+\addtolength{\topmargin}{-3pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{ucdavisblue}{\textbf{Mohammadreza Narimani - Curriculum Vitae}}}
+\fancyhead[R]{\textcolor{ucdavisblue}{UC Davis}}
+\fancyfoot[C]{\thepage}
+
+% Title formatting
+\titleformat{\section}{\Large\bfseries\color{ucdavisblue}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{ucdavisblue}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{darkgray}}{}{0em}{}
+
+% Custom boxes
+\newtcolorbox{contactbox}{
+    colback=ucdavisgold!20,
+    colframe=ucdavisblue,
+    boxrule=2pt,
+    arc=5pt,
+    left=15pt,
+    right=15pt,
+    top=15pt,
+    bottom=15pt
+}
+
+\newtcolorbox{skillbox}{
+    colback=ucdavisblue!10,
+    colframe=ucdavisblue,
+    boxrule=1pt,
+    arc=3pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt
+}
+
+% Custom list styles
+\setlist[itemize]{leftmargin=15pt, itemsep=3pt, parsep=2pt}
+\setlist[enumerate]{leftmargin=15pt, itemsep=4pt, parsep=2pt}
+
+\begin{document}
+\sloppy
+
+% Header Section
+\begin{center}
+    {\Huge\bfseries\color{ucdavisblue} Mohammadreza Narimani}\\[0.3cm]
+    {\Large\color{darkgray} PhD Candidate in Biological Systems Engineering}\\[0.2cm]
+    {\large\color{darkgray} University of California, Davis}\\[0.2cm]
+    {\normalsize\color{darkgray} Biological and Agricultural Engineering Department}\\[0.2cm]
+    {\normalsize\color{darkgray} California, US}\\[0.5cm]
+\end{center}
+
+\begin{contactbox}
+\begin{center}
+\begin{tabular}{ll}
+\textbf{\faEnvelope\ Email:} & mnarimani@ucdavis.edu \\
+\textbf{\faEnvelope\ Personal:} & narimanimohammadreza@gmail.com \\
+\textbf{\faGlobe\ Website:} & \href{https://mohammadrezanarimaniucdavis.github.io/}{\underline{mohammadrezanarimaniucdavis.github.io}} \\
+\textbf{\faGraduationCap\ Scholar:} & \href{https://scholar.google.com/citations?user=BV95fNoAAAAJ}{\underline{Google Scholar Profile}} \\
+\textbf{\faGithub\ GitHub:} & \href{https://github.com/MohammadrezaNarimaniUCDavis}{\underline{MohammadrezaNarimaniUCDavis}}
+\end{tabular}
+\end{center}
+\end{contactbox}
+
+\vspace{0.3cm}
+
+% Research Interests
+\section{Research Interests}
+Remote Sensing of Agriculture and Environment • Earth Observation • Digital Agriculture • Machine Learning • Computer Vision • Precision Agriculture • Hyperspectral Imaging • LiDAR • Satellite Data Analysis • IoT Systems • Plant Phenotyping • 3D Radiative Transfer Modeling • Wildfire Detection
+
+% Education
+\section{Education}
+
+\subsection{\texorpdfstring{Ph.D. Candidate of Biological Systems Engineering \hfill 2022--Present}{Ph.D. Candidate of Biological Systems Engineering (2022--Present)}}
+\textbf{University of California, Davis, US} \hfill \textcolor{ucdavisgolddark}{\textbf{GPA: 4.0/4.0}}\\
+\textit{Thesis:} AI-Driven Remote Sensing and Spectral Modeling for Advanced Monitoring of Tomato Crops\\
+\textit{Advisors:} Prof. Alireza Pourreza, Prof. Ali Moghimi
+
+\subsection{\texorpdfstring{M.Sc. of Biosystem Mechanical Engineering \hfill 2019--2021}{M.Sc. of Biosystem Mechanical Engineering (2019--2021)}}
+\textbf{University of Tehran, Iran} \hfill \textcolor{ucdavisgolddark}{\textbf{GPA: 4.0/4.0 (First Rank)}}\\
+\textit{Thesis:} Designing and Manufacturing an Experimental Smart Greenhouse for High-Throughput Stress Phenotyping and Plant Disease Detection by Implementing Internet of Things System and Machine Learning
+
+\subsection{\texorpdfstring{B.Sc. of Biosystem Mechanical Engineering \hfill 2015--2019}{B.Sc. of Biosystem Mechanical Engineering (2015--2019)}}
+\textbf{University of Tehran, Iran} \hfill \textcolor{ucdavisgolddark}{\textbf{GPA: 4.0/4.0 (First Rank)}}\\
+\textit{Thesis:} Design and construction of electric turning machine for urban agriculture
+
+% Research Experience
+\section{Research Experience}
+
+\subsection{\texorpdfstring{Research Assistant \hfill 2022--Present}{Research Assistant (2022--Present)}}
+\textbf{Digital Agriculture Laboratory, University of California, Davis}
+\begin{itemize}
+    \item Remote Sensing for Early Detection of Branched Broomrape in Tomato from Leaf to Canopy Level
+    \item 3D Radiative Transfer Modeling for Specialty Crops
+    \item Wildfire Detection and Monitoring Using Satellite Imagery and Deep Learning
+    \item Image semantic segmentation using FCN\_AlexNet, SegNet, and U-Net for Agricultural Vision Competition
+    \item High-Throughput Wheat Phenotyping for Agricultural Research Institute of Iran
+\end{itemize}
+
+\subsection{\texorpdfstring{Research Assistant \hfill 2016--2022}{Research Assistant (2016--2022)}}
+\textbf{University of Tehran, Iran}
+\begin{itemize}
+    \item High-Throughput Wheat Phenotyping for Agricultural Research Institute of Iran, Wheat Species Bank
+    \item Detecting fungal disease of lettuce with thermal camera and CNNs
+    \item Image processing algorithms for measuring friction coefficient and angle of repose in rice grain
+    \item IoT device development using Arduino, Raspberry Pi, Ethernet, and ESP8266
+    \item Designing novel fogponic and centrifugal irrigation systems for aeroponic greenhouses
+    \item Deep learning algorithms for detecting powdery tomato disease
+\end{itemize}
+
+
+
+\subsection{\texorpdfstring{Internship \hfill 2017--2022}{Internship (2017--2022)}}
+\textbf{Agricultural Engineering Research Institute of Iran (AERI)}
+
+% Skills
+\section{Technical Skills}
+
+\begin{skillbox}
+\textbf{Remote Sensing Tools:} Sentinel-2, Landsat-9, EMIT, ECOSTRESS, DJI Phantom 4 Multispectral, Aerial Pika-L Hyperspectral Sensor, Aerial Phoenix LiDAR Systems
+\end{skillbox}
+
+\begin{skillbox}
+\textbf{Programming Languages:} Python, R, MATLAB, C++
+\end{skillbox}
+
+\begin{skillbox}
+\textbf{Amazon Web Services:} Lambda, S3, App Runner, API Gateway, EC2, Elastic Container Registry, IAM, CloudFormation, CloudWatch
+\end{skillbox}
+
+\begin{skillbox}
+\textbf{Techniques:} Computer Vision, Image Processing, Deep Learning, Machine Learning, Web App Development, Internet of Things, Robotics
+\end{skillbox}
+
+\begin{skillbox}
+\textbf{Prominent Libraries:} Keras, TensorFlow, PyTorch, scikit-learn, geemap, rasterio, gdal, pandas, NumPy, OpenCV, PlantCV, scikit-image
+\end{skillbox}
+
+\begin{skillbox}
+\textbf{GIS:} ArcGIS, QGIS, Google Earth Engine, ENVI, Pix4D, Resonon, Spatial Explorer, Microstation, Terrasolid
+\end{skillbox}
+
+\begin{skillbox}
+\textbf{Computer-Aided Design and Engineering:} CATIA, SolidWorks, AutoCAD, Abaqus, Ansys, Keyshot
+\end{skillbox}
+
+% Publications
+\section{Journal Publications}
+
+\begin{enumerate}
+\item Farajpoor, P., Pourreza, A., \textbf{Narimani, M.R.}, El‐Kereamy, A., Fidelibus, M. (2025). Multi-Trait Spectral Modeling for Estimating Grapevine Leaf Traits and Nutrients. \textit{Plant Phenomics}. \href{https://www.sciencedirect.com/science/article/pii/S2643651525001487}{\underline{DOI Link}}
+
+\item \textbf{Narimani, M.R.}, Pourreza, A., Moghimi, A., Farajpoor, P., Jafarbiglu, H., Mesgaran, B. (2025). Early Detection of Branched Broomrape (Phelipanche Ramosa) Infestation in Tomato Crops by Using Leaf Spectral Analysis and Machine Learning. \textit{IFAC-PapersOnLine}. \href{https://arxiv.org/abs/2509.12074}{\underline{arXiv Link}}
+
+\item Alimardani, R., Adedeji, A.A., \textbf{Narimani, M.R.} (2025). A Review of IoT Applications in Food Processing and Related Fields. \textit{Journal of Food Processing and Preservation}. \href{https://onlinelibrary.wiley.com/doi/full/10.1155/jfpp/3064441}{\underline{DOI Link}}
+
+\item \textbf{Narimani, M.R.}, Pourreza, A., Moghimi, A., Farajpoor, P., Jafarbiglu, H., Mesgaran, B. (2025). Branched broomrape detection in tomato farms using satellite imagery and time-series analysis. \textit{SPIE Defense + Commercial Sensing}. \href{https://doi.org/10.1117/12.3059998}{\underline{DOI Link}}
+
+\item Farajpoor, P., Pourreza, A., \textbf{Narimani, M.R.}, El‐Kereamy, A., Fidelibus, M. (2024). Leaf spectral reflectance prediction using multihead attention neural networks. \textit{SPIE Defense + Commercial Sensing}. \href{https://doi.org/10.1117/12.3061298}{\underline{DOI Link}}
+
+\item \textbf{Narimani, M.R.}, Pourreza, A., Moghimi, A., Mesgaran, B., Farajpoor, P., Jafarbiglu, H. (2024). Drone-based multispectral imaging and deep learning for timely detection of branched broomrape in tomato farms. \textit{SPIE Defense + Commercial Sensing}. \href{https://doi.org/10.1117/12.3021219}{\underline{DOI Link}}
+
+\item Akpenpuun, T.D., Ogunlowo, Q.O., Na, W.H., Dutta, P., Rabiu, A., Adesanya, M.A., \textbf{Narimani, M.R.}, et al. (2024). Dynamic neural network modeling of thermal environments of two adjacent single-span greenhouses. \textit{Journal of Agricultural Engineering}. \href{https://doi.org/10.4081/jae.2024.1563}{\underline{DOI Link}}
+
+\item \textbf{Narimani, M.R.}, Hajiahmad, A., Moghimi, A., Alimardani, R., Rafiee, S., Mirzabe, A.H. (2021). Developing an aeroponic smart experimental greenhouse for controlling irrigation and plant disease detection using deep learning and IoT. \textit{ASABE Journal}. \href{https://elibrary.asabe.org/abstract.asp?aid=52586}{\underline{Publication Link}}
+
+\item Kianmehr, M., Elyasi, M., \textbf{Narimani, M.R.} Design and construction of electric turning machine for urban agriculture. \textit{Journal of Tarbiyat Modares University}. \href{https://civilica.com/doc/838593/}{\underline{Publication Link}}
+\end{enumerate}
+
+\section{Conference Presentations}
+
+\begin{enumerate}
+\item \textbf{Narimani, M.R.}, et al. (2025). Early Detection of Branched Broomrape Infestation in Tomato Crops. \textit{8th IFAC Conference on Sensing, Control and Automation Technologies for Agriculture}. \href{https://ifac.papercept.net/conferences/conferences/AGRI25/program/AGRI25_ContentListWeb_1.html\#weds2tb_03}{\underline{Conference Link}}
+
+\item \textbf{Narimani, M.R.}, et al. (2024). Drone-based multispectral imaging and deep learning for timely detection of branched broomrape. \textit{SPIE Defense + Commercial Sensing}. \href{https://www.spiedigitallibrary.org/conference-proceedings-of-spie/13053/1305304/Drone-based-multispectral-imaging-and-deep-learning-for-timely-detection/10.1117/12.3021219.full}{\underline{Presentation Link}}
+
+\item \textbf{Narimani, M.R.}, et al. (2024). Early Detection of Branched Broomrape in Tomato by Hyperspectral Sensing. \textit{ASABE 2024}.
+
+\item Jafarbiglu, H., Pourreza, A., \textbf{Narimani, M.R.}, Sanden, B., Marino, G., Culumber, M., Mehata, M., Ferguson, L. (2024). Determining the best irrigation strategy for pistachio orchards with saline water and soil. \textit{SPIE Defense + Commercial Sensing}. \href{https://www.spiedigitallibrary.org/conference-proceedings-of-spie/PC13053/PC1305301/Determining-the-best-irrigation-strategy-for-pistachio-orchards-with-saline/10.1117/12.3021227.full}{\underline{Presentation Link}}
+
+\item \textbf{Narimani, M.R.}, et al. (2024). Remote Sensing of Branched Broomrape in Tomato. \textit{65th Weed Day, UC Davis}. \href{https://wric.ucdavis.edu/events/weed_day_2024.html}{\underline{Event Link}}
+
+\item \textbf{Narimani, M.R.}, et al. (2023). Wildfire Detection and Monitoring Using Satellite Imagery and Deep Learning. \textit{ASABE 2023}. \href{https://www.asabe.org/Portals/0/Events/2023\%20AIM/Tech.Schd.wPres.pdf}{\underline{Schedule Link}}
+
+\item Jafarbiglu, H., Pourreza, A., \textbf{Narimani, M.R.}, Williams, D., Ferguson, L. (2023). Determining the best irrigation practices for pistachio orchards with saline water and soil. \textit{ASABE 2023}. \href{https://www.asabe.org/Portals/0/Events/2023\%20AIM/Tech.Schd.wPres.pdf}{\underline{Schedule Link}}
+
+\item \textbf{Narimani, M.R.}, Hajiahmad, A., Moghimi, A., Alimardani, R., Rafiee, S., Mirzabe, A.H. (2021). Developing an aeroponic smart experimental greenhouse for controlling irrigation and plant disease detection using deep learning and IoT. \textit{ASABE 2021}.
+\end{enumerate}
+
+\section{Conference Posters}
+
+\begin{enumerate}
+\item \textbf{Narimani, M.R.}, Pourreza, A., Moghimi, A., Farajpoor, P., Jafarbiglu, H., Mesgaran, B. (2025). Branched broomrape detection in tomato farms using satellite imagery and time-series analysis. \textit{SPIE Defense + Commercial Sensing}. \href{https://www.spiedigitallibrary.org/conference-proceedings-of-spie/13475/134750V/Leaf-spectral-reflectance-prediction-using-multihead-attention-neural-networks/10.1117/12.3061298.short}{\underline{Poster Link}}
+
+\item Jafarbiglu, H., Pourreza, A., \textbf{Narimani, M.R.}, Bailey, J., Taylor, G. (2024). Seam Carving for Tree Segmentation in Dense Tree Farms. \textit{ASABE 2024}.
+
+\item \textbf{Narimani, M.R.}, Hajiahmad, A., Moghimi, A., Alimardani, R., Rafiee, S., Mirzabe, A.H. (2021). Developing an aeroponic smart experimental greenhouse for controlling irrigation and plant disease detection using deep learning and IoT. \textit{ASABE 2021}.
+\end{enumerate}
+
+% Teaching Experience
+\section{Teaching Experience}
+
+\noindent\textbf{Teaching Assistant, University of California, Davis} \hfill 2022--Present
+\begin{itemize}
+    \item Applied Statistics in Agricultural Sciences \href{https://mohammadrezanarimaniucdavis.github.io/PLS120-Statistics-Lab-Materials/}{\underline{Lab Materials}}
+    \item Introduction to Unmanned Aerial Systems for Agriculture \& Environmental Science
+    \item Communications and Computing Technology (IoT in Ag) \href{https://mohammadrezanarimaniucdavis.github.io/TAE30-IoT-Lab-Materials/}{\underline{Lab Materials}}
+\end{itemize}
+
+\noindent\textbf{Teaching Assistant, University of Tehran, Iran} \hfill 2016--2022
+\begin{itemize}
+    \item Programming with Python and MATLAB
+    \item Computer Vision and Artificial Intelligence
+    \item Industrial drawing with CATIA, SolidWorks and AutoCAD
+\end{itemize}
+
+\noindent\textbf{Teaching Physics, Bonyad Amoozeshi Ghalamchi} \hfill 2014--2016
+
+% Awards and Honors
+\section{Awards and Honors}
+
+\begin{itemize}
+    \item Future Undergraduate Science Educators (FUSE) Program Scholarship \hfill 2025--Present
+    \item Best Presentation Award, ASABE Annual International Meeting \hfill 2024
+    \item Agricultural Genome to Phenome Initiative Scholarship \hfill 2024
+    \item Bill And Jane Fischer Vegetation Management Scholarship \hfill 2024
+    \item Member of SPIE Defense + Commercial Sensing \hfill 2024--Present
+    \item Peter J. Shields and Henry A. Jastro Research Award \hfill 2023
+    \item Dean's Distinguished Graduate Fellowship \hfill 2022
+    \item Member of ASABE (American Society of Agricultural and Biological Engineers) \hfill 2021--Present
+    \item First rank prize, Iran IoT and Computer Vision Competition \hfill 2020
+    \item Member of Iran Elite Foundation (Bonyad Melli Nokhbegan) \hfill 2017--2022
+\end{itemize}
+
+% Leadership and Service
+\section{Leadership and Service}
+
+\subsection{Leadership Positions}
+\begin{itemize}
+    \item Vice President, Graduate Student Association, BAE Department, UC Davis \hfill 2024--Present
+    \item Representative, Graduate Student Association, BAE Department, UC Davis \hfill 2023--2024
+    \item Election Committee Member, Graduate Student Association, BAE Department \hfill 2025
+\end{itemize}
+
+\subsection{Mentorship}
+\begin{itemize}
+    \item Mentor, E-SEARCH Program, UC Davis (4 undergraduate students) \hfill 2024--Present
+    \item Mentor, AgTech Workshop (Drone \& IoT), AI Institute for Next Generation Food Systems \hfill 2023--Present
+    \item Mentor, Young Scholar Program, UC Davis (high school students) \hfill 2023
+\end{itemize}
+
+\subsection{Mentees' Research Posters}
+\begin{itemize}
+    \item Sun, V.J., \textbf{Narimani, M.R.} Deep Learning-Based Snow Monitoring in California Using Sentinel-2 Satellite Data. \href{https://engineering.ucdavis.edu/e-search}{\underline{ESEARCH}} Summer 2025.
+    \item Kumar, S., \textbf{Narimani, M.R.}, et al. Enhancing Orchard Management with Deep Learning: Tree Segmentation Using Geospatial SAM2 Model. \href{https://engineering.ucdavis.edu/e-search}{\underline{ESEARCH}} Fall 2024.
+    \item Richmond, N., \textbf{Narimani, M.R.}, et al. Global Vegetation and Climate Insights Portal (GVCIP). \href{https://engineering.ucdavis.edu/e-search}{\underline{ESEARCH}} Summer 2024.
+    \item Tran, Q., \textbf{Narimani, M.R.}, et al. Enhancing Wildfire Monitoring Through Remote Sensing. \href{https://engineering.ucdavis.edu/e-search}{\underline{ESEARCH}} Spring 2024.
+\end{itemize}
+
+\subsection{Editorial and Peer Review Activities}
+\textbf{Reviewer for the following journals:} \hfill 2024--Present
+\begin{itemize}
+    \item Scientific Reports (Springer Nature)
+    \item Journal of Agriculture and Food Research (Elsevier)
+    \item Journal of Food Science (Wiley)
+    \item Smart Agricultural Technology (Elsevier)
+    \item Computers and Electronics in Agriculture (Elsevier)
+    \item Information Processing in Agriculture (Elsevier)
+    \item Remote Sensing Applications: Society and Environment (Elsevier)
+    \item NJAS: Impact in Agricultural and Life Sciences (Taylor \& Francis)
+\end{itemize}
+
+
+
+% Media Coverage
+\section{Media Coverage}
+
+\textbf{Parasitic Weeds Threaten Tomato Plants on California Farms} - Featured in:
+\begin{itemize}
+    \item UC Davis Newsletter \href{https://www.ucdavis.edu/food/news/parasitic-weeds-threaten-tomato-plants-on-california-farms}{\underline{Read Article}}
+    \item UC Davis College of Agricultural and Environmental Sciences \href{https://caes.ucdavis.edu/news/parasitic-weeds-threaten-tomato-plants-california-farms}{\underline{Read Article}}
+    \item Daily Democrat Newspaper \href{https://www.dailydemocrat.com/2024/03/20/parasitic-weeds-threaten-tomato-plants-on-california-farms}{\underline{Read Article}}
+    \item Ag Alert Magazine \href{https://california-farm-bureau-publications.cfbf.com/view/617470051/8}{\underline{Read Article}}
+    \item Capital Press Newsletter \href{https://www.capitalpress.com/ag_sectors/research/the-enemy-underground-california-researchers-target-parasitic-weed/article_708c3668-613b-11ee-9e7f-137682d06e8c.html}{\underline{Read Article}}
+    \item Organic Growers Newsletter \href{https://organicgrower.info/news/researchers-fight-weeds-threatening-california-tomatoes}{\underline{Read Article}}
+    \item UC Davis Plant Sciences Newsletter \href{https://www.plantsciences.ucdavis.edu/news/parasitic-weeds-tomato-hanson}{\underline{Read Article}}
+    \item Tomato News \href{https://www.tomatonews.com/en/broomrape-parasitic-weeds-threaten-california-tomato-fields_2_2117.html}{\underline{Read Article}}
+    \item California Fruit and Vegetable \href{https://calfruitandveg.com/2024/04/29/read-2024-issue}{\underline{Read Article}}
+\end{itemize}
+
+\vfill
+
+\begin{center}
+\textit{Last updated: November 30, 2025}
+\end{center}
+
+\end{document}
