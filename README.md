@@ -75,3 +75,4 @@ A static website hosted on GitHub Pages to showcase my academic work, tools, blo
 ## 🚀 Acknowledgments  
 Built to support digital agriculture initiatives at UC Davis Digital Agriculture Laboratory. Special thanks to colleagues and collaborators in the Digital Ag Lab for feedback and inspiration.
 
+
