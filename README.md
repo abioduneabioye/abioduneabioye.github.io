@@ -67,7 +67,7 @@ Two tools for hands‑on learning and IoT experimentation:
 
 ## ✉️ Contact  
 I’d love to collaborate, share insights, or answer questions—feel free to reach out:  
-- **Email:** mnarimani@ucdavis.edu  
+- **Email:** emmanuel.abioye@reedleycollege.edu  
 
 ---
 
@@ -85,6 +85,7 @@ A static website hosted on GitHub Pages to showcase my academic work, tools, blo
 
 ## 🚀 Acknowledgments  
 Built to support digital agriculture initiatives at UC Davis Digital Agriculture Laboratory. Special thanks to colleagues and collaborators in the Digital Ag Lab for feedback and inspiration.
+
 
 
 
