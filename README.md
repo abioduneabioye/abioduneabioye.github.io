@@ -1,6 +1,6 @@
 # Abiodun Emmanuel Abioye – Personal Website
 
-Welcome to the personal website of **Abiodun Emmanuel Abioye**, a Ph.D. candidate in Biological Systems Engineering at the University of California, Davis, conducting research in digital agriculture and remote sensing.
+Welcome to the personal website of **Abiodun Emmanuel Abioye**, An Engineering Instructor at the Reedley College, Reedley, conducting research in digital agriculture and remote sensing.
 
 ## 🌐 Site Structure
 
@@ -85,6 +85,7 @@ A static website hosted on GitHub Pages to showcase my academic work, tools, blo
 
 ## 🚀 Acknowledgments  
 Built to support digital agriculture initiatives at UC Davis Digital Agriculture Laboratory. Special thanks to colleagues and collaborators in the Digital Ag Lab for feedback and inspiration.
+
 
 
 
