@@ -6,8 +6,19 @@ Welcome to the personal website of **Abiodun Emmanuel Abioye**, a Ph.D. candidat
 
 ### 1. Home  
 **Hi, I’m Abiodun Emmanuel Abioye!**  
-Ph.D. Candidate at UC Davis and a researcher at the Digital Agriculture Laboratory. I focus on remote sensing—from handheld hyperspectral measurements to drone, LiDAR, and satellite data—using machine learning and deep learning to monitor agricultural environments.
-
+A a researcher and academic who recently concluded his Postdoctoral
+fellowship in Digital Viticulture and Agriculture at California State University Fresno and University of
+California Davis. Dr. Abioye concluded his Ph.D. in Electrical Engineering from Universiti Teknologi
+Malaysia, focusing on Sensors, Control Systems, and Precision Agriculture. He also holds a Master of
+Engineering degree in Electronics and Communications Engineering at Michael Okpara University of
+Agriculture, Umudike, Abia State, Nigeria. His academic journey began with a Bachelor of Engineering in
+Electrical Engineering at the University of Ilorin, after which he lectured Electronics and
+Telecommunication courses for many years at a Federal Polytechnic in Nigeria. He is an active contributor
+to the science and engineering community, serving as a reviewer for several reputable journals and
+publishing numerous papers. His work has been presented at various conferences, and he has received
+multiple accolades, including a gold award for the development of the myUTMagritech web framework,
+a research grant under the Nigeria Artificial Intelligence Research Scheme, OKP Scholarship, and Doctoral
+fellowships.
 ### 2. About Me  
 Professional Experience
 Postdoctoral Scholar – Precision Viticulture
@@ -74,5 +85,6 @@ A static website hosted on GitHub Pages to showcase my academic work, tools, blo
 
 ## 🚀 Acknowledgments  
 Built to support digital agriculture initiatives at UC Davis Digital Agriculture Laboratory. Special thanks to colleagues and collaborators in the Digital Ag Lab for feedback and inspiration.
+
 
 
